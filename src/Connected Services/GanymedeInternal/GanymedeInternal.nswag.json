@@ -1,0 +1,5055 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Bloxxon External API",
+    "description": "The Kapilendo Crypto API offers:\r\n- Wealth Management as a Service \r\n- Retail Crypto Asset Wallet as a Service\r\n# Wealth Management as a Service \r\nCustomer are provided with the ability to onboard users to one of several ETF Portfolios, where depot and wealth management services are provided.\r\n# Retail Crypto Asset Wallet as a Service\r\nCustomer are provided with the ability to create blockchain wallets for users.\r\n",
+    "contact": {
+      "name": "Bloxxon AG",
+      "url": "https://bloxxon.co",
+      "email": "p.tasner@bloxxon.co"
+    },
+    "version": "v1",
+    "x-logo": {
+      "url": "/logo.png",
+      "altText": "Bloxxon External API"
+    }
+  },
+  "paths": {
+    "/api/external/v1/customers": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Getting a list of customers from institution",
+        "operationId": "GetCustomers",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerAccountDtoListApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Creates a new customer inside the institution",
+        "operationId": "CreateCustomer",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCustomerAccountDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCustomerAccountDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCustomerAccountDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/search": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Searches for a customer by firstname lastname or email",
+        "operationId": "QueryCustomers",
+        "parameters": [
+          {
+            "name": "searchText",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "nullable": true
+            }
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "description": "",
+              "format": "int32",
+              "default": 100
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "description": "",
+              "format": "int32",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerAccountDtoListApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/customers/{customer-id}": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Getting a customer by Id",
+        "operationId": "GetCustomer",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerAccountDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Update customer inside the institution",
+        "operationId": "UpdateCustomer",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "The customer ID",
+            "schema": {
+              "type": "string",
+              "description": "The customer ID",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "CUstomer data to be updated",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCustomerAccountDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCustomerAccountDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCustomerAccountDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/customers/{customer-id}/kyc": {
+      "post": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Saving KYC data for custodying customer wallets",
+        "operationId": "SubmitCustomerKycData",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KycDataDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KycDataDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/KycDataDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/electronic-security/{asset-id}": {
+      "get": {
+        "tags": [
+          "Electronic Security"
+        ],
+        "summary": "Information regarding an asset",
+        "operationId": "GetAssetInfo",
+        "parameters": [
+          {
+            "name": "asset-id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the asset",
+            "schema": {
+              "type": "string",
+              "description": "The id of the asset",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ElectronicSecurityBasicInfoDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/electronic-security/{asset-id}/trust-lines": {
+      "post": {
+        "tags": [
+          "Electronic Security"
+        ],
+        "summary": "Allows for creating many trustlines in bulk",
+        "operationId": "CreateTrustLines",
+        "parameters": [
+          {
+            "name": "asset-id",
+            "in": "path",
+            "required": true,
+            "description": "The asset to which the trustline is being created",
+            "schema": {
+              "type": "string",
+              "description": "The asset to which the trustline is being created",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Request body containing the PIN and user ID pairs",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkCreateTrustLineDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkCreateTrustLineDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkCreateTrustLineDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkResultDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/issuer-wallet-seeds": {
+      "get": {
+        "tags": [
+          "Issuer Wallet"
+        ],
+        "summary": "Returns a list of issuer wallet objects associated with the institution.",
+        "operationId": "GetIssuerWalletSeeds",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IssuerWalletSeedDtoListApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Issuer Wallet"
+        ],
+        "summary": "Generates a 24-word mnemonic seed for the institution, encrypts it with the given credentials. \r\nIssuer wallet seed id will be returned",
+        "operationId": "CreateIssuerWalletSeed",
+        "requestBody": {
+          "description": "Name and credentials.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateIssuerWalletSeedDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateIssuerWalletSeedDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateIssuerWalletSeedDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IssuerWalletSeedDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/issuer-wallet-seeds/{issuer-wallet-seed-id}": {
+      "put": {
+        "tags": [
+          "Issuer Wallet"
+        ],
+        "summary": "Derives a new private key from the 24-word mnemonic seed for the institution.\r\nReturns the id for the newly derived issuer wallet.",
+        "operationId": "DeriveNewIssuerWallet",
+        "parameters": [
+          {
+            "name": "issuer-wallet-seed-id",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeriveIssuerWalletFromSeedDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeriveIssuerWalletFromSeedDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeriveIssuerWalletFromSeedDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/issuer-wallet-seeds/{issuer-seed-wallet-id}": {
+      "delete": {
+        "tags": [
+          "Issuer Wallet"
+        ],
+        "summary": "Generates backup PDF file containing mnemonic seed and removes the seed entry from the custodian database.",
+        "operationId": "DeleteIssuerWalletSeed",
+        "parameters": [
+          {
+            "name": "issuer-seed-wallet-id",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IssuerWalletRecoveryKitFileDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/issuer-wallet-seeds/{issuer-wallet-seed-id}/recovery": {
+      "post": {
+        "tags": [
+          "Issuer Wallet"
+        ],
+        "summary": "Initiates recovery process in which the custodian delivers the passphrase to the institution in a secure way.",
+        "operationId": "InitiateIssuerWalletPassphraseRecovery",
+        "parameters": [
+          {
+            "name": "issuer-wallet-seed-id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmptyResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/issuer-wallet-seeds/{issuer-wallet-seed-id}/issuer-wallets": {
+      "get": {
+        "tags": [
+          "Issuer Wallet"
+        ],
+        "summary": "Returns a list of issuer wallet derived from the given seed, includes the tokenized assets issued by the wallet",
+        "operationId": "GetIssuerWallets",
+        "parameters": [
+          {
+            "name": "issuer-wallet-seed-id",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IssuerWalletDtoListApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/issuer-wallet-seeds/{issuer-wallet-seed-id}/issuer-wallets/{issuer-wallet-id}/tokenzid-assets": {
+      "post": {
+        "tags": [
+          "Tokenized Assets"
+        ],
+        "summary": "Creates new tokenized asset",
+        "operationId": "CreateTokenizedAsset",
+        "parameters": [
+          {
+            "name": "issuer-wallet-seed-id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "issuer-wallet-id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTokenizedAssetDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTokenizedAssetDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTokenizedAssetDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenizedAssetDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/issuer-wallet-seeds/{issuer-wallet-seed-id}/issuer-wallets/{issuer-wallet-id}/tokenzid-assets/{tokenized-asset-id}": {
+      "get": {
+        "tags": [
+          "Tokenized Assets"
+        ],
+        "summary": "Returns details about the given tokenized asset. Details include transfers, open opt-in requests and",
+        "operationId": "GetTokenizedAssetDetails",
+        "parameters": [
+          {
+            "name": "issuer-wallet-seed-id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "issuer-wallet-id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "tokenized-asset-id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenizedAssetDetailsDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/issuer-wallet-seeds/{issuer-wallet-seed-id}/issuer-wallets/{issuer-wallet-id}/tokenzid-assets/{tokenized-asset-id}/transfer": {
+      "post": {
+        "tags": [
+          "Tokenized Assets"
+        ],
+        "summary": "Send tokenized assets to retail wallets.\r\nReturns a list of transfer ids.",
+        "operationId": "TransferTokenizedAssets",
+        "parameters": [
+          {
+            "name": "issuer-wallet-seed-id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "issuer-wallet-id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "tokenized-asset-id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IssuerWalletTokenizedAssetTransferDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IssuerWalletTokenizedAssetTransferDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IssuerWalletTokenizedAssetTransferDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidListApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/customers/{customer-id}/retail-wallets": {
+      "get": {
+        "tags": [
+          "Retail Wallet"
+        ],
+        "summary": "Returns a list of retail wallet object associated with the given customer id.",
+        "operationId": "GetRetailWalletsDetails",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "Customer Id",
+            "schema": {
+              "type": "string",
+              "description": "Customer Id",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RetailWalletDtoListApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Retail Wallet"
+        ],
+        "summary": "Generates a 24-word mnemonic seed for the customer encrypts it with the given credentials. \r\nA list of retail wallet objects are being returned, which can be derived from the seed.",
+        "operationId": "InitiateRetailWallet",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "Customer Id",
+            "schema": {
+              "type": "string",
+              "description": "Customer Id",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Credentials to access the mnemonic seed. Encryption key file can be left empty, if it's stored on the Custodian side.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RetailWalletDtoListApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Retail Wallet"
+        ],
+        "summary": "Generates and returns a PDF file containing the 24-word mnemonic seed for retail wallets.\r\nRemoves retail wallet seed from the custodian database.",
+        "operationId": "DeleteRetailWallets",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "Customer Id",
+            "schema": {
+              "type": "string",
+              "description": "Customer Id",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Credentials to access the mnemonic seed. Encryption key file can be left empty, if it's stored on the Custodian side.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RetailWalletRecoveryKitFileDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/customers/{customer-id}/retail-wallets/{retail-wallet-id}/opt-in": {
+      "post": {
+        "tags": [
+          "Retail Wallet"
+        ],
+        "summary": "Request to hold a certain tokenized asset in given retail wallet",
+        "operationId": "OptInWithRetailWallet",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "retail-wallet-id",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RetailWalletOptInDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RetailWalletOptInDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RetailWalletOptInDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/customers/{customer-id}/retail-wallets/lock": {
+      "put": {
+        "tags": [
+          "Retail Wallet"
+        ],
+        "summary": "Freezes or unfreezes all customer retail wallets by locking access to the mnemonic seed",
+        "operationId": "LockRetailWallets",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LockRetailWalletsDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LockRetailWalletsDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LockRetailWalletsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/customers/{customer-id}/retail-wallets/recovery": {
+      "post": {
+        "tags": [
+          "Retail Wallet"
+        ],
+        "summary": "Initiates retail wallet passphrase recovery",
+        "operationId": "InitiateRetailWalletPassphraseRecovery",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "Customer Id",
+            "schema": {
+              "type": "string",
+              "description": "Customer Id",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RetailWalletSeedRecoveryDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Retail Wallet"
+        ],
+        "summary": "Resets retail-wallet's encryption passphrase",
+        "operationId": "RecoverRetailWalletSeedAccess",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "Customer Id",
+            "schema": {
+              "type": "string",
+              "description": "Customer Id",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetRetailWalletAccessCredentialsDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetRetailWalletAccessCredentialsDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetRetailWalletAccessCredentialsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/status": {
+      "get": {
+        "tags": [
+          "Status"
+        ],
+        "summary": "Get status of API",
+        "operationId": "Get",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/external/v1/status/auth": {
+      "get": {
+        "tags": [
+          "Status"
+        ],
+        "summary": "Returns the Users identity, if HMAC authentication worked",
+        "operationId": "GetAuth",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticatedInstitutionDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/customers/{customer-id}/wallets": {
+      "get": {
+        "tags": [
+          "Depricated"
+        ],
+        "summary": "Get wallet information for an account",
+        "operationId": "GetWalletBasicInfo",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalletBasicInfoDtoApiResponse"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/external/v1/customers/{customer-id}/wallets/delete": {
+      "put": {
+        "tags": [
+          "Depricated"
+        ],
+        "summary": "Delete a standard wallet",
+        "operationId": "DeleteWallet",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "Customer Id",
+            "schema": {
+              "type": "string",
+              "description": "Customer Id",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Request body containing the retail wallet pin",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteWalletDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteWalletDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteWalletDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringApiResponse"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/external/v1/wallets": {
+      "post": {
+        "tags": [
+          "Depricated"
+        ],
+        "summary": "Returns empty response, does nothing",
+        "operationId": "BulkCreateWallet",
+        "requestBody": {
+          "description": "Request body containing the PIN and user ID pairs",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkCreateWalletDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkCreateWalletDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkCreateWalletDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkResultDtoApiResponse"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/external/v1/customers/{customer-id}/wallets/external": {
+      "post": {
+        "tags": [
+          "Depricated"
+        ],
+        "summary": "Returns empty response, does nothing",
+        "operationId": "CreateExternalWallet",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "Customer Id",
+            "schema": {
+              "type": "string",
+              "description": "Customer Id",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Request body containing the public key and the account id",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExternalWalletDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExternalWalletDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExternalWalletDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExternalWalletResponseDtoApiResponse"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/external/v1/customers/{customer-id}/wallets/recoverpassword": {
+      "put": {
+        "tags": [
+          "Depricated"
+        ],
+        "summary": "Recover retail wallet pin/password",
+        "operationId": "RecoverWalletPassword",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "Customer Id",
+            "schema": {
+              "type": "string",
+              "description": "Customer Id",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Request body containing the public key and the account id",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WalletPasswordRecoveryDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WalletPasswordRecoveryDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WalletPasswordRecoveryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringApiResponse"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/external/v1/customers/{customer-id}/wallets/recovery-kit": {
+      "get": {
+        "tags": [
+          "Depricated"
+        ],
+        "summary": "Get retail wallet recovery kit",
+        "operationId": "GetWalletRecoveryKit",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "Customer Id",
+            "schema": {
+              "type": "string",
+              "description": "Customer Id",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileResponseDtoApiResponse"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/external/v1/customers/{customer-id}/wealth-management/onboardings": {
+      "post": {
+        "tags": [
+          "Wealth Management"
+        ],
+        "summary": "Create wealth management onboarding",
+        "description": "If all required data is provided, a new wealth management onboarding will be submitted for approval.\r\nOnly one submitted onboarding can be processed at a time. Additionally, if ETF portfolio for the selected EtfPortfolioProductType exists\r\na second onboarding cannot be created.",
+        "operationId": "CreateWealthManagementOnboarding",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "The customer ID",
+            "schema": {
+              "type": "string",
+              "description": "The customer ID",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The request body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEtfOnboardingDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEtfOnboardingDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEtfOnboardingDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/customers/{customer-id}/wealth-management": {
+      "get": {
+        "tags": [
+          "Wealth Management"
+        ],
+        "summary": "Get wealth management overview",
+        "description": "The customer's wealth management overview data includes opened depots, documents, investment totals etc.",
+        "operationId": "GetWealthManagementOverview",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "The customer ID",
+            "schema": {
+              "type": "string",
+              "description": "The customer ID",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WealthManagementOverviewDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/customers/{customer-id}/wealth-management/depots/{depot-id}": {
+      "get": {
+        "tags": [
+          "Wealth Management"
+        ],
+        "summary": "Get ETF Depot",
+        "description": "Get the ETF depot details including all securities and depot value history",
+        "operationId": "GetWealthManagementDepot",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "The customer ID",
+            "schema": {
+              "type": "string",
+              "description": "The customer ID",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "depot-id",
+            "in": "path",
+            "required": true,
+            "description": "The depot ID",
+            "schema": {
+              "type": "string",
+              "description": "The depot ID",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EtfDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/customers/{customer-id}/wealth-management/depots/{depot-id}/payments": {
+      "get": {
+        "tags": [
+          "Wealth Management"
+        ],
+        "summary": "Get payment information for a depot",
+        "description": "The payment information includes one time deposit, recurring deposit and withdrawal information.",
+        "operationId": "GetDepotPayments",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "The customer ID",
+            "schema": {
+              "type": "string",
+              "description": "The customer ID",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "depot-id",
+            "in": "path",
+            "required": true,
+            "description": "The depot ID",
+            "schema": {
+              "type": "string",
+              "description": "The depot ID",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepotPaymentSummaryDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Wealth Management"
+        ],
+        "summary": "Cancel depot payment",
+        "description": "Cancel a pending depot deposit or withdrawal. If payment is already processed cancelling is not possible.",
+        "operationId": "CancelPendingDepotPayment",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "The customer ID",
+            "schema": {
+              "type": "string",
+              "description": "The customer ID",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "depot-id",
+            "in": "path",
+            "required": true,
+            "description": "The depot ID",
+            "schema": {
+              "type": "string",
+              "description": "The depot ID",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The request body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelPendingDepotPaymentDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelPendingDepotPaymentDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelPendingDepotPaymentDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/customers/{customer-id}/wealth-management/depots/{depot-id}/payments/deposits": {
+      "post": {
+        "tags": [
+          "Wealth Management"
+        ],
+        "summary": "Create depot deposit",
+        "description": "Create a one-time or recurring depot deposit.",
+        "operationId": "CreateDepotDeposit",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "The customer ID",
+            "schema": {
+              "type": "string",
+              "description": "The customer ID",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "depot-id",
+            "in": "path",
+            "required": true,
+            "description": "The depot ID",
+            "schema": {
+              "type": "string",
+              "description": "The depot ID",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The request body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDepotDepositDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDepotDepositDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDepotDepositDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/customers/{customer-id}/wealth-management/depots/{depot-id}/payments/withdrawals": {
+      "post": {
+        "tags": [
+          "Wealth Management"
+        ],
+        "summary": "Create depot withdrawal",
+        "description": "Create a depot withdrawal, with the option to provide an amount or request liquidation. If \"liquidate",
+        "operationId": "CreateDepotWithdrawal",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "The customer ID",
+            "schema": {
+              "type": "string",
+              "description": "The customer ID",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "depot-id",
+            "in": "path",
+            "required": true,
+            "description": "The depot ID",
+            "schema": {
+              "type": "string",
+              "description": "The depot ID",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The request body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDepotWithdrawalDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDepotWithdrawalDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDepotWithdrawalDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/customers/{customer-id}/wealth-management/documents/{document-id}": {
+      "get": {
+        "tags": [
+          "Wealth Management"
+        ],
+        "summary": "Get wealth management document",
+        "description": "Used to get quarterly reports, trade confirmations, invoices etc.",
+        "operationId": "GetWealthManagementDocument",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "The customer ID",
+            "schema": {
+              "type": "string",
+              "description": "The customer ID",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "document-id",
+            "in": "path",
+            "required": true,
+            "description": "The document ID",
+            "schema": {
+              "type": "string",
+              "description": "The document ID",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileResponseDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/sepa-transactions": {
+      "get": {
+        "tags": [
+          "Wealth Management"
+        ],
+        "summary": "Search wealth management SEPA transactions",
+        "operationId": "GetWealthManagementSepaTransactions",
+        "parameters": [
+          {
+            "name": "due-date-min",
+            "in": "query",
+            "description": "- The minimum due date for SEPA transaction.\r\n- Defaults to today - 1 day\r\n- Expects ISO 8601 standard e.g. \"2012-03-19T07:22Z\".\r\n- <strong>Example</strong>: api/external/v1/sepa-transactions?due-date-min=2020-03-19T10:00Z",
+            "schema": {
+              "type": "string",
+              "description": "- The minimum due date for SEPA transaction.\r\n- Defaults to today - 1 day\r\n- Expects ISO 8601 standard e.g. \"2012-03-19T07:22Z\".\r\n- <strong>Example</strong>: api/external/v1/sepa-transactions?due-date-min=2020-03-19T10:00Z",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "due-date-max",
+            "in": "query",
+            "description": "- The maximum due date for SEPA transaction.\r\n- Defaults to today + 1 day\r\n- Expects ISO 8601 standard e.g. \"2012-05-19T07:22Z\".\r\n- <strong>Example</strong>: api/external/v1/sepa-transactions?due-date-max=2020-05-19T10:00Z",
+            "schema": {
+              "type": "string",
+              "description": "- The maximum due date for SEPA transaction.\r\n- Defaults to today + 1 day\r\n- Expects ISO 8601 standard e.g. \"2012-05-19T07:22Z\".\r\n- <strong>Example</strong>: api/external/v1/sepa-transactions?due-date-max=2020-05-19T10:00Z",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "transaction-type",
+            "in": "query",
+            "description": "- The type of SEPA transaction. One or more of\r\n    - PayIn = 1\r\n    - PayInRecurring = 2\r\n    - PayOut = 3\r\n    - PayOutRecurring = 4\r\n    - Fee = 5\r\n    - InitialPayIn = 6\r\n- <strong>Example</strong>: api/external/v1/sepa-transactions?transaction-type=1&transaction-type=2",
+            "schema": {
+              "type": "array",
+              "description": "- The type of SEPA transaction. One or more of\r\n    - PayIn = 1\r\n    - PayInRecurring = 2\r\n    - PayOut = 3\r\n    - PayOutRecurring = 4\r\n    - Fee = 5\r\n    - InitialPayIn = 6\r\n- <strong>Example</strong>: api/external/v1/sepa-transactions?transaction-type=1&transaction-type=2",
+              "nullable": true,
+              "items": {
+                "$ref": "#/components/schemas/SepaExportTransactionType"
+              }
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "- The status of SEPA transaction. One or more of\r\n    - Pending = 100\r\n    - Submitted = 200\r\n    - Processed = 300\r\n    - Cancelled = 400\r\n- <strong>Example</strong>: api/external/v1/sepa-transactions?status=100&status=200",
+            "schema": {
+              "type": "array",
+              "description": "- The status of SEPA transaction. One or more of\r\n    - Pending = 100\r\n    - Submitted = 200\r\n    - Processed = 300\r\n    - Cancelled = 400\r\n- <strong>Example</strong>: api/external/v1/sepa-transactions?status=100&status=200",
+              "nullable": true,
+              "items": {
+                "$ref": "#/components/schemas/SepaExportTransactionStatus"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SepaTransactionDtoIEnumerableApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AccountTypes": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "Person",
+          "LegalEntity"
+        ],
+        "x-custom-enum": {
+          "name": "AccountTypes",
+          "enumObjects": [
+            {
+              "label": "Person",
+              "value": 1
+            },
+            {
+              "label": "LegalEntity",
+              "value": 2
+            }
+          ]
+        }
+      },
+      "RetailWalletAccessLevels": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "None",
+          "Basic",
+          "Full"
+        ],
+        "x-custom-enum": {
+          "name": "RetailWalletAccessLevels",
+          "enumObjects": [
+            {
+              "label": "None",
+              "value": 0
+            },
+            {
+              "label": "Basic",
+              "value": 1
+            },
+            {
+              "label": "Full",
+              "value": 2
+            }
+          ]
+        }
+      },
+      "CountryDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "iso": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "CustomerAddressDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "street": {
+            "type": "string",
+            "nullable": true
+          },
+          "streetNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "postalCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "town": {
+            "type": "string",
+            "nullable": true
+          },
+          "country": {
+            "$ref": "#/components/schemas/CountryDto"
+          }
+        }
+      },
+      "CustomerAccountDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "institutionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "institutionName": {
+            "type": "string",
+            "nullable": true
+          },
+          "salutation": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/AccountTypes"
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstname": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastname": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "walletAccess": {
+            "$ref": "#/components/schemas/RetailWalletAccessLevels"
+          },
+          "address": {
+            "$ref": "#/components/schemas/CustomerAddressDto"
+          }
+        }
+      },
+      "CustomerAccountDtoListApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/CustomerAccountDto"
+            }
+          }
+        }
+      },
+      "CreateCustomerAccountDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "countryIso",
+          "email",
+          "firstname",
+          "lastname",
+          "postalCode",
+          "salutation",
+          "street",
+          "streetNo",
+          "town",
+          "type"
+        ],
+        "properties": {
+          "salutation": {
+            "type": "string",
+            "maxLength": 16,
+            "minLength": 0
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 0,
+            "nullable": true
+          },
+          "firstname": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 0
+          },
+          "lastname": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 0
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "format": "tel",
+            "maxLength": 64,
+            "minLength": 0,
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/AccountTypes"
+          },
+          "street": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "streetNo": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "postalCode": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "town": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "countryIso": {
+            "type": "string",
+            "maxLength": 2
+          },
+          "walletAccess": {
+            "$ref": "#/components/schemas/RetailWalletAccessLevels"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 64,
+            "minLength": 0
+          }
+        }
+      },
+      "GuidApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "string",
+            "readOnly": true,
+            "format": "uuid"
+          }
+        }
+      },
+      "CustomerAccountDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/CustomerAccountDto"
+          }
+        }
+      },
+      "UpdateCustomerAccountDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "countryIso",
+          "firstname",
+          "lastname",
+          "postalCode",
+          "salutation",
+          "street",
+          "streetNo",
+          "town",
+          "type"
+        ],
+        "properties": {
+          "salutation": {
+            "type": "string",
+            "maxLength": 16,
+            "minLength": 0
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 0,
+            "nullable": true
+          },
+          "firstname": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 0
+          },
+          "lastname": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 0
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "format": "tel",
+            "maxLength": 64,
+            "minLength": 0,
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/AccountTypes"
+          },
+          "street": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "streetNo": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "postalCode": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "town": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "countryIso": {
+            "type": "string",
+            "maxLength": 2
+          },
+          "walletAccess": {
+            "$ref": "#/components/schemas/RetailWalletAccessLevels"
+          }
+        }
+      },
+      "KycAddressDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "countryCodeIso2",
+          "postalCode",
+          "street",
+          "streetNo",
+          "town"
+        ],
+        "properties": {
+          "street": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "streetNo": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "postalCode": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "town": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "countryCodeIso2": {
+            "type": "string",
+            "maxLength": 2
+          }
+        }
+      },
+      "KycDataDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "address",
+          "dateOfBirth",
+          "email",
+          "eulaAgreed",
+          "firstname",
+          "highCorruptionIndex",
+          "identVerified",
+          "lastname",
+          "nonPepPerson",
+          "nonSanctionedCountry",
+          "nonUsTaxPerson",
+          "placeOfBirth"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 0,
+            "nullable": true
+          },
+          "firstname": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 0
+          },
+          "lastname": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 0
+          },
+          "placeOfBirth": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 0
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "address": {
+            "$ref": "#/components/schemas/KycAddressDto"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 64,
+            "minLength": 0
+          },
+          "nonPepPerson": {
+            "type": "boolean"
+          },
+          "highCorruptionIndex": {
+            "type": "boolean"
+          },
+          "nonSanctionedCountry": {
+            "type": "boolean"
+          },
+          "nonUsTaxPerson": {
+            "type": "boolean"
+          },
+          "identVerified": {
+            "type": "boolean"
+          },
+          "eulaAgreed": {
+            "type": "boolean"
+          }
+        }
+      },
+      "BooleanApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        }
+      },
+      "AssetTypes": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "NotSet",
+          "BTC",
+          "ETH",
+          "XLM",
+          "XTZ",
+          "LINK",
+          "CRO",
+          "OMG",
+          "BAT",
+          "COMP",
+          "DAI",
+          "SNX",
+          "EOS",
+          "LTC",
+          "AAVE",
+          "DOT",
+          "KSM",
+          "ALGO",
+          "CRV",
+          "YFI",
+          "EUR",
+          "USD"
+        ],
+        "x-custom-enum": {
+          "name": "AssetTypes",
+          "enumObjects": [
+            {
+              "label": "NotSet",
+              "value": 0
+            },
+            {
+              "label": "BTC",
+              "value": 1
+            },
+            {
+              "label": "ETH",
+              "value": 2
+            },
+            {
+              "label": "XLM",
+              "value": 3
+            },
+            {
+              "label": "XTZ",
+              "value": 4
+            },
+            {
+              "label": "LINK",
+              "value": 5
+            },
+            {
+              "label": "CRO",
+              "value": 6
+            },
+            {
+              "label": "OMG",
+              "value": 7
+            },
+            {
+              "label": "BAT",
+              "value": 8
+            },
+            {
+              "label": "COMP",
+              "value": 9
+            },
+            {
+              "label": "DAI",
+              "value": 10
+            },
+            {
+              "label": "SNX",
+              "value": 11
+            },
+            {
+              "label": "EOS",
+              "value": 12
+            },
+            {
+              "label": "LTC",
+              "value": 13
+            },
+            {
+              "label": "AAVE",
+              "value": 14
+            },
+            {
+              "label": "DOT",
+              "value": 16
+            },
+            {
+              "label": "KSM",
+              "value": 17
+            },
+            {
+              "label": "ALGO",
+              "value": 18
+            },
+            {
+              "label": "CRV",
+              "value": 19
+            },
+            {
+              "label": "YFI",
+              "value": 20
+            },
+            {
+              "label": "EUR",
+              "value": 1001
+            },
+            {
+              "label": "USD",
+              "value": 1002
+            }
+          ]
+        }
+      },
+      "ElectronicSecurityBasicInfoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "issuerWalletPubKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "assetType": {
+            "$ref": "#/components/schemas/AssetTypes"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "ElectronicSecurityBasicInfoDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/ElectronicSecurityBasicInfoDto"
+          }
+        }
+      },
+      "CreateTrustLineInternalDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "pin": {
+            "type": "string",
+            "nullable": true
+          },
+          "uuid": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "BulkCreateTrustLineDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "trustLineData": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/CreateTrustLineInternalDto"
+            }
+          }
+        }
+      },
+      "BulkResultItemStatus": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "NotSet",
+          "Ok",
+          "Failed",
+          "Duplicate"
+        ],
+        "x-custom-enum": {
+          "name": "BulkResultItemStatus",
+          "enumObjects": [
+            {
+              "label": "NotSet",
+              "value": 0
+            },
+            {
+              "label": "Ok",
+              "value": 1
+            },
+            {
+              "label": "Failed",
+              "value": 10
+            },
+            {
+              "label": "Duplicate",
+              "value": 11
+            }
+          ]
+        }
+      },
+      "BulkResultItemDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "requestId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/BulkResultItemStatus"
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "BulkResultDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/BulkResultItemDto"
+            }
+          }
+        }
+      },
+      "BulkResultDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/BulkResultDto"
+          }
+        }
+      },
+      "IssuerWalletRoles": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "Issuer",
+          "Distributor"
+        ],
+        "x-custom-enum": {
+          "name": "IssuerWalletRoles",
+          "enumObjects": [
+            {
+              "label": "Issuer",
+              "value": 1
+            },
+            {
+              "label": "Distributor",
+              "value": 2
+            }
+          ]
+        }
+      },
+      "BalanceDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "nativeBalance": {
+            "type": "number",
+            "format": "double"
+          },
+          "nonNativeBalances": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        }
+      },
+      "TokenizedAssetDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "assetId": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitName": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalSupply": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "decimals": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "url": {
+            "type": "string",
+            "nullable": true
+          },
+          "metaData": {
+            "type": "string",
+            "nullable": true
+          },
+          "issuerAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "distributionAddress": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "IssuerWalletDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "issuerWalletSeedId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "role": {
+            "$ref": "#/components/schemas/IssuerWalletRoles"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "assetType": {
+            "$ref": "#/components/schemas/AssetTypes"
+          },
+          "publicAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "accountIndex": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "balance": {
+            "$ref": "#/components/schemas/BalanceDto"
+          },
+          "tokenizedAssets": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/TokenizedAssetDto"
+            }
+          }
+        }
+      },
+      "IssuerWalletSeedDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdDt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "wallets": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/IssuerWalletDto"
+            }
+          }
+        }
+      },
+      "IssuerWalletSeedDtoListApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/IssuerWalletSeedDto"
+            }
+          }
+        }
+      },
+      "SimpleAccessCredentialsDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "passphrase"
+        ],
+        "properties": {
+          "passphrase": {
+            "type": "string"
+          },
+          "keyFileContent": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "CreateIssuerWalletSeedDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "credentials": {
+            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+          }
+        }
+      },
+      "IssuerWalletSeedDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/IssuerWalletSeedDto"
+          }
+        }
+      },
+      "DeriveIssuerWalletFromSeedDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "accountIndex",
+          "assetType",
+          "role"
+        ],
+        "properties": {
+          "assetType": {
+            "$ref": "#/components/schemas/AssetTypes"
+          },
+          "accountIndex": {
+            "type": "integer",
+            "format": "int32",
+            "maximum": 1024.0,
+            "minimum": 0.0
+          },
+          "credentials": {
+            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+          },
+          "role": {
+            "$ref": "#/components/schemas/IssuerWalletRoles"
+          }
+        }
+      },
+      "IssuerWalletRecoveryKitFileDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "content": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "IssuerWalletRecoveryKitFileDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/IssuerWalletRecoveryKitFileDto"
+          }
+        }
+      },
+      "EmptyResult": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "IssuerWalletDtoListApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/IssuerWalletDto"
+            }
+          }
+        }
+      },
+      "CreateTokenizedAssetDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitName": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalSupply": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "decimals": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "url": {
+            "type": "string",
+            "nullable": true
+          },
+          "metaData": {
+            "type": "string",
+            "nullable": true
+          },
+          "credentials": {
+            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+          },
+          "distributorWalletId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          }
+        }
+      },
+      "TokenizedAssetDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/TokenizedAssetDto"
+          }
+        }
+      },
+      "TokenizedAssetTransferDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "receiverRetailWalletId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "txId": {
+            "type": "string",
+            "nullable": true
+          },
+          "fromAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "toAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "amount": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "TokenizedAssetOptInDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "txId": {
+            "type": "string",
+            "nullable": true
+          },
+          "fee": {
+            "type": "string",
+            "nullable": true
+          },
+          "confirmed": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "TokenizedAssetDetailsDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "assetId": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitName": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalSupply": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "decimals": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "url": {
+            "type": "string",
+            "nullable": true
+          },
+          "metaData": {
+            "type": "string",
+            "nullable": true
+          },
+          "issuerAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "distributionAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "transfers": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/TokenizedAssetTransferDto"
+            }
+          },
+          "optIns": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/TokenizedAssetOptInDto"
+            }
+          }
+        }
+      },
+      "TokenizedAssetDetailsDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/TokenizedAssetDetailsDto"
+          }
+        }
+      },
+      "TokenizedAssetToRetailWallet": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "retailWalletId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "IssuerWalletTokenizedAssetTransferDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "transfers": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/TokenizedAssetToRetailWallet"
+            }
+          },
+          "credentials": {
+            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+          }
+        }
+      },
+      "GuidListApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "RetailWalletDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "assetType": {
+            "$ref": "#/components/schemas/AssetTypes"
+          },
+          "publicAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "balance": {
+            "$ref": "#/components/schemas/BalanceDto"
+          },
+          "reservedAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "stakedAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "seedLockStatus": {
+            "type": "boolean"
+          }
+        }
+      },
+      "RetailWalletDtoListApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/RetailWalletDto"
+            }
+          }
+        }
+      },
+      "RetailWalletRecoveryKitFileDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "content": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "RetailWalletRecoveryKitFileDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/RetailWalletRecoveryKitFileDto"
+          }
+        }
+      },
+      "RetailWalletOptInDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "credentials",
+          "tokenizedAssetId"
+        ],
+        "properties": {
+          "tokenizedAssetId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "credentials": {
+            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+          }
+        }
+      },
+      "LockRetailWalletsDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "lock": {
+            "type": "boolean"
+          }
+        }
+      },
+      "RetailWalletSeedRecoveryDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "institutionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "accountId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "recoveryKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "retailWalletSeedId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "closedDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "RetailWalletSeedRecoveryDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/RetailWalletSeedRecoveryDto"
+          }
+        }
+      },
+      "ResetRetailWalletAccessCredentialsDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "recoveryKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "passphrase": {
+            "type": "string",
+            "nullable": true
+          },
+          "keyFileContent": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "Products": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "ETFWealthManagement",
+          "RetailWallet",
+          "CryptoWealthManagement",
+          "Tokenization"
+        ],
+        "x-custom-enum": {
+          "name": "Products",
+          "enumObjects": [
+            {
+              "label": "ETFWealthManagement",
+              "value": 100
+            },
+            {
+              "label": "RetailWallet",
+              "value": 101
+            },
+            {
+              "label": "CryptoWealthManagement",
+              "value": 102
+            },
+            {
+              "label": "Tokenization",
+              "value": 103
+            }
+          ]
+        }
+      },
+      "AuthenticatedInstitutionDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "institutionName": {
+            "type": "string",
+            "nullable": true
+          },
+          "productAccess": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Products"
+            }
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "AuthenticatedInstitutionDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/AuthenticatedInstitutionDto"
+          }
+        }
+      },
+      "WalletType": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "NotSet",
+          "Standard",
+          "Issuer",
+          "External"
+        ],
+        "x-custom-enum": {
+          "name": "WalletType",
+          "enumObjects": [
+            {
+              "label": "NotSet",
+              "value": 0
+            },
+            {
+              "label": "Standard",
+              "value": 1
+            },
+            {
+              "label": "Issuer",
+              "value": 2
+            },
+            {
+              "label": "External",
+              "value": 3
+            }
+          ]
+        }
+      },
+      "WalletBasicInfoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/WalletType"
+          },
+          "publicKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          }
+        }
+      },
+      "WalletBasicInfoDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/WalletBasicInfoDto"
+          }
+        }
+      },
+      "DeleteWalletDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "pin": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "StringApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "string",
+            "readOnly": true,
+            "nullable": true
+          }
+        }
+      },
+      "CreateWalletDataDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "pin": {
+            "type": "string",
+            "nullable": true
+          },
+          "uuid": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "BulkCreateWalletDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "walletData": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/CreateWalletDataDto"
+            }
+          }
+        }
+      },
+      "ExternalWalletDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "publicKey": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ExternalWalletResponseDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "ExternalWalletResponseDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/ExternalWalletResponseDto"
+          }
+        }
+      },
+      "WalletPasswordRecoveryDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "passwordRecoveryString": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "FileResponseDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "contentType": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "FileResponseDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/FileResponseDto"
+          }
+        }
+      },
+      "WealthManagementProductType": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "Unknown",
+          "AllWeather",
+          "ValueSave",
+          "AllWeatherGreen",
+          "ValueSaveGreen"
+        ],
+        "x-custom-enum": {
+          "name": "WealthManagementProductType",
+          "enumObjects": [
+            {
+              "label": "AllWeather",
+              "value": 1
+            },
+            {
+              "label": "ValueSave",
+              "value": 2
+            },
+            {
+              "label": "AllWeatherGreen",
+              "value": 3
+            },
+            {
+              "label": "ValueSaveGreen",
+              "value": 4
+            },
+            {
+              "label": "Unknown",
+              "value": -1
+            }
+          ]
+        }
+      },
+      "WealthManagementPurposeType": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "NotSet",
+          "SavingMoney",
+          "IncreasingWealth"
+        ],
+        "x-custom-enum": {
+          "name": "WealthManagementPurposeType",
+          "enumObjects": [
+            {
+              "label": "NotSet",
+              "value": 0
+            },
+            {
+              "label": "SavingMoney",
+              "value": 1
+            },
+            {
+              "label": "IncreasingWealth",
+              "value": 2
+            }
+          ]
+        }
+      },
+      "WealthManagementHorizonType": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "NotSet",
+          "Small",
+          "Medium",
+          "Large"
+        ],
+        "x-custom-enum": {
+          "name": "WealthManagementHorizonType",
+          "enumObjects": [
+            {
+              "label": "NotSet",
+              "value": 0
+            },
+            {
+              "label": "Small",
+              "value": 1
+            },
+            {
+              "label": "Medium",
+              "value": 2
+            },
+            {
+              "label": "Large",
+              "value": 3
+            }
+          ]
+        }
+      },
+      "WealthManagementOnboardingGender": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "Male",
+          "Female",
+          "Unknown"
+        ],
+        "x-custom-enum": {
+          "name": "WealthManagementOnboardingGender",
+          "enumObjects": [
+            {
+              "label": "Male",
+              "value": 1
+            },
+            {
+              "label": "Female",
+              "value": 2
+            },
+            {
+              "label": "Unknown",
+              "value": 3
+            }
+          ]
+        }
+      },
+      "AccountMaritalStatus": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "NotSet",
+          "Single",
+          "Married",
+          "CivilPartnership"
+        ],
+        "x-custom-enum": {
+          "name": "AccountMaritalStatus",
+          "enumObjects": [
+            {
+              "label": "NotSet",
+              "value": 0
+            },
+            {
+              "label": "Single",
+              "value": 1
+            },
+            {
+              "label": "Married",
+              "value": 2
+            },
+            {
+              "label": "CivilPartnership",
+              "value": 3
+            }
+          ]
+        }
+      },
+      "EmploymentType": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "NotSet",
+          "Employee",
+          "SelfEmployed",
+          "Retired",
+          "Private"
+        ],
+        "x-custom-enum": {
+          "name": "EmploymentType",
+          "enumObjects": [
+            {
+              "label": "NotSet",
+              "value": 0
+            },
+            {
+              "label": "Employee",
+              "value": 1
+            },
+            {
+              "label": "SelfEmployed",
+              "value": 2
+            },
+            {
+              "label": "Retired",
+              "value": 3
+            },
+            {
+              "label": "Private",
+              "value": 4
+            }
+          ]
+        }
+      },
+      "EducationType": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "NotSet",
+          "Hochschulabschluss",
+          "AbgeschlosseneAusbildung",
+          "Abitur",
+          "Fachhochschulreife",
+          "MittlererSchulabschluss",
+          "Hauptschulabschluss",
+          "KeinSchulabschluss"
+        ],
+        "x-custom-enum": {
+          "name": "EducationType",
+          "enumObjects": [
+            {
+              "label": "NotSet",
+              "value": 0
+            },
+            {
+              "label": "Hochschulabschluss",
+              "value": 1
+            },
+            {
+              "label": "AbgeschlosseneAusbildung",
+              "value": 2
+            },
+            {
+              "label": "Abitur",
+              "value": 3
+            },
+            {
+              "label": "Fachhochschulreife",
+              "value": 4
+            },
+            {
+              "label": "MittlererSchulabschluss",
+              "value": 5
+            },
+            {
+              "label": "Hauptschulabschluss",
+              "value": 6
+            },
+            {
+              "label": "KeinSchulabschluss",
+              "value": 7
+            }
+          ]
+        }
+      },
+      "IndustryType": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "NotSet",
+          "AgricultureForestryHunting",
+          "Mining",
+          "Glassware",
+          "VanParts",
+          "EnergySupply",
+          "WaterSupply",
+          "Construction",
+          "MotorVehicles",
+          "RetailTrade",
+          "Warehousing",
+          "Gastronomy",
+          "InformationServices",
+          "PropertyAndHousing",
+          "ScientificActivities",
+          "ProvisionBusinessEconomicServicesAndIndividuals",
+          "PublicAdministration",
+          "EducationAndTeaching",
+          "Healthcare",
+          "CreativeArtisticEntertainingActivities",
+          "SportsEntertainmentRecreation",
+          "EconomicallyDependentPrivateIndividuals"
+        ],
+        "x-custom-enum": {
+          "name": "IndustryType",
+          "enumObjects": [
+            {
+              "label": "NotSet",
+              "value": 0
+            },
+            {
+              "label": "AgricultureForestryHunting",
+              "value": 1
+            },
+            {
+              "label": "Mining",
+              "value": 2
+            },
+            {
+              "label": "Glassware",
+              "value": 3
+            },
+            {
+              "label": "VanParts",
+              "value": 4
+            },
+            {
+              "label": "EnergySupply",
+              "value": 5
+            },
+            {
+              "label": "WaterSupply",
+              "value": 6
+            },
+            {
+              "label": "Construction",
+              "value": 7
+            },
+            {
+              "label": "MotorVehicles",
+              "value": 8
+            },
+            {
+              "label": "RetailTrade",
+              "value": 9
+            },
+            {
+              "label": "Warehousing",
+              "value": 10
+            },
+            {
+              "label": "Gastronomy",
+              "value": 11
+            },
+            {
+              "label": "InformationServices",
+              "value": 12
+            },
+            {
+              "label": "PropertyAndHousing",
+              "value": 13
+            },
+            {
+              "label": "ScientificActivities",
+              "value": 14
+            },
+            {
+              "label": "ProvisionBusinessEconomicServicesAndIndividuals",
+              "value": 15
+            },
+            {
+              "label": "PublicAdministration",
+              "value": 16
+            },
+            {
+              "label": "EducationAndTeaching",
+              "value": 17
+            },
+            {
+              "label": "Healthcare",
+              "value": 18
+            },
+            {
+              "label": "CreativeArtisticEntertainingActivities",
+              "value": 19
+            },
+            {
+              "label": "SportsEntertainmentRecreation",
+              "value": 20
+            },
+            {
+              "label": "EconomicallyDependentPrivateIndividuals",
+              "value": 21
+            }
+          ]
+        }
+      },
+      "WealthManagementInitialDebitType": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "NotSet",
+          "Immediate",
+          "InOneWeek"
+        ],
+        "x-custom-enum": {
+          "name": "WealthManagementInitialDebitType",
+          "enumObjects": [
+            {
+              "label": "NotSet",
+              "value": 0
+            },
+            {
+              "label": "Immediate",
+              "value": 1
+            },
+            {
+              "label": "InOneWeek",
+              "value": 2
+            }
+          ]
+        }
+      },
+      "EtfOnboardingPersonalDataDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "gender": {
+            "$ref": "#/components/schemas/WealthManagementOnboardingGender"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "maritalStatus": {
+            "$ref": "#/components/schemas/AccountMaritalStatus"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "countryOfBirth": {
+            "type": "string",
+            "nullable": true
+          },
+          "placeOfBirth": {
+            "type": "string",
+            "nullable": true
+          },
+          "citizenship": {
+            "type": "string",
+            "nullable": true
+          },
+          "politicallyExposedPerson": {
+            "type": "boolean"
+          },
+          "street": {
+            "type": "string",
+            "nullable": true
+          },
+          "streetNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "additionalAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "postalCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "town": {
+            "type": "string",
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "nullable": true
+          },
+          "mobile": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "employment": {
+            "$ref": "#/components/schemas/EmploymentType"
+          },
+          "education": {
+            "$ref": "#/components/schemas/EducationType"
+          },
+          "industry": {
+            "$ref": "#/components/schemas/IndustryType"
+          },
+          "knowledgeStocks": {
+            "type": "boolean"
+          },
+          "knowledgeBonds": {
+            "type": "boolean"
+          },
+          "knowledgeFunds": {
+            "type": "boolean"
+          },
+          "knowledgeMercantile": {
+            "type": "boolean"
+          },
+          "experienceStocks": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "experienceBonds": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "experienceFunds": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "experienceMercantile": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "refAccountFirstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "refAccountLastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "refAccountIBAN": {
+            "type": "string",
+            "nullable": true
+          },
+          "taxIDOne": {
+            "type": "string",
+            "nullable": true
+          },
+          "taxCountryOne": {
+            "type": "string",
+            "nullable": true
+          },
+          "taxIDTwo": {
+            "type": "string",
+            "nullable": true
+          },
+          "taxCountryTwo": {
+            "type": "string",
+            "nullable": true
+          },
+          "churchTaxDeduction": {
+            "type": "boolean"
+          },
+          "instructionTaxFreeAmount": {
+            "type": "boolean"
+          },
+          "taxFreeAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "notUsTaxLiability": {
+            "type": "boolean"
+          },
+          "debit": {
+            "$ref": "#/components/schemas/WealthManagementInitialDebitType"
+          }
+        }
+      },
+      "CreateEtfOnboardingDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "product": {
+            "$ref": "#/components/schemas/WealthManagementProductType"
+          },
+          "investmentAmount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "monthlyInvestmentAmount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "investmentGoal": {
+            "$ref": "#/components/schemas/WealthManagementPurposeType"
+          },
+          "investmentHorizon": {
+            "$ref": "#/components/schemas/WealthManagementHorizonType"
+          },
+          "monthlyNetIncome": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "monthlyCost": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "monetaryAssets": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "stockAssets": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "propertyAssets": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "otherAssets": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "liabilities": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "risk": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "changeInDataAgreement": {
+            "type": "boolean"
+          },
+          "preSigningAgreement": {
+            "type": "boolean"
+          },
+          "newsletterAgreement": {
+            "type": "boolean"
+          },
+          "wealthManagementAgreement": {
+            "type": "boolean"
+          },
+          "depotAccountAgreement": {
+            "type": "boolean"
+          },
+          "dataPrivacyAgreement": {
+            "type": "boolean"
+          },
+          "personalDataModel": {
+            "$ref": "#/components/schemas/EtfOnboardingPersonalDataDto"
+          }
+        }
+      },
+      "WealthManagementOverviewInvestmentDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "productType": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "externalIdentifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "externalCustomerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "updated": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "total": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "WealthManagementDocumentDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "categoryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "categoryName": {
+            "type": "string",
+            "nullable": true
+          },
+          "new": {
+            "type": "boolean"
+          },
+          "url": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "WealthManagementOverviewDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "investments": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/WealthManagementOverviewInvestmentDto"
+            }
+          },
+          "total": {
+            "type": "number",
+            "format": "double"
+          },
+          "performance": {
+            "type": "number",
+            "format": "double"
+          },
+          "documents": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/WealthManagementDocumentDto"
+            }
+          }
+        }
+      },
+      "WealthManagementOverviewDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/WealthManagementOverviewDto"
+          }
+        }
+      },
+      "EtfSecurityDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total": {
+            "type": "number",
+            "format": "double"
+          },
+          "quantity": {
+            "type": "number",
+            "format": "double"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "wkn": {
+            "type": "string",
+            "nullable": true
+          },
+          "isin": {
+            "type": "string",
+            "nullable": true
+          },
+          "assetClassName": {
+            "type": "string",
+            "nullable": true
+          },
+          "region": {
+            "type": "string",
+            "nullable": true
+          },
+          "stockRate": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "EtfValueDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "depotValue": {
+            "type": "number",
+            "format": "double"
+          },
+          "cashValue": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "PartnerBankType": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "NotSet",
+          "BaaderBank",
+          "Comdirect",
+          "Dab",
+          "Fondsdepot",
+          "VBank"
+        ],
+        "x-custom-enum": {
+          "name": "PartnerBankType",
+          "enumObjects": [
+            {
+              "label": "BaaderBank",
+              "value": 100
+            },
+            {
+              "label": "Comdirect",
+              "value": 200
+            },
+            {
+              "label": "Dab",
+              "value": 300
+            },
+            {
+              "label": "Fondsdepot",
+              "value": 400
+            },
+            {
+              "label": "VBank",
+              "value": 500
+            },
+            {
+              "label": "NotSet",
+              "value": -100
+            }
+          ]
+        }
+      },
+      "EtfRole": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "Owner",
+          "CoOwner",
+          "AuthorisedPerson"
+        ],
+        "x-custom-enum": {
+          "name": "EtfRole",
+          "enumObjects": [
+            {
+              "label": "Owner",
+              "value": 1
+            },
+            {
+              "label": "CoOwner",
+              "value": 2
+            },
+            {
+              "label": "AuthorisedPerson",
+              "value": 3
+            }
+          ]
+        }
+      },
+      "InvestmentBondDepotPerformanceDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "valueHistoryAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "valueHistoryCashAccount": {
+            "type": "number",
+            "format": "double"
+          },
+          "dailyPerformance": {
+            "type": "number",
+            "format": "double"
+          },
+          "inceptionToDatePerformance": {
+            "type": "number",
+            "format": "double"
+          },
+          "yearToDatePerformance": {
+            "type": "number",
+            "format": "double"
+          },
+          "quarterToDatePerformance": {
+            "type": "number",
+            "format": "double"
+          },
+          "monthToDatePerformance": {
+            "type": "number",
+            "format": "double"
+          },
+          "dailyPayInsPayOuts": {
+            "type": "number",
+            "format": "double"
+          },
+          "inceptionToDatePayInsPayOuts": {
+            "type": "number",
+            "format": "double"
+          },
+          "yearToDatePayInsPayOuts": {
+            "type": "number",
+            "format": "double"
+          },
+          "quarterToDatePayInsPayOuts": {
+            "type": "number",
+            "format": "double"
+          },
+          "monthToDatePayInsPayOuts": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "EtfDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "product": {
+            "$ref": "#/components/schemas/WealthManagementProductType"
+          },
+          "updated": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "productName": {
+            "type": "string",
+            "nullable": true
+          },
+          "info": {
+            "type": "string",
+            "nullable": true
+          },
+          "total": {
+            "type": "number",
+            "format": "double"
+          },
+          "cash": {
+            "type": "number",
+            "format": "double"
+          },
+          "securities": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/EtfSecurityDto"
+            }
+          },
+          "excludeCashFromOverview": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "currentStockRate": {
+            "type": "number",
+            "format": "double"
+          },
+          "aq": {
+            "type": "number",
+            "format": "double"
+          },
+          "lastDayDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastDayTotal": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "valueHistory": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/EtfValueDto"
+            }
+          },
+          "depositTotal": {
+            "type": "number",
+            "format": "double"
+          },
+          "depositYearToDate": {
+            "type": "number",
+            "format": "double"
+          },
+          "partnerBankName": {
+            "type": "string",
+            "nullable": true
+          },
+          "partnerBank": {
+            "$ref": "#/components/schemas/PartnerBankType"
+          },
+          "customerRole": {
+            "$ref": "#/components/schemas/EtfRole"
+          },
+          "depotPerformance": {
+            "$ref": "#/components/schemas/InvestmentBondDepotPerformanceDto"
+          }
+        }
+      },
+      "EtfDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/EtfDto"
+          }
+        }
+      },
+      "DepotPaymentSummaryBankAccountDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "holder": {
+            "type": "string",
+            "nullable": true
+          },
+          "iban": {
+            "type": "string",
+            "nullable": true
+          },
+          "bic": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "SepaExportTransactionStatus": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "Pending",
+          "Submitted",
+          "Processed",
+          "Cancelled"
+        ],
+        "x-custom-enum": {
+          "name": "SepaExportTransactionStatus",
+          "enumObjects": [
+            {
+              "label": "Pending",
+              "value": 100
+            },
+            {
+              "label": "Submitted",
+              "value": 200
+            },
+            {
+              "label": "Processed",
+              "value": 300
+            },
+            {
+              "label": "Cancelled",
+              "value": 400
+            }
+          ]
+        }
+      },
+      "EtfPayoutRequestStatus": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "CreatedByAdmin",
+          "RequestedByCustomer"
+        ],
+        "x-custom-enum": {
+          "name": "EtfPayoutRequestStatus",
+          "enumObjects": [
+            {
+              "label": "CreatedByAdmin",
+              "value": 100
+            },
+            {
+              "label": "RequestedByCustomer",
+              "value": 200
+            }
+          ]
+        }
+      },
+      "DepotPaymentSummaryWithdrawalDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "due": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "processed": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "transactionId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "transactionStatus": {
+            "$ref": "#/components/schemas/SepaExportTransactionStatus"
+          },
+          "type": {
+            "$ref": "#/components/schemas/EtfPayoutRequestStatus"
+          },
+          "liquidate": {
+            "type": "boolean"
+          }
+        }
+      },
+      "DepotPaymentSummaryDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "recurringDepositAmount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "oneTimeDepositAmount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "portfolioAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "referenceAccount": {
+            "$ref": "#/components/schemas/DepotPaymentSummaryBankAccountDto"
+          },
+          "depotBankAccount": {
+            "$ref": "#/components/schemas/DepotPaymentSummaryBankAccountDto"
+          },
+          "withdrawal": {
+            "$ref": "#/components/schemas/DepotPaymentSummaryWithdrawalDto"
+          }
+        }
+      },
+      "DepotPaymentSummaryDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/DepotPaymentSummaryDto"
+          }
+        }
+      },
+      "WealthManagementPaymentType": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "Deposit",
+          "RecurringDeposit",
+          "Withdrawal"
+        ],
+        "x-custom-enum": {
+          "name": "WealthManagementPaymentType",
+          "enumObjects": [
+            {
+              "label": "Deposit",
+              "value": 1
+            },
+            {
+              "label": "RecurringDeposit",
+              "value": 2
+            },
+            {
+              "label": "Withdrawal",
+              "value": 3
+            }
+          ]
+        }
+      },
+      "CancelPendingDepotPaymentDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/WealthManagementPaymentType"
+          }
+        }
+      },
+      "CreateDepotDepositDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "amount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "recurring": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CreateDepotWithdrawalDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "liquidate": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SepaExportTransactionType": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "PayIn",
+          "PayInRecurring",
+          "PayOut",
+          "PayOutRecurring",
+          "Fee",
+          "InitialPayIn"
+        ],
+        "x-custom-enum": {
+          "name": "SepaExportTransactionType",
+          "enumObjects": [
+            {
+              "label": "PayIn",
+              "value": 1
+            },
+            {
+              "label": "PayInRecurring",
+              "value": 2
+            },
+            {
+              "label": "PayOut",
+              "value": 3
+            },
+            {
+              "label": "PayOutRecurring",
+              "value": 4
+            },
+            {
+              "label": "Fee",
+              "value": 5
+            },
+            {
+              "label": "InitialPayIn",
+              "value": 6
+            }
+          ]
+        }
+      },
+      "SepaTransactionDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "processedDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "accountId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "transactionType": {
+            "$ref": "#/components/schemas/SepaExportTransactionType"
+          },
+          "status": {
+            "$ref": "#/components/schemas/SepaExportTransactionStatus"
+          },
+          "capitalUuid": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "SepaTransactionDtoIEnumerableApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/SepaTransactionDto"
+            }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Wealth Management",
+      "description": "Wealth management services provide institution the ability to onbaord their customer for one of several ETF portfolios. Customers receive a depot where the ETF securities are stored, as well as quarterly reporting and daily depot performance data. "
+    }
+  ]
+}
