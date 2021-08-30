@@ -45,6 +45,19 @@ namespace Ganymede.SDK
         }
 
         /// <summary>
+        /// Searches the customer database and returns a list of customers. 
+        /// </summary>
+        /// <param name="seachText">Applied as starting with on the columns: Firstname, Lastname or Email</param>
+        /// <param name="take">Result set size</param>
+        /// <param name="skip">Number of results to skip</param>
+        /// <returns></returns>
+        public async Task<IEnumerable<CustomerAccountDto>> SearchCustomerAsync(string seachText, int take = 50, int skip = 0)
+        {
+            var response = await _client.ApiExternalV1SearchAsync(seachText, take, skip);
+            return response.Data;
+        }
+
+        /// <summary>
         /// Create new customer. Throws exception if email already used or if ID is provided and already used
         /// </summary>
         /// <param name="data">All required data for creating a new customer</param>
