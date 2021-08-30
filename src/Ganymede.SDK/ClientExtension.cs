@@ -1,8 +1,6 @@
-﻿using System;
+﻿using Ganymede.SDK.Extensions;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace Ganymede.SDK
 {
@@ -30,25 +28,9 @@ namespace Ganymede.SDK
 
         private HttpRequestMessage Sign(HttpRequestMessage request)
         {
-            var signature = GenerateSignature(request);
+            var signature = request.Sign(_apiSecret);
             request.Headers.Authorization = new AuthenticationHeaderValue("basic", $"{_apiKey}:{signature}");
             return request;
-        }
-
-        private string GenerateSignature(HttpRequestMessage req)
-        {
-            var msg = $"{req.Content?.Headers?.ContentLength ?? 0}" +
-                $"{req.Method}" +
-                $"{req.RequestUri.AbsolutePath}" +
-                $"{req.RequestUri.Query}"
-                .ToLower();
-
-            using var hmac = new HMACSHA256
-            {
-                Key = Encoding.UTF8.GetBytes(_apiSecret)
-            };
-
-            return Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(msg)));
         }
     }
 }
