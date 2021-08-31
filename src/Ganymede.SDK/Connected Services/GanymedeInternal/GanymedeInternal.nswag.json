@@ -1928,22 +1928,10 @@
         "type": "string",
         "format": "int32",
         "enum": [
+          "Unknown",
           "Person",
           "LegalEntity"
-        ],
-        "x-custom-enum": {
-          "name": "AccountTypes",
-          "enumObjects": [
-            {
-              "label": "Person",
-              "value": 1
-            },
-            {
-              "label": "LegalEntity",
-              "value": 2
-            }
-          ]
-        }
+        ]
       },
       "RetailWalletAccessLevels": {
         "type": "string",
@@ -1952,24 +1940,7 @@
           "None",
           "Basic",
           "Full"
-        ],
-        "x-custom-enum": {
-          "name": "RetailWalletAccessLevels",
-          "enumObjects": [
-            {
-              "label": "None",
-              "value": 0
-            },
-            {
-              "label": "Basic",
-              "value": 1
-            },
-            {
-              "label": "Full",
-              "value": 2
-            }
-          ]
-        }
+        ]
       },
       "CountryDto": {
         "type": "object",
@@ -2488,100 +2459,7 @@
           "YFI",
           "EUR",
           "USD"
-        ],
-        "x-custom-enum": {
-          "name": "AssetTypes",
-          "enumObjects": [
-            {
-              "label": "NotSet",
-              "value": 0
-            },
-            {
-              "label": "BTC",
-              "value": 1
-            },
-            {
-              "label": "ETH",
-              "value": 2
-            },
-            {
-              "label": "XLM",
-              "value": 3
-            },
-            {
-              "label": "XTZ",
-              "value": 4
-            },
-            {
-              "label": "LINK",
-              "value": 5
-            },
-            {
-              "label": "CRO",
-              "value": 6
-            },
-            {
-              "label": "OMG",
-              "value": 7
-            },
-            {
-              "label": "BAT",
-              "value": 8
-            },
-            {
-              "label": "COMP",
-              "value": 9
-            },
-            {
-              "label": "DAI",
-              "value": 10
-            },
-            {
-              "label": "SNX",
-              "value": 11
-            },
-            {
-              "label": "EOS",
-              "value": 12
-            },
-            {
-              "label": "LTC",
-              "value": 13
-            },
-            {
-              "label": "AAVE",
-              "value": 14
-            },
-            {
-              "label": "DOT",
-              "value": 16
-            },
-            {
-              "label": "KSM",
-              "value": 17
-            },
-            {
-              "label": "ALGO",
-              "value": 18
-            },
-            {
-              "label": "CRV",
-              "value": 19
-            },
-            {
-              "label": "YFI",
-              "value": 20
-            },
-            {
-              "label": "EUR",
-              "value": 1001
-            },
-            {
-              "label": "USD",
-              "value": 1002
-            }
-          ]
-        }
+        ]
       },
       "ElectronicSecurityBasicInfoDto": {
         "type": "object",
@@ -2656,28 +2534,7 @@
           "Ok",
           "Failed",
           "Duplicate"
-        ],
-        "x-custom-enum": {
-          "name": "BulkResultItemStatus",
-          "enumObjects": [
-            {
-              "label": "NotSet",
-              "value": 0
-            },
-            {
-              "label": "Ok",
-              "value": 1
-            },
-            {
-              "label": "Failed",
-              "value": 10
-            },
-            {
-              "label": "Duplicate",
-              "value": 11
-            }
-          ]
-        }
+        ]
       },
       "BulkResultItemDto": {
         "type": "object",
@@ -2737,20 +2594,7 @@
         "enum": [
           "Issuer",
           "Distributor"
-        ],
-        "x-custom-enum": {
-          "name": "IssuerWalletRoles",
-          "enumObjects": [
-            {
-              "label": "Issuer",
-              "value": 1
-            },
-            {
-              "label": "Distributor",
-              "value": 2
-            }
-          ]
-        }
+        ]
       },
       "BalanceDto": {
         "type": "object",
@@ -3467,28 +3311,7 @@
           "RetailWallet",
           "CryptoWealthManagement",
           "Tokenization"
-        ],
-        "x-custom-enum": {
-          "name": "Products",
-          "enumObjects": [
-            {
-              "label": "ETFWealthManagement",
-              "value": 100
-            },
-            {
-              "label": "RetailWallet",
-              "value": 101
-            },
-            {
-              "label": "CryptoWealthManagement",
-              "value": 102
-            },
-            {
-              "label": "Tokenization",
-              "value": 103
-            }
-          ]
-        }
+        ]
       },
       "AuthenticatedInstitutionDto": {
         "type": "object",
@@ -3536,28 +3359,7 @@
           "Standard",
           "Issuer",
           "External"
-        ],
-        "x-custom-enum": {
-          "name": "WalletType",
-          "enumObjects": [
-            {
-              "label": "NotSet",
-              "value": 0
-            },
-            {
-              "label": "Standard",
-              "value": 1
-            },
-            {
-              "label": "Issuer",
-              "value": 2
-            },
-            {
-              "label": "External",
-              "value": 3
-            }
-          ]
-        }
+        ]
       },
       "WalletBasicInfoDto": {
         "type": "object",
@@ -3743,36 +3545,7 @@
           "AllWeatherGreen",
           "ValueSaveGreen",
           "Future"
-        ],
-        "x-custom-enum": {
-          "name": "WealthManagementProductType",
-          "enumObjects": [
-            {
-              "label": "AllWeather",
-              "value": 1
-            },
-            {
-              "label": "ValueSave",
-              "value": 2
-            },
-            {
-              "label": "AllWeatherGreen",
-              "value": 3
-            },
-            {
-              "label": "ValueSaveGreen",
-              "value": 4
-            },
-            {
-              "label": "Future",
-              "value": 5
-            },
-            {
-              "label": "Unknown",
-              "value": -1
-            }
-          ]
-        }
+        ]
       },
       "WealthManagementPurposeType": {
         "type": "string",
@@ -3782,28 +3555,7 @@
           "SavingMoney",
           "IncreasingWealth",
           "FutureAssetGrowth"
-        ],
-        "x-custom-enum": {
-          "name": "WealthManagementPurposeType",
-          "enumObjects": [
-            {
-              "label": "NotSet",
-              "value": 0
-            },
-            {
-              "label": "SavingMoney",
-              "value": 1
-            },
-            {
-              "label": "IncreasingWealth",
-              "value": 2
-            },
-            {
-              "label": "FutureAssetGrowth",
-              "value": 3
-            }
-          ]
-        }
+        ]
       },
       "WealthManagementHorizonType": {
         "type": "string",
@@ -3813,28 +3565,7 @@
           "Small",
           "Medium",
           "Large"
-        ],
-        "x-custom-enum": {
-          "name": "WealthManagementHorizonType",
-          "enumObjects": [
-            {
-              "label": "NotSet",
-              "value": 0
-            },
-            {
-              "label": "Small",
-              "value": 1
-            },
-            {
-              "label": "Medium",
-              "value": 2
-            },
-            {
-              "label": "Large",
-              "value": 3
-            }
-          ]
-        }
+        ]
       },
       "WealthManagementOnboardingGender": {
         "type": "string",
@@ -3843,24 +3574,7 @@
           "Male",
           "Female",
           "Unknown"
-        ],
-        "x-custom-enum": {
-          "name": "WealthManagementOnboardingGender",
-          "enumObjects": [
-            {
-              "label": "Male",
-              "value": 1
-            },
-            {
-              "label": "Female",
-              "value": 2
-            },
-            {
-              "label": "Unknown",
-              "value": 3
-            }
-          ]
-        }
+        ]
       },
       "AccountMaritalStatus": {
         "type": "string",
@@ -3870,28 +3584,7 @@
           "Single",
           "Married",
           "CivilPartnership"
-        ],
-        "x-custom-enum": {
-          "name": "AccountMaritalStatus",
-          "enumObjects": [
-            {
-              "label": "NotSet",
-              "value": 0
-            },
-            {
-              "label": "Single",
-              "value": 1
-            },
-            {
-              "label": "Married",
-              "value": 2
-            },
-            {
-              "label": "CivilPartnership",
-              "value": 3
-            }
-          ]
-        }
+        ]
       },
       "EmploymentType": {
         "type": "string",
@@ -3902,32 +3595,7 @@
           "SelfEmployed",
           "Retired",
           "Private"
-        ],
-        "x-custom-enum": {
-          "name": "EmploymentType",
-          "enumObjects": [
-            {
-              "label": "NotSet",
-              "value": 0
-            },
-            {
-              "label": "Employee",
-              "value": 1
-            },
-            {
-              "label": "SelfEmployed",
-              "value": 2
-            },
-            {
-              "label": "Retired",
-              "value": 3
-            },
-            {
-              "label": "Private",
-              "value": 4
-            }
-          ]
-        }
+        ]
       },
       "EducationType": {
         "type": "string",
@@ -3941,44 +3609,7 @@
           "MittlererSchulabschluss",
           "Hauptschulabschluss",
           "KeinSchulabschluss"
-        ],
-        "x-custom-enum": {
-          "name": "EducationType",
-          "enumObjects": [
-            {
-              "label": "NotSet",
-              "value": 0
-            },
-            {
-              "label": "Hochschulabschluss",
-              "value": 1
-            },
-            {
-              "label": "AbgeschlosseneAusbildung",
-              "value": 2
-            },
-            {
-              "label": "Abitur",
-              "value": 3
-            },
-            {
-              "label": "Fachhochschulreife",
-              "value": 4
-            },
-            {
-              "label": "MittlererSchulabschluss",
-              "value": 5
-            },
-            {
-              "label": "Hauptschulabschluss",
-              "value": 6
-            },
-            {
-              "label": "KeinSchulabschluss",
-              "value": 7
-            }
-          ]
-        }
+        ]
       },
       "IndustryType": {
         "type": "string",
@@ -4006,100 +3637,7 @@
           "CreativeArtisticEntertainingActivities",
           "SportsEntertainmentRecreation",
           "EconomicallyDependentPrivateIndividuals"
-        ],
-        "x-custom-enum": {
-          "name": "IndustryType",
-          "enumObjects": [
-            {
-              "label": "NotSet",
-              "value": 0
-            },
-            {
-              "label": "AgricultureForestryHunting",
-              "value": 1
-            },
-            {
-              "label": "Mining",
-              "value": 2
-            },
-            {
-              "label": "Glassware",
-              "value": 3
-            },
-            {
-              "label": "VanParts",
-              "value": 4
-            },
-            {
-              "label": "EnergySupply",
-              "value": 5
-            },
-            {
-              "label": "WaterSupply",
-              "value": 6
-            },
-            {
-              "label": "Construction",
-              "value": 7
-            },
-            {
-              "label": "MotorVehicles",
-              "value": 8
-            },
-            {
-              "label": "RetailTrade",
-              "value": 9
-            },
-            {
-              "label": "Warehousing",
-              "value": 10
-            },
-            {
-              "label": "Gastronomy",
-              "value": 11
-            },
-            {
-              "label": "InformationServices",
-              "value": 12
-            },
-            {
-              "label": "PropertyAndHousing",
-              "value": 13
-            },
-            {
-              "label": "ScientificActivities",
-              "value": 14
-            },
-            {
-              "label": "ProvisionBusinessEconomicServicesAndIndividuals",
-              "value": 15
-            },
-            {
-              "label": "PublicAdministration",
-              "value": 16
-            },
-            {
-              "label": "EducationAndTeaching",
-              "value": 17
-            },
-            {
-              "label": "Healthcare",
-              "value": 18
-            },
-            {
-              "label": "CreativeArtisticEntertainingActivities",
-              "value": 19
-            },
-            {
-              "label": "SportsEntertainmentRecreation",
-              "value": 20
-            },
-            {
-              "label": "EconomicallyDependentPrivateIndividuals",
-              "value": 21
-            }
-          ]
-        }
+        ]
       },
       "WealthManagementInitialDebitType": {
         "type": "string",
@@ -4108,24 +3646,7 @@
           "NotSet",
           "Immediate",
           "InOneWeek"
-        ],
-        "x-custom-enum": {
-          "name": "WealthManagementInitialDebitType",
-          "enumObjects": [
-            {
-              "label": "NotSet",
-              "value": 0
-            },
-            {
-              "label": "Immediate",
-              "value": 1
-            },
-            {
-              "label": "InOneWeek",
-              "value": 2
-            }
-          ]
-        }
+        ]
       },
       "EtfOnboardingPersonalDataDto": {
         "type": "object",
@@ -4542,36 +4063,7 @@
           "Dab",
           "Fondsdepot",
           "VBank"
-        ],
-        "x-custom-enum": {
-          "name": "PartnerBankType",
-          "enumObjects": [
-            {
-              "label": "BaaderBank",
-              "value": 100
-            },
-            {
-              "label": "Comdirect",
-              "value": 200
-            },
-            {
-              "label": "Dab",
-              "value": 300
-            },
-            {
-              "label": "Fondsdepot",
-              "value": 400
-            },
-            {
-              "label": "VBank",
-              "value": 500
-            },
-            {
-              "label": "NotSet",
-              "value": -100
-            }
-          ]
-        }
+        ]
       },
       "EtfRole": {
         "type": "string",
@@ -4580,24 +4072,7 @@
           "Owner",
           "CoOwner",
           "AuthorisedPerson"
-        ],
-        "x-custom-enum": {
-          "name": "EtfRole",
-          "enumObjects": [
-            {
-              "label": "Owner",
-              "value": 1
-            },
-            {
-              "label": "CoOwner",
-              "value": 2
-            },
-            {
-              "label": "AuthorisedPerson",
-              "value": 3
-            }
-          ]
-        }
+        ]
       },
       "InvestmentBondDepotPerformanceDto": {
         "type": "object",
@@ -4791,28 +4266,7 @@
           "Submitted",
           "Processed",
           "Cancelled"
-        ],
-        "x-custom-enum": {
-          "name": "SepaExportTransactionStatus",
-          "enumObjects": [
-            {
-              "label": "Pending",
-              "value": 100
-            },
-            {
-              "label": "Submitted",
-              "value": 200
-            },
-            {
-              "label": "Processed",
-              "value": 300
-            },
-            {
-              "label": "Cancelled",
-              "value": 400
-            }
-          ]
-        }
+        ]
       },
       "EtfPayoutRequestStatus": {
         "type": "string",
@@ -4820,20 +4274,7 @@
         "enum": [
           "CreatedByAdmin",
           "RequestedByCustomer"
-        ],
-        "x-custom-enum": {
-          "name": "EtfPayoutRequestStatus",
-          "enumObjects": [
-            {
-              "label": "CreatedByAdmin",
-              "value": 100
-            },
-            {
-              "label": "RequestedByCustomer",
-              "value": 200
-            }
-          ]
-        }
+        ]
       },
       "DepotPaymentSummaryWithdrawalDto": {
         "type": "object",
@@ -4934,24 +4375,7 @@
           "Deposit",
           "RecurringDeposit",
           "Withdrawal"
-        ],
-        "x-custom-enum": {
-          "name": "WealthManagementPaymentType",
-          "enumObjects": [
-            {
-              "label": "Deposit",
-              "value": 1
-            },
-            {
-              "label": "RecurringDeposit",
-              "value": 2
-            },
-            {
-              "label": "Withdrawal",
-              "value": 3
-            }
-          ]
-        }
+        ]
       },
       "CancelPendingDepotPaymentDto": {
         "type": "object",
@@ -4998,36 +4422,7 @@
           "PayOutRecurring",
           "Fee",
           "InitialPayIn"
-        ],
-        "x-custom-enum": {
-          "name": "SepaExportTransactionType",
-          "enumObjects": [
-            {
-              "label": "PayIn",
-              "value": 1
-            },
-            {
-              "label": "PayInRecurring",
-              "value": 2
-            },
-            {
-              "label": "PayOut",
-              "value": 3
-            },
-            {
-              "label": "PayOutRecurring",
-              "value": 4
-            },
-            {
-              "label": "Fee",
-              "value": 5
-            },
-            {
-              "label": "InitialPayIn",
-              "value": 6
-            }
-          ]
-        }
+        ]
       },
       "SepaTransactionDto": {
         "type": "object",

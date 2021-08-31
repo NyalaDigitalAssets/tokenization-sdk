@@ -1044,7 +1044,7 @@ namespace Ganymede.SDK
         /// <summary>Initiates recovery process in which the custodian delivers the passphrase to the institution in a secure way.</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<EmptyResult> ApiExternalV1IssuerWalletSeedsRecoveryAsync(System.Guid issuer_wallet_seed_id)
+        public System.Threading.Tasks.Task<object> ApiExternalV1IssuerWalletSeedsRecoveryAsync(System.Guid issuer_wallet_seed_id)
         {
             return ApiExternalV1IssuerWalletSeedsRecoveryAsync(issuer_wallet_seed_id, System.Threading.CancellationToken.None);
         }
@@ -1053,7 +1053,7 @@ namespace Ganymede.SDK
         /// <summary>Initiates recovery process in which the custodian delivers the passphrase to the institution in a secure way.</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<EmptyResult> ApiExternalV1IssuerWalletSeedsRecoveryAsync(System.Guid issuer_wallet_seed_id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<object> ApiExternalV1IssuerWalletSeedsRecoveryAsync(System.Guid issuer_wallet_seed_id, System.Threading.CancellationToken cancellationToken)
         {
             if (issuer_wallet_seed_id == null)
                 throw new System.ArgumentNullException("issuer_wallet_seed_id");
@@ -1095,7 +1095,7 @@ namespace Ganymede.SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<EmptyResult>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<object>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -3685,11 +3685,14 @@ namespace Ganymede.SDK
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v12.0.0.0)")]
     public enum AccountTypes
     {
+        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
+        Unknown = 0,
+    
         [System.Runtime.Serialization.EnumMember(Value = @"Person")]
-        Person = 0,
+        Person = 1,
     
         [System.Runtime.Serialization.EnumMember(Value = @"LegalEntity")]
-        LegalEntity = 1,
+        LegalEntity = 2,
     
     }
     
@@ -3788,7 +3791,7 @@ namespace Ganymede.SDK
         public string Salutation { get; set; }
     
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public AccountTypes Type { get; set; }
     
         [Newtonsoft.Json.JsonProperty("birthDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -3810,7 +3813,7 @@ namespace Ganymede.SDK
         public string PhoneNumber { get; set; }
     
         [Newtonsoft.Json.JsonProperty("walletAccess", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public RetailWalletAccessLevels WalletAccess { get; set; }
     
         [Newtonsoft.Json.JsonProperty("address", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -3865,7 +3868,7 @@ namespace Ganymede.SDK
     
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public AccountTypes Type { get; set; }
     
         [Newtonsoft.Json.JsonProperty("street", Required = Newtonsoft.Json.Required.Always)]
@@ -3894,7 +3897,7 @@ namespace Ganymede.SDK
         public string CountryIso { get; set; }
     
         [Newtonsoft.Json.JsonProperty("walletAccess", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public RetailWalletAccessLevels WalletAccess { get; set; }
     
         [Newtonsoft.Json.JsonProperty("company", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -3966,7 +3969,7 @@ namespace Ganymede.SDK
     
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public AccountTypes Type { get; set; }
     
         [Newtonsoft.Json.JsonProperty("street", Required = Newtonsoft.Json.Required.Always)]
@@ -3995,7 +3998,7 @@ namespace Ganymede.SDK
         public string CountryIso { get; set; }
     
         [Newtonsoft.Json.JsonProperty("walletAccess", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public RetailWalletAccessLevels WalletAccess { get; set; }
     
         [Newtonsoft.Json.JsonProperty("company", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -4187,7 +4190,7 @@ namespace Ganymede.SDK
         public string IssuerWalletPubKey { get; set; }
     
         [Newtonsoft.Json.JsonProperty("assetType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public AssetTypes AssetType { get; set; }
     
         [Newtonsoft.Json.JsonProperty("total", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -4256,7 +4259,7 @@ namespace Ganymede.SDK
         public System.Guid? LocationId { get; set; }
     
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public BulkResultItemStatus Status { get; set; }
     
         [Newtonsoft.Json.JsonProperty("reason", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -4355,14 +4358,14 @@ namespace Ganymede.SDK
         public System.Guid IssuerWalletSeedId { get; set; }
     
         [Newtonsoft.Json.JsonProperty("role", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public IssuerWalletRoles Role { get; set; }
     
         [Newtonsoft.Json.JsonProperty("created", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Created { get; set; }
     
         [Newtonsoft.Json.JsonProperty("assetType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public AssetTypes AssetType { get; set; }
     
         [Newtonsoft.Json.JsonProperty("publicAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -4453,7 +4456,7 @@ namespace Ganymede.SDK
     {
         [Newtonsoft.Json.JsonProperty("assetType", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public AssetTypes AssetType { get; set; }
     
         [Newtonsoft.Json.JsonProperty("accountIndex", Required = Newtonsoft.Json.Required.Always)]
@@ -4465,7 +4468,7 @@ namespace Ganymede.SDK
     
         [Newtonsoft.Json.JsonProperty("role", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public IssuerWalletRoles Role { get; set; }
     
     
@@ -4492,12 +4495,6 @@ namespace Ganymede.SDK
         [Newtonsoft.Json.JsonProperty("data", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IssuerWalletRecoveryKitFileDto Data { get; set; }
     
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class EmptyResult 
-    {
     
     }
     
@@ -4700,7 +4697,7 @@ namespace Ganymede.SDK
         public System.Guid Id { get; set; }
     
         [Newtonsoft.Json.JsonProperty("assetType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public AssetTypes AssetType { get; set; }
     
         [Newtonsoft.Json.JsonProperty("publicAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -4896,7 +4893,7 @@ namespace Ganymede.SDK
     public partial class WalletBasicInfoDto 
     {
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public WalletType Type { get; set; }
     
         [Newtonsoft.Json.JsonProperty("publicKey", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -5254,7 +5251,7 @@ namespace Ganymede.SDK
     public partial class EtfOnboardingPersonalDataDto 
     {
         [Newtonsoft.Json.JsonProperty("gender", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public WealthManagementOnboardingGender Gender { get; set; }
     
         [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -5267,7 +5264,7 @@ namespace Ganymede.SDK
         public string LastName { get; set; }
     
         [Newtonsoft.Json.JsonProperty("maritalStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public AccountMaritalStatus MaritalStatus { get; set; }
     
         [Newtonsoft.Json.JsonProperty("dateOfBirth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -5310,15 +5307,15 @@ namespace Ganymede.SDK
         public string Email { get; set; }
     
         [Newtonsoft.Json.JsonProperty("employment", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public EmploymentType Employment { get; set; }
     
         [Newtonsoft.Json.JsonProperty("education", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public EducationType Education { get; set; }
     
         [Newtonsoft.Json.JsonProperty("industry", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public IndustryType Industry { get; set; }
     
         [Newtonsoft.Json.JsonProperty("knowledgeStocks", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -5379,7 +5376,7 @@ namespace Ganymede.SDK
         public bool NotUsTaxLiability { get; set; }
     
         [Newtonsoft.Json.JsonProperty("debit", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public WealthManagementInitialDebitType Debit { get; set; }
     
     
@@ -5389,7 +5386,7 @@ namespace Ganymede.SDK
     public partial class CreateEtfOnboardingDto 
     {
         [Newtonsoft.Json.JsonProperty("product", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public WealthManagementProductType Product { get; set; }
     
         [Newtonsoft.Json.JsonProperty("investmentAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -5399,11 +5396,11 @@ namespace Ganymede.SDK
         public int MonthlyInvestmentAmount { get; set; }
     
         [Newtonsoft.Json.JsonProperty("investmentGoal", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public WealthManagementPurposeType InvestmentGoal { get; set; }
     
         [Newtonsoft.Json.JsonProperty("investmentHorizon", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public WealthManagementHorizonType InvestmentHorizon { get; set; }
     
         [Newtonsoft.Json.JsonProperty("monthlyNetIncome", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -5675,7 +5672,7 @@ namespace Ganymede.SDK
         public System.Guid Id { get; set; }
     
         [Newtonsoft.Json.JsonProperty("product", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public WealthManagementProductType Product { get; set; }
     
         [Newtonsoft.Json.JsonProperty("updated", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -5724,11 +5721,11 @@ namespace Ganymede.SDK
         public string PartnerBankName { get; set; }
     
         [Newtonsoft.Json.JsonProperty("partnerBank", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public PartnerBankType PartnerBank { get; set; }
     
         [Newtonsoft.Json.JsonProperty("customerRole", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public EtfRole CustomerRole { get; set; }
     
         [Newtonsoft.Json.JsonProperty("depotPerformance", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -5817,11 +5814,11 @@ namespace Ganymede.SDK
         public System.Guid? TransactionId { get; set; }
     
         [Newtonsoft.Json.JsonProperty("transactionStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public SepaExportTransactionStatus TransactionStatus { get; set; }
     
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public EtfPayoutRequestStatus Type { get; set; }
     
         [Newtonsoft.Json.JsonProperty("liquidate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -5884,7 +5881,7 @@ namespace Ganymede.SDK
     public partial class CancelPendingDepotPaymentDto 
     {
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public WealthManagementPaymentType Type { get; set; }
     
     
@@ -5959,11 +5956,11 @@ namespace Ganymede.SDK
         public System.Guid AccountId { get; set; }
     
         [Newtonsoft.Json.JsonProperty("transactionType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public SepaExportTransactionType TransactionType { get; set; }
     
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        
         public SepaExportTransactionStatus Status { get; set; }
     
         [Newtonsoft.Json.JsonProperty("capitalUuid", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
