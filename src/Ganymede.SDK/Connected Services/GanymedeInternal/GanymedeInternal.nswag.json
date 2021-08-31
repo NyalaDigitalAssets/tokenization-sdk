@@ -2018,6 +2018,35 @@
           }
         }
       },
+      "CustomerCompanyDetailDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "email",
+          "fullAddress",
+          "name",
+          "registerNumber"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "registerNumber": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "fullAddress": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 64
+          }
+        }
+      },
       "CustomerAccountDto": {
         "type": "object",
         "additionalProperties": false,
@@ -2071,6 +2100,9 @@
           },
           "address": {
             "$ref": "#/components/schemas/CustomerAddressDto"
+          },
+          "company": {
+            "$ref": "#/components/schemas/CustomerCompanyDetailDto"
           }
         }
       },
@@ -2166,10 +2198,14 @@
           },
           "countryIso": {
             "type": "string",
-            "maxLength": 2
+            "maxLength": 2,
+            "minLength": 2
           },
           "walletAccess": {
             "$ref": "#/components/schemas/RetailWalletAccessLevels"
+          },
+          "company": {
+            "$ref": "#/components/schemas/CustomerCompanyDetailDto"
           },
           "id": {
             "type": "string",
@@ -2289,10 +2325,14 @@
           },
           "countryIso": {
             "type": "string",
-            "maxLength": 2
+            "maxLength": 2,
+            "minLength": 2
           },
           "walletAccess": {
             "$ref": "#/components/schemas/RetailWalletAccessLevels"
+          },
+          "company": {
+            "$ref": "#/components/schemas/CustomerCompanyDetailDto"
           }
         }
       },
@@ -3698,7 +3738,8 @@
           "AllWeather",
           "ValueSave",
           "AllWeatherGreen",
-          "ValueSaveGreen"
+          "ValueSaveGreen",
+          "Future"
         ],
         "x-custom-enum": {
           "name": "WealthManagementProductType",
@@ -3720,6 +3761,10 @@
               "value": 4
             },
             {
+              "label": "Future",
+              "value": 5
+            },
+            {
               "label": "Unknown",
               "value": -1
             }
@@ -3732,7 +3777,8 @@
         "enum": [
           "NotSet",
           "SavingMoney",
-          "IncreasingWealth"
+          "IncreasingWealth",
+          "FutureAssetGrowth"
         ],
         "x-custom-enum": {
           "name": "WealthManagementPurposeType",
@@ -3748,6 +3794,10 @@
             {
               "label": "IncreasingWealth",
               "value": 2
+            },
+            {
+              "label": "FutureAssetGrowth",
+              "value": 3
             }
           ]
         }
