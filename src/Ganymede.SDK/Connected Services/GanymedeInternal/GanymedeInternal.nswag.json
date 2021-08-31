@@ -2438,6 +2438,9 @@
           },
           "eulaAgreed": {
             "type": "boolean"
+          },
+          "company": {
+            "$ref": "#/components/schemas/CustomerCompanyDetailDto"
           }
         }
       },

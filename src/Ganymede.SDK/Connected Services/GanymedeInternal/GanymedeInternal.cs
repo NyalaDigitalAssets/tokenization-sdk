@@ -4088,6 +4088,9 @@ namespace Ganymede.SDK
         [Newtonsoft.Json.JsonProperty("eulaAgreed", Required = Newtonsoft.Json.Required.Always)]
         public bool EulaAgreed { get; set; }
     
+        [Newtonsoft.Json.JsonProperty("company", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public CustomerCompanyDetailDto Company { get; set; }
+    
     
     }
     
