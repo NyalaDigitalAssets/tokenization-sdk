@@ -21,14 +21,16 @@ namespace Ganymede.SDK.Tests
             });
         }
 
-        //[Test]
+        [Test]
         public void EmulateFunding()
         {
-            var xlmTokenId = Guid.Parse("87F8A525-2DA0-418C-B7B7-8CD5E8D11262");
-            var customerIds = Enumerable.Repeat(Guid.NewGuid(), 1);
+            var xlmTokenId = Guid.Parse("67d78d46-ff24-4e18-90a1-a5738349b606");
+            var repeats = Enumerable.Repeat(0, 5);
 
-            Parallel.ForEach(customerIds, new ParallelOptions { MaxDegreeOfParallelism = 1 }, (customerId) =>
+            Parallel.ForEach(repeats, new ParallelOptions { MaxDegreeOfParallelism = 1 }, (_) =>
             {
+                var customerId = Guid.NewGuid();
+
                 try
                 {
                     var customer = _client.GetCustomerAsync(customerId).ConfigureAwait(false).GetAwaiter().GetResult();

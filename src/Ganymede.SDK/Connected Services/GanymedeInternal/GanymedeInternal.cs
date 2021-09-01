@@ -1044,7 +1044,7 @@ namespace Ganymede.SDK
         /// <summary>Initiates recovery process in which the custodian delivers the passphrase to the institution in a secure way.</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<object> ApiExternalV1IssuerWalletSeedsRecoveryAsync(System.Guid issuer_wallet_seed_id)
+        public System.Threading.Tasks.Task<EmptyResult> ApiExternalV1IssuerWalletSeedsRecoveryAsync(System.Guid issuer_wallet_seed_id)
         {
             return ApiExternalV1IssuerWalletSeedsRecoveryAsync(issuer_wallet_seed_id, System.Threading.CancellationToken.None);
         }
@@ -1053,7 +1053,7 @@ namespace Ganymede.SDK
         /// <summary>Initiates recovery process in which the custodian delivers the passphrase to the institution in a secure way.</summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<object> ApiExternalV1IssuerWalletSeedsRecoveryAsync(System.Guid issuer_wallet_seed_id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<EmptyResult> ApiExternalV1IssuerWalletSeedsRecoveryAsync(System.Guid issuer_wallet_seed_id, System.Threading.CancellationToken cancellationToken)
         {
             if (issuer_wallet_seed_id == null)
                 throw new System.ArgumentNullException("issuer_wallet_seed_id");
@@ -1095,7 +1095,7 @@ namespace Ganymede.SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<object>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<EmptyResult>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -3750,32 +3750,6 @@ namespace Ganymede.SDK
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class CustomerCompanyDetailDto 
-    {
-        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        [System.ComponentModel.DataAnnotations.StringLength(255)]
-        public string Name { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("registerNumber", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        [System.ComponentModel.DataAnnotations.StringLength(255)]
-        public string RegisterNumber { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("fullAddress", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        [System.ComponentModel.DataAnnotations.StringLength(255)]
-        public string FullAddress { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        [System.ComponentModel.DataAnnotations.StringLength(64)]
-        public string Email { get; set; }
-    
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v12.0.0.0)")]
     public partial class CustomerAccountDto 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -3819,9 +3793,6 @@ namespace Ganymede.SDK
         [Newtonsoft.Json.JsonProperty("address", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CustomerAddressDto Address { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("company", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public CustomerCompanyDetailDto Company { get; set; }
-    
     
     }
     
@@ -3833,6 +3804,24 @@ namespace Ganymede.SDK
     
         [Newtonsoft.Json.JsonProperty("data", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<CustomerAccountDto> Data { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class CustomerCompanyDetailDto 
+    {
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Name { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("registerNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string RegisterNumber { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("fullAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string FullAddress { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Email { get; set; }
     
     
     }
@@ -4495,6 +4484,12 @@ namespace Ganymede.SDK
         [Newtonsoft.Json.JsonProperty("data", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IssuerWalletRecoveryKitFileDto Data { get; set; }
     
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class EmptyResult 
+    {
     
     }
     

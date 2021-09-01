@@ -1,4 +1,5 @@
 ﻿using Ganymede.SDK.Extensions;
+using Newtonsoft.Json;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
@@ -24,6 +25,11 @@ namespace Ganymede.SDK
         partial void PrepareRequest(HttpClient client, HttpRequestMessage request, string url)
         {
             Sign(request);
+        }
+
+        partial void UpdateJsonSerializerSettings(JsonSerializerSettings settings)
+        {
+            settings.NullValueHandling = NullValueHandling.Ignore;
         }
 
         private HttpRequestMessage Sign(HttpRequestMessage request)
