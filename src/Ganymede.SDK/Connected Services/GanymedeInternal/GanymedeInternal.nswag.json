@@ -771,6 +771,82 @@
         }
       }
     },
+    "/api/external/v1/issuerWalletSeeds/{issuerWalletSeedId}/issuerWallets/{issuerWalletId}/lock": {
+      "post": {
+        "tags": [
+          "Tokenized Assets"
+        ],
+        "summary": "Permanently locks issuer wallet ( won't be able to create new tokens anymore)",
+        "operationId": "LockIssuerWallet",
+        "parameters": [
+          {
+            "name": "institutionId",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "issuerWalletSeedId",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "issuerWalletId",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/external/v1/customers/{customer-id}/retail-wallets": {
       "get": {
         "tags": [
@@ -2104,22 +2180,29 @@
       "CustomerCompanyDetailDto": {
         "type": "object",
         "additionalProperties": false,
+        "required": [
+          "email",
+          "fullAddress",
+          "name",
+          "registerNumber"
+        ],
         "properties": {
           "name": {
             "type": "string",
-            "nullable": true
+            "maxLength": 255
           },
           "registerNumber": {
             "type": "string",
-            "nullable": true
+            "maxLength": 255
           },
           "fullAddress": {
             "type": "string",
-            "nullable": true
+            "maxLength": 255
           },
           "email": {
             "type": "string",
-            "nullable": true
+            "format": "email",
+            "maxLength": 64
           }
         }
       },
@@ -2481,6 +2564,8 @@
           "ALGO",
           "CRV",
           "YFI",
+          "ATOM",
+          "MANA",
           "EUR",
           "USD"
         ],
@@ -2566,6 +2651,14 @@
             {
               "label": "YFI",
               "value": 20
+            },
+            {
+              "label": "ATOM",
+              "value": 21
+            },
+            {
+              "label": "MANA",
+              "value": 22
             },
             {
               "label": "EUR",
@@ -3141,6 +3234,14 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          },
+          "customerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "retailWalletId": {
+            "type": "string",
+            "format": "uuid"
           }
         }
       },
@@ -3415,7 +3516,8 @@
           },
           "closedDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           }
         }
       },
@@ -5089,11 +5191,6 @@
       }
     }
   },
-  "security": [
-    {
-      "Bearer": []
-    }
-  ],
   "tags": [
     {
       "name": "Wealth Management",
