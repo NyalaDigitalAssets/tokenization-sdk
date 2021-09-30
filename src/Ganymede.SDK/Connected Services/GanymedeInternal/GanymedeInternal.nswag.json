@@ -771,6 +771,223 @@
         }
       }
     },
+    "/api/external/v1/issuer-wallet-seeds/{issuer-wallet-seed-id}/issuer-wallets/{issuer-wallet-id}/lock": {
+      "post": {
+        "tags": [
+          "Tokenized Assets"
+        ],
+        "summary": "Permanently locks issuer wallet ( won't be able to create new tokens anymore)",
+        "operationId": "LockIssuerWallet",
+        "parameters": [
+          {
+            "name": "issuer-wallet-seed-id",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "issuer-wallet-id",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/issuer-wallet-seeds/{issuer-wallet-seed-id}/issuer-wallets/{issuer-wallet-id}/tokenized-assets/{tokenized-asset-id}/authorize-opt-in": {
+      "post": {
+        "tags": [
+          "Tokenized Assets"
+        ],
+        "summary": "Approve opt-in for retail wallet",
+        "operationId": "AuthorizeOptIn",
+        "parameters": [
+          {
+            "name": "issuer-wallet-seed-id",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "issuer-wallet-id",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "tokenized-asset-id",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToggleOptInAuthorizationDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToggleOptInAuthorizationDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToggleOptInAuthorizationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/issuer-wallet-seeds/{issuer-wallet-seed-id}/issuer-wallets/{issuer-wallet-id}/tokenized-assets/{tokenized-asset-id}/revoke-opt-in": {
+      "post": {
+        "tags": [
+          "Tokenized Assets"
+        ],
+        "summary": "Revokes opt-in as a result tokenized assets in the retail wallet will be frozen, if called after delivery",
+        "operationId": "RevokeOptIn",
+        "parameters": [
+          {
+            "name": "issuer-wallet-seed-id",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "issuer-wallet-id",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "tokenized-asset-id",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToggleOptInAuthorizationDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToggleOptInAuthorizationDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToggleOptInAuthorizationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/external/v1/customers/{customer-id}/retail-wallets": {
       "get": {
         "tags": [
@@ -2104,22 +2321,29 @@
       "CustomerCompanyDetailDto": {
         "type": "object",
         "additionalProperties": false,
+        "required": [
+          "email",
+          "fullAddress",
+          "name",
+          "registerNumber"
+        ],
         "properties": {
           "name": {
             "type": "string",
-            "nullable": true
+            "maxLength": 255
           },
           "registerNumber": {
             "type": "string",
-            "nullable": true
+            "maxLength": 255
           },
           "fullAddress": {
             "type": "string",
-            "nullable": true
+            "maxLength": 255
           },
           "email": {
             "type": "string",
-            "nullable": true
+            "format": "email",
+            "maxLength": 64
           }
         }
       },
@@ -2481,6 +2705,9 @@
           "ALGO",
           "CRV",
           "YFI",
+          "ATOM",
+          "MANA",
+          "POLY",
           "EUR",
           "USD"
         ],
@@ -2566,6 +2793,18 @@
             {
               "label": "YFI",
               "value": 20
+            },
+            {
+              "label": "ATOM",
+              "value": 21
+            },
+            {
+              "label": "MANA",
+              "value": 22
+            },
+            {
+              "label": "POLY",
+              "value": 23
             },
             {
               "label": "EUR",
@@ -2793,6 +3032,12 @@
           "decimals": {
             "type": "integer",
             "format": "int32"
+          },
+          "enableFreeze": {
+            "type": "boolean"
+          },
+          "enableClawback": {
+            "type": "boolean"
           },
           "url": {
             "type": "string",
@@ -3052,6 +3297,12 @@
             "type": "integer",
             "format": "int32"
           },
+          "enableFreeze": {
+            "type": "boolean"
+          },
+          "enableClawback": {
+            "type": "boolean"
+          },
           "url": {
             "type": "string",
             "nullable": true
@@ -3141,6 +3392,14 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          },
+          "customerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "retailWalletId": {
+            "type": "string",
+            "format": "uuid"
           }
         }
       },
@@ -3172,6 +3431,12 @@
           "decimals": {
             "type": "integer",
             "format": "int32"
+          },
+          "enableFreeze": {
+            "type": "boolean"
+          },
+          "enableClawback": {
+            "type": "boolean"
           },
           "url": {
             "type": "string",
@@ -3279,6 +3544,23 @@
           }
         }
       },
+      "ToggleOptInAuthorizationDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "credentials": {
+            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+          },
+          "retailWalletIds": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
       "RetailWalletDto": {
         "type": "object",
         "additionalProperties": false,
@@ -3307,6 +3589,10 @@
           },
           "seedLockStatus": {
             "type": "boolean"
+          },
+          "retailWalletSeedId": {
+            "type": "string",
+            "format": "uuid"
           }
         }
       },
@@ -3415,7 +3701,8 @@
           },
           "closedDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           }
         }
       },
@@ -5089,11 +5376,6 @@
       }
     }
   },
-  "security": [
-    {
-      "Bearer": []
-    }
-  ],
   "tags": [
     {
       "name": "Wealth Management",
