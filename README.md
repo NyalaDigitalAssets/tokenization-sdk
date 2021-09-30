@@ -43,3 +43,25 @@ var customerId = await client.CreateCustomerAsync(customer);
 var searchText = "John";
 var customers = await client.SearchCustomerAsync(searchText);
 ```
+
+
+## Creating Retail Wallets
+```
+var customerId = Guid.Parse("67d78d46-ff24-4e18-90a1-a5738349b606");
+var wallets = await client.CreateRetailWalletsAsync(customerId, new SimpleAccessCredentialsDto
+{
+    Passphrase = "S3cur3-P4ssphr4s3"
+});
+```
+
+
+## Recover Retail Wallet access
+```
+var customerId = Guid.Parse("67d78d46-ff24-4e18-90a1-a5738349b606");
+var seedRecoveryData = await client.InitiateCustomersRetailWalletsRecoveryAsync(customerId);
+await _client.RecoverRetailWalletSeedAccessAsync(customerId, new ResetRetailWalletAccessCredentialsDto
+{
+    Passphrase = "N3w-P4ssphras3",
+    RecoveryKey = seedRecoveryData.RecoveryKey,
+});
+```
