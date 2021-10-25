@@ -763,7 +763,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GuidListApiResponse"
+                  "$ref": "#/components/schemas/BooleanApiResponse"
                 }
               }
             }
@@ -970,6 +970,82 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/ToggleOptInAuthorizationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/issuer-wallet-seeds/{issuer-wallet-seed-id}/issuer-wallets/{issuer-wallet-id}/tokenized-assets/{tokenized-asset-id}/clawback-asset": {
+      "post": {
+        "tags": [
+          "Tokenized Assets"
+        ],
+        "summary": "Clawback asset from an account",
+        "operationId": "ClawbackAsset",
+        "parameters": [
+          {
+            "name": "issuer-wallet-seed-id",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "issuer-wallet-id",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "tokenized-asset-id",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenizedAssetClawbackDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenizedAssetClawbackDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenizedAssetClawbackDto"
               }
             }
           }
@@ -2708,6 +2784,7 @@
           "ATOM",
           "MANA",
           "POLY",
+          "LUNA",
           "EUR",
           "USD"
         ],
@@ -2805,6 +2882,10 @@
             {
               "label": "POLY",
               "value": 23
+            },
+            {
+              "label": "LUNA",
+              "value": 24
             },
             {
               "label": "EUR",
@@ -3338,6 +3419,57 @@
           }
         }
       },
+      "WalletTransferStatus": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "New",
+          "Pending",
+          "Rejected",
+          "Approved",
+          "Sent",
+          "Successful",
+          "Failed",
+          "TimedOut"
+        ],
+        "x-custom-enum": {
+          "name": "WalletTransferStatus",
+          "enumObjects": [
+            {
+              "label": "New",
+              "value": 0
+            },
+            {
+              "label": "Pending",
+              "value": 1
+            },
+            {
+              "label": "Rejected",
+              "value": 2
+            },
+            {
+              "label": "Approved",
+              "value": 3
+            },
+            {
+              "label": "Sent",
+              "value": 4
+            },
+            {
+              "label": "Successful",
+              "value": 5
+            },
+            {
+              "label": "Failed",
+              "value": 6
+            },
+            {
+              "label": "TimedOut",
+              "value": 7
+            }
+          ]
+        }
+      },
       "TokenizedAssetTransferDto": {
         "type": "object",
         "additionalProperties": false,
@@ -3349,6 +3481,9 @@
           "receiverRetailWalletId": {
             "type": "string",
             "format": "uuid"
+          },
+          "status": {
+            "$ref": "#/components/schemas/WalletTransferStatus"
           },
           "created": {
             "type": "string",
@@ -3372,6 +3507,121 @@
           }
         }
       },
+      "TransactionActions": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "TxNative",
+          "TxAsset",
+          "IssueAsset",
+          "FreezeAsset",
+          "ClawbackAssets",
+          "OptIn",
+          "AuthOptIn",
+          "LockAccount"
+        ],
+        "x-custom-enum": {
+          "name": "TransactionActions",
+          "enumObjects": [
+            {
+              "label": "TxNative",
+              "value": 1
+            },
+            {
+              "label": "TxAsset",
+              "value": 2
+            },
+            {
+              "label": "IssueAsset",
+              "value": 3
+            },
+            {
+              "label": "FreezeAsset",
+              "value": 4
+            },
+            {
+              "label": "ClawbackAssets",
+              "value": 5
+            },
+            {
+              "label": "OptIn",
+              "value": 6
+            },
+            {
+              "label": "AuthOptIn",
+              "value": 7
+            },
+            {
+              "label": "LockAccount",
+              "value": 8
+            }
+          ]
+        }
+      },
+      "TransactionDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "txAction": {
+            "$ref": "#/components/schemas/TransactionActions"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "txId": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "OptInStatus": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "New",
+          "Sent",
+          "Failed",
+          "Rejected",
+          "Approved",
+          "Revoked",
+          "AuthorizationFailed"
+        ],
+        "x-custom-enum": {
+          "name": "OptInStatus",
+          "enumObjects": [
+            {
+              "label": "New",
+              "value": 0
+            },
+            {
+              "label": "Sent",
+              "value": 1
+            },
+            {
+              "label": "Failed",
+              "value": 2
+            },
+            {
+              "label": "Rejected",
+              "value": 3
+            },
+            {
+              "label": "Approved",
+              "value": 4
+            },
+            {
+              "label": "Revoked",
+              "value": 5
+            },
+            {
+              "label": "AuthorizationFailed",
+              "value": 6
+            }
+          ]
+        }
+      },
       "TokenizedAssetOptInDto": {
         "type": "object",
         "additionalProperties": false,
@@ -3380,15 +3630,14 @@
             "type": "string",
             "format": "uuid"
           },
-          "txId": {
-            "type": "string",
-            "nullable": true
+          "txIds": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/TransactionDto"
+            }
           },
-          "fee": {
-            "type": "string",
-            "nullable": true
-          },
-          "confirmed": {
+          "modified": {
             "type": "string",
             "format": "date-time",
             "nullable": true
@@ -3400,6 +3649,13 @@
           "retailWalletId": {
             "type": "string",
             "format": "uuid"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "$ref": "#/components/schemas/OptInStatus"
           }
         }
       },
@@ -3521,26 +3777,17 @@
           }
         }
       },
-      "GuidListApiResponse": {
+      "CustomerRetailWalletDto": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
+          "customerId": {
+            "type": "string",
+            "format": "uuid"
           },
-          "data": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string",
-              "format": "uuid"
-            }
+          "retailWalletId": {
+            "type": "string",
+            "format": "uuid"
           }
         }
       },
@@ -3551,13 +3798,38 @@
           "credentials": {
             "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
           },
-          "retailWalletIds": {
+          "customerRetailWalletIds": {
             "type": "array",
             "nullable": true,
             "items": {
-              "type": "string",
-              "format": "uuid"
+              "$ref": "#/components/schemas/CustomerRetailWalletDto"
             }
+          }
+        }
+      },
+      "TokenizedAssetClawbackTransfer": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "retailWalletId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "TokenizedAssetClawbackDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "clawback": {
+            "$ref": "#/components/schemas/TokenizedAssetClawbackTransfer"
+          },
+          "credentials": {
+            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
           }
         }
       },
