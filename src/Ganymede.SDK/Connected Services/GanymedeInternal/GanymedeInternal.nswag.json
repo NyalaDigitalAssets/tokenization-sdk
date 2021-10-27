@@ -358,6 +358,47 @@
         }
       }
     },
+    "/api/external/v1/request-funding": {
+      "post": {
+        "tags": [
+          "Faucet"
+        ],
+        "summary": "Allows users to request funding for retail and issuer wallets",
+        "operationId": "RequestWalletFunding",
+        "requestBody": {
+          "description": "List of issuer and retail wallet ids",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestFaucetFundingDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestFaucetFundingDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestFaucetFundingDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalletFundingResultsDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/external/v1/issuer-wallet-seeds": {
       "get": {
         "tags": [
@@ -2496,9 +2537,6 @@
             "maxLength": 2,
             "minLength": 2
           },
-          "walletAccess": {
-            "$ref": "#/components/schemas/RetailWalletAccessLevels"
-          },
           "company": {
             "$ref": "#/components/schemas/CustomerCompanyDetailDto"
           },
@@ -2622,9 +2660,6 @@
             "type": "string",
             "maxLength": 2,
             "minLength": 2
-          },
-          "walletAccess": {
-            "$ref": "#/components/schemas/RetailWalletAccessLevels"
           },
           "company": {
             "$ref": "#/components/schemas/CustomerCompanyDetailDto"
@@ -3043,6 +3078,104 @@
           },
           "data": {
             "$ref": "#/components/schemas/BulkResultDto"
+          }
+        }
+      },
+      "RequestFaucetFundingDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "retailWallets": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "issuerWallets": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "FaucetFundingResult": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "Initiated",
+          "NotEligible",
+          "Failed"
+        ],
+        "x-custom-enum": {
+          "name": "FaucetFundingResult",
+          "enumObjects": [
+            {
+              "label": "Initiated",
+              "value": 1
+            },
+            {
+              "label": "Failed",
+              "value": -2
+            },
+            {
+              "label": "NotEligible",
+              "value": -1
+            }
+          ]
+        }
+      },
+      "WalletFundingResult": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "walletId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "result": {
+            "$ref": "#/components/schemas/FaucetFundingResult"
+          }
+        }
+      },
+      "WalletFundingResultsDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "retailFundingResults": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/WalletFundingResult"
+            }
+          },
+          "issuerFundingResults": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/WalletFundingResult"
+            }
+          }
+        }
+      },
+      "WalletFundingResultsDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/WalletFundingResultsDto"
           }
         }
       },
