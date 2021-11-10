@@ -1105,6 +1105,82 @@
         }
       }
     },
+    "/api/external/v1/issuer-wallet-seeds/{issuer-wallet-seed-id}/issuer-wallets/{issuer-wallet-id}/tokenized-assets/{tokenized-asset-id}/burn-asset": {
+      "post": {
+        "tags": [
+          "Tokenized Assets"
+        ],
+        "summary": "Clawback asset from an account",
+        "operationId": "BurnAsset",
+        "parameters": [
+          {
+            "name": "issuer-wallet-seed-id",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "issuer-wallet-id",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "tokenized-asset-id",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenizedAssetBurnDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenizedAssetBurnDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenizedAssetBurnDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/external/v1/customers/{customer-id}/retail-wallets": {
       "get": {
         "tags": [
@@ -1236,6 +1312,69 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RetailWalletRecoveryKitFileDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/customers/{customer-id}/retail-wallets/{asset-type}": {
+      "put": {
+        "tags": [
+          "Retail Wallet"
+        ],
+        "summary": "Derives a new type of wallet for a customer, if the customer already has wallets.",
+        "operationId": "DeriveRetailWallet",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "Customer Id",
+            "schema": {
+              "type": "string",
+              "description": "Customer Id",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "asset-type",
+            "in": "path",
+            "required": true,
+            "description": "AssetType for wallet",
+            "schema": {
+              "$ref": "#/components/schemas/AssetTypes"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Credentials to access the mnemonic seed. Encryption key file can be left empty, if it's stored on the Custodian side.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RetailWalletDtoApiResponse"
                 }
               }
             }
@@ -1476,6 +1615,76 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AuthenticatedInstitutionDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/transactions/{days}": {
+      "get": {
+        "tags": [
+          "Transaction"
+        ],
+        "operationId": "GetTransactions",
+        "parameters": [
+          {
+            "name": "days",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionToShowDtoListApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/cancel-transactions": {
+      "post": {
+        "tags": [
+          "Transaction"
+        ],
+        "operationId": "CancelTransactions",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelTransactionsDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelTransactionsDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelTransactionsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Int32ApiResponse"
                 }
               }
             }
@@ -2322,6 +2531,10 @@
             "type": "string",
             "nullable": true
           },
+          "isoCode3": {
+            "type": "string",
+            "nullable": true
+          },
           "name": {
             "type": "string",
             "nullable": true
@@ -2742,9 +2955,6 @@
             "type": "string",
             "format": "date-time"
           },
-          "address": {
-            "$ref": "#/components/schemas/KycAddressDto"
-          },
           "email": {
             "type": "string",
             "format": "email",
@@ -2768,6 +2978,9 @@
           },
           "eulaAgreed": {
             "type": "boolean"
+          },
+          "address": {
+            "$ref": "#/components/schemas/KycAddressDto"
           },
           "company": {
             "$ref": "#/components/schemas/CustomerCompanyDetailDto"
@@ -3268,6 +3481,9 @@
           "distributionAddress": {
             "type": "string",
             "nullable": true
+          },
+          "assetType": {
+            "$ref": "#/components/schemas/AssetTypes"
           }
         }
       },
@@ -3843,6 +4059,9 @@
             "type": "string",
             "nullable": true
           },
+          "assetType": {
+            "$ref": "#/components/schemas/AssetTypes"
+          },
           "transfers": {
             "type": "array",
             "nullable": true,
@@ -3958,8 +4177,25 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "clawback": {
-            "$ref": "#/components/schemas/TokenizedAssetClawbackTransfer"
+          "clawbacks": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/TokenizedAssetClawbackTransfer"
+            }
+          },
+          "credentials": {
+            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+          }
+        }
+      },
+      "TokenizedAssetBurnDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "amount": {
+            "type": "number",
+            "format": "double"
           },
           "credentials": {
             "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
@@ -4051,6 +4287,23 @@
           },
           "data": {
             "$ref": "#/components/schemas/RetailWalletRecoveryKitFileDto"
+          }
+        }
+      },
+      "RetailWalletDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/RetailWalletDto"
           }
         }
       },
@@ -4212,6 +4465,176 @@
           },
           "data": {
             "$ref": "#/components/schemas/AuthenticatedInstitutionDto"
+          }
+        }
+      },
+      "WalletTypes": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "Institutional",
+          "Retail",
+          "Issuer",
+          "Faucet"
+        ],
+        "x-custom-enum": {
+          "name": "WalletTypes",
+          "enumObjects": [
+            {
+              "label": "Institutional",
+              "value": 1
+            },
+            {
+              "label": "Retail",
+              "value": 2
+            },
+            {
+              "label": "Issuer",
+              "value": 3
+            },
+            {
+              "label": "Faucet",
+              "value": 4
+            }
+          ]
+        }
+      },
+      "TxStatus": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "New",
+          "Succesful",
+          "Retrying",
+          "Failed",
+          "Canceled"
+        ],
+        "x-custom-enum": {
+          "name": "TxStatus",
+          "enumObjects": [
+            {
+              "label": "New",
+              "value": 1
+            },
+            {
+              "label": "Succesful",
+              "value": 2
+            },
+            {
+              "label": "Canceled",
+              "value": -3
+            },
+            {
+              "label": "Failed",
+              "value": -2
+            },
+            {
+              "label": "Retrying",
+              "value": -1
+            }
+          ]
+        }
+      },
+      "TransactionToShowDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "institutionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "assetType": {
+            "$ref": "#/components/schemas/AssetTypes"
+          },
+          "sourceWalletType": {
+            "$ref": "#/components/schemas/WalletTypes"
+          },
+          "action": {
+            "$ref": "#/components/schemas/TransactionActions"
+          },
+          "txBody": {
+            "type": "string",
+            "nullable": true
+          },
+          "modified": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/TxStatus"
+          },
+          "retryCounter": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "txId": {
+            "type": "string",
+            "nullable": true
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "TransactionToShowDtoListApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/TransactionToShowDto"
+            }
+          }
+        }
+      },
+      "CancelTransactionsDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "transactionIds": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "Int32ApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "integer",
+            "readOnly": true,
+            "format": "int32"
           }
         }
       },
@@ -4420,6 +4843,27 @@
           }
         }
       },
+      "WealthManagementType": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "Core",
+          "Crypto"
+        ],
+        "x-custom-enum": {
+          "name": "WealthManagementType",
+          "enumObjects": [
+            {
+              "label": "Core",
+              "value": 0
+            },
+            {
+              "label": "Crypto",
+              "value": 1
+            }
+          ]
+        }
+      },
       "WealthManagementProductType": {
         "type": "string",
         "format": "int32",
@@ -4429,7 +4873,10 @@
           "ValueSave",
           "AllWeatherGreen",
           "ValueSaveGreen",
-          "Future"
+          "Future",
+          "CryptoCore",
+          "CryptoETP",
+          "N11"
         ],
         "x-custom-enum": {
           "name": "WealthManagementProductType",
@@ -4453,6 +4900,18 @@
             {
               "label": "Future",
               "value": 5
+            },
+            {
+              "label": "CryptoCore",
+              "value": 6
+            },
+            {
+              "label": "CryptoETP",
+              "value": 7
+            },
+            {
+              "label": "N11",
+              "value": 8
             },
             {
               "label": "Unknown",
@@ -4908,6 +5367,9 @@
           "knowledgeMercantile": {
             "type": "boolean"
           },
+          "knowledgeCrypto": {
+            "type": "boolean"
+          },
           "experienceStocks": {
             "type": "integer",
             "format": "int32"
@@ -4921,6 +5383,10 @@
             "format": "int32"
           },
           "experienceMercantile": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "experienceCrypto": {
             "type": "integer",
             "format": "int32"
           },
@@ -4974,6 +5440,9 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "type": {
+            "$ref": "#/components/schemas/WealthManagementType"
+          },
           "product": {
             "$ref": "#/components/schemas/WealthManagementProductType"
           },

@@ -1911,6 +1911,97 @@ namespace Ganymede.SDK
             }
         }
     
+        /// <summary>Clawback asset from an account</summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public System.Threading.Tasks.Task<BooleanApiResponse> ApiExternalV1IssuerWalletSeedsIssuerWalletsTokenizedAssetsBurnAssetAsync(System.Guid issuer_wallet_seed_id, System.Guid issuer_wallet_id, System.Guid tokenized_asset_id, TokenizedAssetBurnDto body)
+        {
+            return ApiExternalV1IssuerWalletSeedsIssuerWalletsTokenizedAssetsBurnAssetAsync(issuer_wallet_seed_id, issuer_wallet_id, tokenized_asset_id, body, System.Threading.CancellationToken.None);
+        }
+    
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Clawback asset from an account</summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public async System.Threading.Tasks.Task<BooleanApiResponse> ApiExternalV1IssuerWalletSeedsIssuerWalletsTokenizedAssetsBurnAssetAsync(System.Guid issuer_wallet_seed_id, System.Guid issuer_wallet_id, System.Guid tokenized_asset_id, TokenizedAssetBurnDto body, System.Threading.CancellationToken cancellationToken)
+        {
+            if (issuer_wallet_seed_id == null)
+                throw new System.ArgumentNullException("issuer_wallet_seed_id");
+    
+            if (issuer_wallet_id == null)
+                throw new System.ArgumentNullException("issuer_wallet_id");
+    
+            if (tokenized_asset_id == null)
+                throw new System.ArgumentNullException("tokenized_asset_id");
+    
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/external/v1/issuer-wallet-seeds/{issuer-wallet-seed-id}/issuer-wallets/{issuer-wallet-id}/tokenized-assets/{tokenized-asset-id}/burn-asset");
+            urlBuilder_.Replace("{issuer-wallet-seed-id}", System.Uri.EscapeDataString(ConvertToString(issuer_wallet_seed_id, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{issuer-wallet-id}", System.Uri.EscapeDataString(ConvertToString(issuer_wallet_id, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{tokenized-asset-id}", System.Uri.EscapeDataString(ConvertToString(tokenized_asset_id, System.Globalization.CultureInfo.InvariantCulture)));
+    
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+    
+                    PrepareRequest(client_, request_, urlBuilder_);
+    
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+    
+                    PrepareRequest(client_, request_, url_);
+    
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+    
+                        ProcessResponse(client_, response_);
+    
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<BooleanApiResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+    
         /// <summary>Returns a list of retail wallet object associated with the given customer id.</summary>
         /// <param name="customer_id">Customer Id</param>
         /// <returns>Success</returns>
@@ -2145,6 +2236,99 @@ namespace Ganymede.SDK
                         if (status_ == 200)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<RetailWalletRecoveryKitFileDtoApiResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+    
+        /// <summary>Derives a new type of wallet for a customer, if the customer already has wallets.</summary>
+        /// <param name="customer_id">Customer Id</param>
+        /// <param name="asset_type">AssetType for wallet</param>
+        /// <param name="body">Credentials to access the mnemonic seed. Encryption key file can be left empty, if it's stored on the Custodian side.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public System.Threading.Tasks.Task<RetailWalletDtoApiResponse> ApiExternalV1CustomersRetailWalletsPutAsync(System.Guid customer_id, AssetTypes asset_type, SimpleAccessCredentialsDto body)
+        {
+            return ApiExternalV1CustomersRetailWalletsPutAsync(customer_id, asset_type, body, System.Threading.CancellationToken.None);
+        }
+    
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>Derives a new type of wallet for a customer, if the customer already has wallets.</summary>
+        /// <param name="customer_id">Customer Id</param>
+        /// <param name="asset_type">AssetType for wallet</param>
+        /// <param name="body">Credentials to access the mnemonic seed. Encryption key file can be left empty, if it's stored on the Custodian side.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public async System.Threading.Tasks.Task<RetailWalletDtoApiResponse> ApiExternalV1CustomersRetailWalletsPutAsync(System.Guid customer_id, AssetTypes asset_type, SimpleAccessCredentialsDto body, System.Threading.CancellationToken cancellationToken)
+        {
+            if (customer_id == null)
+                throw new System.ArgumentNullException("customer_id");
+    
+            if (asset_type == null)
+                throw new System.ArgumentNullException("asset_type");
+    
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/external/v1/customers/{customer-id}/retail-wallets/{asset-type}");
+            urlBuilder_.Replace("{customer-id}", System.Uri.EscapeDataString(ConvertToString(customer_id, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{asset-type}", System.Uri.EscapeDataString(ConvertToString(asset_type, System.Globalization.CultureInfo.InvariantCulture)));
+    
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("PUT");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+    
+                    PrepareRequest(client_, request_, urlBuilder_);
+    
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+    
+                    PrepareRequest(client_, request_, url_);
+    
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+    
+                        ProcessResponse(client_, response_);
+    
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<RetailWalletDtoApiResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -2629,6 +2813,161 @@ namespace Ganymede.SDK
                         if (status_ == 200)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<AuthenticatedInstitutionDtoApiResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+    
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public System.Threading.Tasks.Task<TransactionToShowDtoListApiResponse> ApiExternalV1TransactionsAsync(int days)
+        {
+            return ApiExternalV1TransactionsAsync(days, System.Threading.CancellationToken.None);
+        }
+    
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public async System.Threading.Tasks.Task<TransactionToShowDtoListApiResponse> ApiExternalV1TransactionsAsync(int days, System.Threading.CancellationToken cancellationToken)
+        {
+            if (days == null)
+                throw new System.ArgumentNullException("days");
+    
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/external/v1/transactions/{days}");
+            urlBuilder_.Replace("{days}", System.Uri.EscapeDataString(ConvertToString(days, System.Globalization.CultureInfo.InvariantCulture)));
+    
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+    
+                    PrepareRequest(client_, request_, urlBuilder_);
+    
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+    
+                    PrepareRequest(client_, request_, url_);
+    
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+    
+                        ProcessResponse(client_, response_);
+    
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<TransactionToShowDtoListApiResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+    
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public System.Threading.Tasks.Task<Int32ApiResponse> ApiExternalV1CancelTransactionsAsync(CancelTransactionsDto body)
+        {
+            return ApiExternalV1CancelTransactionsAsync(body, System.Threading.CancellationToken.None);
+        }
+    
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public async System.Threading.Tasks.Task<Int32ApiResponse> ApiExternalV1CancelTransactionsAsync(CancelTransactionsDto body, System.Threading.CancellationToken cancellationToken)
+        {
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/external/v1/cancel-transactions");
+    
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value));
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+    
+                    PrepareRequest(client_, request_, urlBuilder_);
+    
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+    
+                    PrepareRequest(client_, request_, url_);
+    
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+    
+                        ProcessResponse(client_, response_);
+    
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<Int32ApiResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -4160,6 +4499,9 @@ namespace Ganymede.SDK
         [Newtonsoft.Json.JsonProperty("iso", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Iso { get; set; }
     
+        [Newtonsoft.Json.JsonProperty("isoCode3", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string IsoCode3 { get; set; }
+    
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
     
@@ -4206,7 +4548,7 @@ namespace Ganymede.SDK
         public string Salutation { get; set; }
     
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public AccountTypes Type { get; set; }
     
         [Newtonsoft.Json.JsonProperty("birthDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -4228,7 +4570,7 @@ namespace Ganymede.SDK
         public string PhoneNumber { get; set; }
     
         [Newtonsoft.Json.JsonProperty("walletAccess", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public RetailWalletAccessLevels WalletAccess { get; set; }
     
         [Newtonsoft.Json.JsonProperty("address", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -4306,7 +4648,7 @@ namespace Ganymede.SDK
     
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        
+
         public AccountTypes Type { get; set; }
     
         [Newtonsoft.Json.JsonProperty("street", Required = Newtonsoft.Json.Required.Always)]
@@ -4403,7 +4745,7 @@ namespace Ganymede.SDK
     
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        
+
         public AccountTypes Type { get; set; }
     
         [Newtonsoft.Json.JsonProperty("street", Required = Newtonsoft.Json.Required.Always)]
@@ -4494,10 +4836,6 @@ namespace Ganymede.SDK
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public System.DateTimeOffset DateOfBirth { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("address", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required]
-        public KycAddressDto Address { get; set; } = new KycAddressDto();
-    
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(64)]
@@ -4520,6 +4858,10 @@ namespace Ganymede.SDK
     
         [Newtonsoft.Json.JsonProperty("eulaAgreed", Required = Newtonsoft.Json.Required.Always)]
         public bool EulaAgreed { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("address", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public KycAddressDto Address { get; set; } = new KycAddressDto();
     
         [Newtonsoft.Json.JsonProperty("company", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CustomerCompanyDetailDto Company { get; set; }
@@ -4632,7 +4974,7 @@ namespace Ganymede.SDK
         public string IssuerWalletPubKey { get; set; }
     
         [Newtonsoft.Json.JsonProperty("assetType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public AssetTypes AssetType { get; set; }
     
         [Newtonsoft.Json.JsonProperty("total", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -4701,7 +5043,7 @@ namespace Ganymede.SDK
         public System.Guid? LocationId { get; set; }
     
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public BulkResultItemStatus Status { get; set; }
     
         [Newtonsoft.Json.JsonProperty("reason", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -4747,13 +5089,14 @@ namespace Ganymede.SDK
     public enum FaucetFundingResult
     {
         [System.Runtime.Serialization.EnumMember(Value = @"Initiated")]
-        Initiated = 1,
+        Initiated = 0,
     
         [System.Runtime.Serialization.EnumMember(Value = @"NotEligible")]
-        NotEligible = -1,
+        NotEligible = 1,
     
         [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
-        Failed = -2,    
+        Failed = 2,
+    
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v12.0.0.0)")]
@@ -4763,7 +5106,7 @@ namespace Ganymede.SDK
         public System.Guid WalletId { get; set; }
     
         [Newtonsoft.Json.JsonProperty("result", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public FaucetFundingResult Result { get; set; }
     
     
@@ -4855,6 +5198,10 @@ namespace Ganymede.SDK
         [Newtonsoft.Json.JsonProperty("distributionAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string DistributionAddress { get; set; }
     
+        [Newtonsoft.Json.JsonProperty("assetType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+
+        public AssetTypes AssetType { get; set; }
+    
     
     }
     
@@ -4868,14 +5215,14 @@ namespace Ganymede.SDK
         public System.Guid IssuerWalletSeedId { get; set; }
     
         [Newtonsoft.Json.JsonProperty("role", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public IssuerWalletRoles Role { get; set; }
     
         [Newtonsoft.Json.JsonProperty("created", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Created { get; set; }
     
         [Newtonsoft.Json.JsonProperty("assetType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public AssetTypes AssetType { get; set; }
     
         [Newtonsoft.Json.JsonProperty("publicAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -4966,7 +5313,7 @@ namespace Ganymede.SDK
     {
         [Newtonsoft.Json.JsonProperty("assetType", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        
+
         public AssetTypes AssetType { get; set; }
     
         [Newtonsoft.Json.JsonProperty("accountIndex", Required = Newtonsoft.Json.Required.Always)]
@@ -4978,7 +5325,7 @@ namespace Ganymede.SDK
     
         [Newtonsoft.Json.JsonProperty("role", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        
+
         public IssuerWalletRoles Role { get; set; }
     
     
@@ -5113,7 +5460,7 @@ namespace Ganymede.SDK
         public System.Guid ReceiverRetailWalletId { get; set; }
     
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public WalletTransferStatus Status { get; set; }
     
         [Newtonsoft.Json.JsonProperty("created", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -5167,7 +5514,7 @@ namespace Ganymede.SDK
     public partial class TransactionDto 
     {
         [Newtonsoft.Json.JsonProperty("txAction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public TransactionActions TxAction { get; set; }
     
         [Newtonsoft.Json.JsonProperty("created", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -5227,7 +5574,7 @@ namespace Ganymede.SDK
         public System.DateTimeOffset Created { get; set; }
     
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public OptInStatus Status { get; set; }
     
     
@@ -5271,6 +5618,10 @@ namespace Ganymede.SDK
     
         [Newtonsoft.Json.JsonProperty("distributionAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string DistributionAddress { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("assetType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+
+        public AssetTypes AssetType { get; set; }
     
         [Newtonsoft.Json.JsonProperty("transfers", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<TokenizedAssetTransferDto> Transfers { get; set; }
@@ -5359,8 +5710,20 @@ namespace Ganymede.SDK
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v12.0.0.0)")]
     public partial class TokenizedAssetClawbackDto 
     {
-        [Newtonsoft.Json.JsonProperty("clawback", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public TokenizedAssetClawbackTransfer Clawback { get; set; }
+        [Newtonsoft.Json.JsonProperty("clawbacks", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<TokenizedAssetClawbackTransfer> Clawbacks { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("credentials", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SimpleAccessCredentialsDto Credentials { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class TokenizedAssetBurnDto 
+    {
+        [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double Amount { get; set; }
     
         [Newtonsoft.Json.JsonProperty("credentials", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public SimpleAccessCredentialsDto Credentials { get; set; }
@@ -5375,7 +5738,7 @@ namespace Ganymede.SDK
         public System.Guid Id { get; set; }
     
         [Newtonsoft.Json.JsonProperty("assetType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public AssetTypes AssetType { get; set; }
     
         [Newtonsoft.Json.JsonProperty("publicAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -5431,6 +5794,18 @@ namespace Ganymede.SDK
     
         [Newtonsoft.Json.JsonProperty("data", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public RetailWalletRecoveryKitFileDto Data { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class RetailWalletDtoApiResponse 
+    {
+        [Newtonsoft.Json.JsonProperty("errorMessageCodes", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<string> ErrorMessageCodes { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("data", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public RetailWalletDto Data { get; set; }
     
     
     }
@@ -5554,6 +5929,119 @@ namespace Ganymede.SDK
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum WalletTypes
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"Institutional")]
+        Institutional = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Retail")]
+        Retail = 1,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Issuer")]
+        Issuer = 2,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Faucet")]
+        Faucet = 3,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum TxStatus
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"New")]
+        New = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Succesful")]
+        Succesful = 1,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Retrying")]
+        Retrying = 2,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Failed")]
+        Failed = 3,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Canceled")]
+        Canceled = 4,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class TransactionToShowDto 
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid Id { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("institutionId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid InstitutionId { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("assetType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+
+        public AssetTypes AssetType { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("sourceWalletType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+
+        public WalletTypes SourceWalletType { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("action", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+
+        public TransactionActions Action { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("txBody", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string TxBody { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("modified", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? Modified { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+
+        public TxStatus Status { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("retryCounter", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int RetryCounter { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("txId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string TxId { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("created", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? Created { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class TransactionToShowDtoListApiResponse 
+    {
+        [Newtonsoft.Json.JsonProperty("errorMessageCodes", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<string> ErrorMessageCodes { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("data", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<TransactionToShowDto> Data { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class CancelTransactionsDto 
+    {
+        [Newtonsoft.Json.JsonProperty("transactionIds", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<System.Guid> TransactionIds { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class Int32ApiResponse 
+    {
+        [Newtonsoft.Json.JsonProperty("errorMessageCodes", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<string> ErrorMessageCodes { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("data", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Data { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v12.0.0.0)")]
     public enum WalletType
     {
         [System.Runtime.Serialization.EnumMember(Value = @"NotSet")]
@@ -5574,7 +6062,7 @@ namespace Ganymede.SDK
     public partial class WalletBasicInfoDto 
     {
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public WalletType Type { get; set; }
     
         [Newtonsoft.Json.JsonProperty("publicKey", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -5707,6 +6195,17 @@ namespace Ganymede.SDK
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum WealthManagementType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"Core")]
+        Core = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Crypto")]
+        Crypto = 1,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v12.0.0.0)")]
     public enum WealthManagementProductType
     {
         [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
@@ -5726,6 +6225,15 @@ namespace Ganymede.SDK
     
         [System.Runtime.Serialization.EnumMember(Value = @"Future")]
         Future = 5,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"CryptoCore")]
+        CryptoCore = 6,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"CryptoETP")]
+        CryptoETP = 7,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"N11")]
+        N11 = 8,
     
     }
     
@@ -5932,7 +6440,7 @@ namespace Ganymede.SDK
     public partial class EtfOnboardingPersonalDataDto 
     {
         [Newtonsoft.Json.JsonProperty("gender", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public WealthManagementOnboardingGender Gender { get; set; }
     
         [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -5945,7 +6453,7 @@ namespace Ganymede.SDK
         public string LastName { get; set; }
     
         [Newtonsoft.Json.JsonProperty("maritalStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public AccountMaritalStatus MaritalStatus { get; set; }
     
         [Newtonsoft.Json.JsonProperty("dateOfBirth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -5988,15 +6496,15 @@ namespace Ganymede.SDK
         public string Email { get; set; }
     
         [Newtonsoft.Json.JsonProperty("employment", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public EmploymentType Employment { get; set; }
     
         [Newtonsoft.Json.JsonProperty("education", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public EducationType Education { get; set; }
     
         [Newtonsoft.Json.JsonProperty("industry", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public IndustryType Industry { get; set; }
     
         [Newtonsoft.Json.JsonProperty("knowledgeStocks", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -6011,6 +6519,9 @@ namespace Ganymede.SDK
         [Newtonsoft.Json.JsonProperty("knowledgeMercantile", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool KnowledgeMercantile { get; set; }
     
+        [Newtonsoft.Json.JsonProperty("knowledgeCrypto", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool KnowledgeCrypto { get; set; }
+    
         [Newtonsoft.Json.JsonProperty("experienceStocks", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int ExperienceStocks { get; set; }
     
@@ -6022,6 +6533,9 @@ namespace Ganymede.SDK
     
         [Newtonsoft.Json.JsonProperty("experienceMercantile", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int ExperienceMercantile { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("experienceCrypto", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int ExperienceCrypto { get; set; }
     
         [Newtonsoft.Json.JsonProperty("refAccountFirstName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string RefAccountFirstName { get; set; }
@@ -6057,7 +6571,7 @@ namespace Ganymede.SDK
         public bool NotUsTaxLiability { get; set; }
     
         [Newtonsoft.Json.JsonProperty("debit", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public WealthManagementInitialDebitType Debit { get; set; }
     
     
@@ -6066,8 +6580,12 @@ namespace Ganymede.SDK
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v12.0.0.0)")]
     public partial class CreateEtfOnboardingDto 
     {
+        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+
+        public WealthManagementType Type { get; set; }
+    
         [Newtonsoft.Json.JsonProperty("product", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public WealthManagementProductType Product { get; set; }
     
         [Newtonsoft.Json.JsonProperty("investmentAmount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -6077,11 +6595,11 @@ namespace Ganymede.SDK
         public int MonthlyInvestmentAmount { get; set; }
     
         [Newtonsoft.Json.JsonProperty("investmentGoal", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public WealthManagementPurposeType InvestmentGoal { get; set; }
     
         [Newtonsoft.Json.JsonProperty("investmentHorizon", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public WealthManagementHorizonType InvestmentHorizon { get; set; }
     
         [Newtonsoft.Json.JsonProperty("monthlyNetIncome", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -6353,7 +6871,7 @@ namespace Ganymede.SDK
         public System.Guid Id { get; set; }
     
         [Newtonsoft.Json.JsonProperty("product", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public WealthManagementProductType Product { get; set; }
     
         [Newtonsoft.Json.JsonProperty("updated", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -6402,11 +6920,11 @@ namespace Ganymede.SDK
         public string PartnerBankName { get; set; }
     
         [Newtonsoft.Json.JsonProperty("partnerBank", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public PartnerBankType PartnerBank { get; set; }
     
         [Newtonsoft.Json.JsonProperty("customerRole", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public EtfRole CustomerRole { get; set; }
     
         [Newtonsoft.Json.JsonProperty("depotPerformance", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -6495,11 +7013,11 @@ namespace Ganymede.SDK
         public System.Guid? TransactionId { get; set; }
     
         [Newtonsoft.Json.JsonProperty("transactionStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public SepaExportTransactionStatus TransactionStatus { get; set; }
     
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public EtfPayoutRequestStatus Type { get; set; }
     
         [Newtonsoft.Json.JsonProperty("liquidate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -6562,7 +7080,7 @@ namespace Ganymede.SDK
     public partial class CancelPendingDepotPaymentDto 
     {
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public WealthManagementPaymentType Type { get; set; }
     
     
@@ -6637,11 +7155,11 @@ namespace Ganymede.SDK
         public System.Guid AccountId { get; set; }
     
         [Newtonsoft.Json.JsonProperty("transactionType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public SepaExportTransactionType TransactionType { get; set; }
     
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        
+
         public SepaExportTransactionStatus Status { get; set; }
     
         [Newtonsoft.Json.JsonProperty("capitalUuid", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

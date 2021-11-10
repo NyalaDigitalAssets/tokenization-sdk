@@ -119,6 +119,19 @@ namespace Ganymede.SDK
         }
 
         /// <summary>
+        /// Creates a new wallet for the give customer. If the customer already has a wallet with the given assetType no new wallet will be created.
+        /// </summary>
+        /// <param name="customerId">The GUID ID of the customer for whom wallets are to be created</param>
+        /// <param name="credentials">The customer Passphrase is required. KeyFileContent is optinal (configurable)</param>
+        /// <param name="assetType"></param>
+        /// <returns></returns>
+        public async Task<RetailWalletDto> CreateRetailWalletAsync(Guid customerId, SimpleAccessCredentialsDto credentials, AssetTypes assetType)
+        {
+            var response = await _client.ApiExternalV1CustomersRetailWalletsPutAsync(customerId, assetType, credentials);
+            return response.Data;
+        }
+
+        /// <summary>
         /// Create an Opt In for a specified Tokenized Asset.
         /// </summary>
         /// <param name="customerId">The GUID ID of the customer</param>
