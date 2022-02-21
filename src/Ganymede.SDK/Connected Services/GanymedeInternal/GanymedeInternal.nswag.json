@@ -638,8 +638,8 @@
         "tags": [
           "Tokenized Assets"
         ],
-        "summary": "Creates new tokenized asset",
-        "operationId": "CreateTokenizedAsset",
+        "summary": "Initialize tokenized asset creation",
+        "operationId": "InitializeTokenizedAssetCreation",
         "parameters": [
           {
             "name": "issuer-wallet-seed-id",
@@ -664,17 +664,86 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateTokenizedAssetDto"
+                "$ref": "#/components/schemas/InitTokenizedAssetCreationDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateTokenizedAssetDto"
+                "$ref": "#/components/schemas/InitTokenizedAssetCreationDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateTokenizedAssetDto"
+                "$ref": "#/components/schemas/InitTokenizedAssetCreationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/issuer-wallet-seeds/{issuer-wallet-seed-id}/issuer-wallets/{issuer-wallet-id}/tokenzid-assets/{tokenized-asset-id}": {
+      "put": {
+        "tags": [
+          "Tokenized Assets"
+        ],
+        "summary": "Finalized tokenized asset creation",
+        "operationId": "CreateTokenizedAsset",
+        "parameters": [
+          {
+            "name": "issuer-wallet-seed-id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "issuer-wallet-id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "tokenized-asset-id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
               }
             }
           }
@@ -691,9 +760,7 @@
             }
           }
         }
-      }
-    },
-    "/api/external/v1/issuer-wallet-seeds/{issuer-wallet-seed-id}/issuer-wallets/{issuer-wallet-id}/tokenzid-assets/{tokenized-asset-id}": {
+      },
       "get": {
         "tags": [
           "Tokenized Assets"
@@ -1110,7 +1177,7 @@
         "tags": [
           "Tokenized Assets"
         ],
-        "summary": "Clawback asset from an account",
+        "summary": "Burn x amount of tokens",
         "operationId": "BurnAsset",
         "parameters": [
           {
@@ -1174,6 +1241,121 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BooleanApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/issuer-wallet-seeds/{issuer-wallet-seed-id}/issuer-wallets/{issuer-wallet-id}/tokenized-assets/{tokenized-asset-id}/metadata": {
+      "post": {
+        "tags": [
+          "Tokenized Assets"
+        ],
+        "summary": "Build .toml file for token",
+        "operationId": "BuildAndSubmitMetadaFile",
+        "parameters": [
+          {
+            "name": "issuer-wallet-seed-id",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "issuer-wallet-id",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "tokenized-asset-id",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metaDataFormData": {
+                    "type": "string",
+                    "description": "",
+                    "nullable": true
+                  },
+                  "orgImageFile": {
+                    "type": "string",
+                    "description": "",
+                    "format": "binary",
+                    "nullable": true
+                  },
+                  "tokenImageFile": {
+                    "type": "string",
+                    "description": "",
+                    "format": "binary",
+                    "nullable": true
+                  }
+                }
+              },
+              "encoding": {
+                "metaDataFormData": {
+                  "style": "form"
+                },
+                "orgImageFile": {
+                  "style": "form"
+                },
+                "tokenImageFile": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/model": {
+      "get": {
+        "tags": [
+          "IssuerWallet"
+        ],
+        "operationId": "MissingModels",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MissingModelsContainer"
                 }
               }
             }
@@ -1344,7 +1526,9 @@
             "required": true,
             "description": "AssetType for wallet",
             "schema": {
-              "$ref": "#/components/schemas/AssetTypes"
+              "type": "integer",
+              "description": "AssetType for wallet",
+              "format": "int32"
             }
           }
         ],
@@ -1472,17 +1656,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/LockRetailWalletsDto"
+                "$ref": "#/components/schemas/LockWalletsDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/LockRetailWalletsDto"
+                "$ref": "#/components/schemas/LockWalletsDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/LockRetailWalletsDto"
+                "$ref": "#/components/schemas/LockWalletsDto"
               }
             }
           }
@@ -3005,147 +3189,6 @@
           }
         }
       },
-      "AssetTypes": {
-        "type": "string",
-        "format": "int32",
-        "enum": [
-          "NotSet",
-          "BTC",
-          "ETH",
-          "XLM",
-          "XTZ",
-          "LINK",
-          "CRO",
-          "OMG",
-          "BAT",
-          "COMP",
-          "DAI",
-          "SNX",
-          "EOS",
-          "LTC",
-          "AAVE",
-          "DOT",
-          "KSM",
-          "ALGO",
-          "CRV",
-          "YFI",
-          "ATOM",
-          "MANA",
-          "POLY",
-          "LUNA",
-          "EUR",
-          "USD"
-        ],
-        "x-custom-enum": {
-          "name": "AssetTypes",
-          "enumObjects": [
-            {
-              "label": "NotSet",
-              "value": 0
-            },
-            {
-              "label": "BTC",
-              "value": 1
-            },
-            {
-              "label": "ETH",
-              "value": 2
-            },
-            {
-              "label": "XLM",
-              "value": 3
-            },
-            {
-              "label": "XTZ",
-              "value": 4
-            },
-            {
-              "label": "LINK",
-              "value": 5
-            },
-            {
-              "label": "CRO",
-              "value": 6
-            },
-            {
-              "label": "OMG",
-              "value": 7
-            },
-            {
-              "label": "BAT",
-              "value": 8
-            },
-            {
-              "label": "COMP",
-              "value": 9
-            },
-            {
-              "label": "DAI",
-              "value": 10
-            },
-            {
-              "label": "SNX",
-              "value": 11
-            },
-            {
-              "label": "EOS",
-              "value": 12
-            },
-            {
-              "label": "LTC",
-              "value": 13
-            },
-            {
-              "label": "AAVE",
-              "value": 14
-            },
-            {
-              "label": "DOT",
-              "value": 16
-            },
-            {
-              "label": "KSM",
-              "value": 17
-            },
-            {
-              "label": "ALGO",
-              "value": 18
-            },
-            {
-              "label": "CRV",
-              "value": 19
-            },
-            {
-              "label": "YFI",
-              "value": 20
-            },
-            {
-              "label": "ATOM",
-              "value": 21
-            },
-            {
-              "label": "MANA",
-              "value": 22
-            },
-            {
-              "label": "POLY",
-              "value": 23
-            },
-            {
-              "label": "LUNA",
-              "value": 24
-            },
-            {
-              "label": "EUR",
-              "value": 1001
-            },
-            {
-              "label": "USD",
-              "value": 1002
-            }
-          ]
-        }
-      },
       "ElectronicSecurityBasicInfoDto": {
         "type": "object",
         "additionalProperties": false,
@@ -3157,9 +3200,6 @@
           "issuerWalletPubKey": {
             "type": "string",
             "nullable": true
-          },
-          "assetType": {
-            "$ref": "#/components/schemas/AssetTypes"
           },
           "total": {
             "type": "integer",
@@ -3413,13 +3453,112 @@
           ]
         }
       },
-      "BalanceDto": {
+      "Blockchains": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "NotSet",
+          "Bitcoin",
+          "Ethereum",
+          "Stellar",
+          "Litecoin",
+          "Polkadot",
+          "Kusama",
+          "Algorand",
+          "Cosmos",
+          "Terra",
+          "Polymesh",
+          "Binance",
+          "Solana",
+          "Cardano",
+          "Polygon"
+        ],
+        "x-custom-enum": {
+          "name": "Blockchains",
+          "enumObjects": [
+            {
+              "label": "NotSet",
+              "value": 0
+            },
+            {
+              "label": "Bitcoin",
+              "value": 1
+            },
+            {
+              "label": "Ethereum",
+              "value": 2
+            },
+            {
+              "label": "Stellar",
+              "value": 3
+            },
+            {
+              "label": "Litecoin",
+              "value": 4
+            },
+            {
+              "label": "Polkadot",
+              "value": 5
+            },
+            {
+              "label": "Kusama",
+              "value": 6
+            },
+            {
+              "label": "Algorand",
+              "value": 7
+            },
+            {
+              "label": "Cosmos",
+              "value": 8
+            },
+            {
+              "label": "Terra",
+              "value": 9
+            },
+            {
+              "label": "Polymesh",
+              "value": 10
+            },
+            {
+              "label": "Binance",
+              "value": 11
+            },
+            {
+              "label": "Solana",
+              "value": 12
+            },
+            {
+              "label": "Cardano",
+              "value": 13
+            },
+            {
+              "label": "Polygon",
+              "value": 14
+            }
+          ]
+        }
+      },
+      "DecimalBalanceAmount": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "free": {
+            "type": "number",
+            "format": "double"
+          },
+          "locked": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "BalancesInDecimalDto": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
           "nativeBalance": {
-            "type": "number",
-            "format": "double"
+            "$ref": "#/components/schemas/DecimalBalanceAmount"
           },
           "nonNativeBalances": {
             "type": "object",
@@ -3429,6 +3568,32 @@
               "format": "double"
             }
           }
+        }
+      },
+      "ReviewDecision": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "Pending",
+          "Approved",
+          "Rejected"
+        ],
+        "x-custom-enum": {
+          "name": "ReviewDecision",
+          "enumObjects": [
+            {
+              "label": "Pending",
+              "value": 0
+            },
+            {
+              "label": "Approved",
+              "value": 1
+            },
+            {
+              "label": "Rejected",
+              "value": 2
+            }
+          ]
         }
       },
       "TokenizedAssetDto": {
@@ -3482,8 +3647,24 @@
             "type": "string",
             "nullable": true
           },
-          "assetType": {
-            "$ref": "#/components/schemas/AssetTypes"
+          "blockchain": {
+            "$ref": "#/components/schemas/Blockchains"
+          },
+          "reviewDecision": {
+            "$ref": "#/components/schemas/ReviewDecision"
+          },
+          "reviewedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "reviewer": {
+            "type": "string",
+            "nullable": true
+          },
+          "issuingMemo": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -3506,8 +3687,8 @@
             "type": "string",
             "format": "date-time"
           },
-          "assetType": {
-            "$ref": "#/components/schemas/AssetTypes"
+          "blockchain": {
+            "$ref": "#/components/schemas/Blockchains"
           },
           "publicAddress": {
             "type": "string",
@@ -3522,7 +3703,7 @@
             "nullable": true
           },
           "balance": {
-            "$ref": "#/components/schemas/BalanceDto"
+            "$ref": "#/components/schemas/BalancesInDecimalDto"
           },
           "tokenizedAssets": {
             "type": "array",
@@ -3530,6 +3711,9 @@
             "items": {
               "$ref": "#/components/schemas/TokenizedAssetDto"
             }
+          },
+          "seedLockStatus": {
+            "type": "boolean"
           }
         }
       },
@@ -3629,12 +3813,12 @@
         "additionalProperties": false,
         "required": [
           "accountIndex",
-          "assetType",
+          "blockchain",
           "role"
         ],
         "properties": {
-          "assetType": {
-            "$ref": "#/components/schemas/AssetTypes"
+          "blockchain": {
+            "$ref": "#/components/schemas/Blockchains"
           },
           "accountIndex": {
             "type": "integer",
@@ -3707,7 +3891,7 @@
           }
         }
       },
-      "CreateTokenizedAssetDto": {
+      "InitTokenizedAssetCreationDto": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -3737,17 +3921,13 @@
             "type": "string",
             "nullable": true
           },
-          "metaData": {
+          "issuingMemo": {
             "type": "string",
             "nullable": true
-          },
-          "credentials": {
-            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
           },
           "distributorWalletId": {
             "type": "string",
-            "format": "uuid",
-            "nullable": true
+            "format": "uuid"
           }
         }
       },
@@ -3768,7 +3948,7 @@
           }
         }
       },
-      "WalletTransferStatus": {
+      "WalletTransactionStatus": {
         "type": "string",
         "format": "int32",
         "enum": [
@@ -3782,7 +3962,7 @@
           "TimedOut"
         ],
         "x-custom-enum": {
-          "name": "WalletTransferStatus",
+          "name": "WalletTransactionStatus",
           "enumObjects": [
             {
               "label": "New",
@@ -3832,7 +4012,7 @@
             "format": "uuid"
           },
           "status": {
-            "$ref": "#/components/schemas/WalletTransferStatus"
+            "$ref": "#/components/schemas/WalletTransactionStatus"
           },
           "created": {
             "type": "string",
@@ -3867,7 +4047,10 @@
           "ClawbackAssets",
           "OptIn",
           "AuthOptIn",
-          "LockAccount"
+          "LockAccount",
+          "Stake",
+          "Unstake",
+          "WithdrawRewards"
         ],
         "x-custom-enum": {
           "name": "TransactionActions",
@@ -3903,6 +4086,18 @@
             {
               "label": "LockAccount",
               "value": 8
+            },
+            {
+              "label": "Stake",
+              "value": 9
+            },
+            {
+              "label": "Unstake",
+              "value": 10
+            },
+            {
+              "label": "WithdrawRewards",
+              "value": 11
             }
           ]
         }
@@ -4059,8 +4254,24 @@
             "type": "string",
             "nullable": true
           },
-          "assetType": {
-            "$ref": "#/components/schemas/AssetTypes"
+          "blockchain": {
+            "$ref": "#/components/schemas/Blockchains"
+          },
+          "reviewDecision": {
+            "$ref": "#/components/schemas/ReviewDecision"
+          },
+          "reviewedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "reviewer": {
+            "type": "string",
+            "nullable": true
+          },
+          "issuingMemo": {
+            "type": "string",
+            "nullable": true
           },
           "transfers": {
             "type": "array",
@@ -4075,6 +4286,11 @@
             "items": {
               "$ref": "#/components/schemas/TokenizedAssetOptInDto"
             }
+          },
+          "metaDataUrl": {
+            "type": "string",
+            "readOnly": true,
+            "nullable": true
           }
         }
       },
@@ -4202,6 +4418,117 @@
           }
         }
       },
+      "MetadataOrganizationDocumentation": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "dba": {
+            "type": "string",
+            "nullable": true
+          },
+          "url": {
+            "type": "string",
+            "nullable": true
+          },
+          "logoUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "MetadataPrincipal": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "MetadataCurrency": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageUrl": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "CreateMetadataFileDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "documentation": {
+            "$ref": "#/components/schemas/MetadataOrganizationDocumentation"
+          },
+          "principals": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/MetadataPrincipal"
+            }
+          },
+          "currency": {
+            "$ref": "#/components/schemas/MetadataCurrency"
+          },
+          "subDomain": {
+            "type": "string",
+            "nullable": true
+          },
+          "orgLogoBytes": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "tokenLogoBytes": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "credentials": {
+            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+          }
+        }
+      },
+      "MissingModelsContainer": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "metadataFile": {
+            "$ref": "#/components/schemas/CreateMetadataFileDto"
+          }
+        }
+      },
       "RetailWalletDto": {
         "type": "object",
         "additionalProperties": false,
@@ -4210,23 +4537,15 @@
             "type": "string",
             "format": "uuid"
           },
-          "assetType": {
-            "$ref": "#/components/schemas/AssetTypes"
+          "blockchain": {
+            "$ref": "#/components/schemas/Blockchains"
           },
           "publicAddress": {
             "type": "string",
             "nullable": true
           },
           "balance": {
-            "$ref": "#/components/schemas/BalanceDto"
-          },
-          "reservedAmount": {
-            "type": "number",
-            "format": "double"
-          },
-          "stakedAmount": {
-            "type": "number",
-            "format": "double"
+            "$ref": "#/components/schemas/BalancesInDecimalDto"
           },
           "seedLockStatus": {
             "type": "boolean"
@@ -4324,7 +4643,7 @@
           }
         }
       },
-      "LockRetailWalletsDto": {
+      "LockWalletsDto": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -4547,8 +4866,8 @@
             "type": "string",
             "format": "uuid"
           },
-          "assetType": {
-            "$ref": "#/components/schemas/AssetTypes"
+          "blockchain": {
+            "$ref": "#/components/schemas/Blockchains"
           },
           "sourceWalletType": {
             "$ref": "#/components/schemas/WalletTypes"
@@ -4579,6 +4898,14 @@
           "created": {
             "type": "string",
             "format": "date-time",
+            "nullable": true
+          },
+          "cryptoAssetName": {
+            "type": "string",
+            "nullable": true
+          },
+          "cryptoAssetSymbol": {
+            "type": "string",
             "nullable": true
           }
         }
@@ -4869,10 +5196,10 @@
         "format": "int32",
         "enum": [
           "Unknown",
-          "AllWeather",
-          "ValueSave",
-          "AllWeatherGreen",
-          "ValueSaveGreen",
+          "Balance",
+          "Liqui",
+          "BalanceGreen",
+          "LiquiGreen",
           "Future",
           "CryptoCore",
           "CryptoETP",
@@ -4882,19 +5209,19 @@
           "name": "WealthManagementProductType",
           "enumObjects": [
             {
-              "label": "AllWeather",
+              "label": "Balance",
               "value": 1
             },
             {
-              "label": "ValueSave",
+              "label": "Liqui",
               "value": 2
             },
             {
-              "label": "AllWeatherGreen",
+              "label": "BalanceGreen",
               "value": 3
             },
             {
-              "label": "ValueSaveGreen",
+              "label": "LiquiGreen",
               "value": 4
             },
             {
