@@ -125,9 +125,9 @@ namespace Ganymede.SDK
         /// <param name="credentials">The customer Passphrase is required. KeyFileContent is optinal (configurable)</param>
         /// <param name="assetType"></param>
         /// <returns></returns>
-        public async Task<RetailWalletDto> CreateRetailWalletAsync(Guid customerId, SimpleAccessCredentialsDto credentials, AssetTypes assetType)
+        public async Task<RetailWalletDto> CreateRetailWalletAsync(Guid customerId, SimpleAccessCredentialsDto credentials, Blockchains blockchain)
         {
-            var response = await _client.ApiExternalV1CustomersRetailWalletsPutAsync(customerId, assetType, credentials);
+            var response = await _client.ApiExternalV1CustomersRetailWalletsPutAsync(customerId, (int)blockchain, credentials);
             return response.Data;
         }
 
