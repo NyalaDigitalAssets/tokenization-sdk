@@ -165,6 +165,12 @@ namespace Ganymede.SDK
             return response.Data;
         }
 
+        /// <summary>
+        /// Returns true if the retail wallet passphrase is correct for given customer.
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <param name="passphrase"></param>
+        /// <returns></returns>
         public async Task<bool> CheckRetailWalletPassphrase(Guid customerId, string passphrase)
         {
             var response = await _client.ApiExternalV1CustomersRetailWalletsCheckPassphraseAsync(customerId, new SimpleAccessCredentialsDto
