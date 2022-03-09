@@ -165,6 +165,15 @@ namespace Ganymede.SDK
             return response.Data;
         }
 
+        public async Task<bool> CheckRetailWalletPassphrase(Guid customerId, string passphrase)
+        {
+            var response = await _client.ApiExternalV1CustomersRetailWalletsCheckPassphraseAsync(customerId, new SimpleAccessCredentialsDto
+            {
+                Passphrase = passphrase,
+            });
+            return response.Data;
+        }
+
         #endregion
     }
 }

@@ -1501,7 +1501,7 @@
         }
       }
     },
-    "/api/external/v1/customers/{customer-id}/retail-wallets/{asset-type}": {
+    "/api/external/v1/customers/{customer-id}/retail-wallets/{blockchain}": {
       "put": {
         "tags": [
           "Retail Wallet"
@@ -1521,13 +1521,13 @@
             }
           },
           {
-            "name": "asset-type",
+            "name": "blockchain",
             "in": "path",
             "required": true,
-            "description": "AssetType for wallet",
+            "description": "Blockchain for wallet",
             "schema": {
               "type": "integer",
-              "description": "AssetType for wallet",
+              "description": "Blockchain for wallet",
               "format": "int32"
             }
           }
@@ -1667,6 +1667,60 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/LockWalletsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/customers/{customer-id}/retail-wallets/check-passphrase": {
+      "post": {
+        "tags": [
+          "Retail Wallet"
+        ],
+        "summary": "Checks if the passphrase is correct for the given customer retail wallet",
+        "operationId": "CheckRetailWalletPassphrase",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "Customer Id",
+            "schema": {
+              "type": "string",
+              "description": "Customer Id",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
               }
             }
           }
@@ -3714,6 +3768,14 @@
           },
           "seedLockStatus": {
             "type": "boolean"
+          },
+          "nativeCryptoAssetSymbol": {
+            "type": "string",
+            "nullable": true
+          },
+          "nativeCryptoAssetId": {
+            "type": "string",
+            "format": "uuid"
           }
         }
       },

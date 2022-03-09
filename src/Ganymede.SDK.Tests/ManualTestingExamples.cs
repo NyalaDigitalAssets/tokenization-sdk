@@ -76,7 +76,7 @@ namespace Ganymede.SDK.Tests
 
                 // Create wallets
                 var wallets = _client.CreateRetailWalletsAsync(customerId, new SimpleAccessCredentialsDto { Passphrase = "Bloxxon1234" }).ConfigureAwait(false).GetAwaiter().GetResult();
-                var xlmWallet = wallets.FirstOrDefault(w => w.AssetType == AssetTypes.XLM);
+                var xlmWallet = wallets.FirstOrDefault(w => w.Blockchain == Blockchains.Stellar);
                 Assert.NotNull(xlmWallet);
 
                 // Opt-In for token
