@@ -45,6 +45,7 @@ namespace Ganymede.SDK.Tests
                 Street = "Street",
                 StreetNo = "42",
                 PostalCode = "1337",
+                NationalityIso = "DE"
             });
             req.Content = new StringContent(json, Encoding.UTF8, "application/json");
 
