@@ -45,12 +45,14 @@ namespace Ganymede.SDK.Tests
                 Street = "Street",
                 StreetNo = "42",
                 PostalCode = "1337",
+                NationalityIso = "DE",
+                Gender = GenderTypes.Male,
             });
             req.Content = new StringContent(json, Encoding.UTF8, "application/json");
 
             var signature = req.Sign(_apiSecret);
 
-            Assert.AreEqual("pEVuTrNY1xMm/3qt4m+K8EiZ8KRjxQ12Xs6s32Ml3U0=", signature);
+            Assert.AreEqual("XCnne5vqHkPXdupa8lpgAAN+ATmFSP2i2Ti0hB0+bbs=", signature);
         }
     }
 }
