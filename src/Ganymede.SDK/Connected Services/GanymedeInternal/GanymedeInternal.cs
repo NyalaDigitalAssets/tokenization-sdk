@@ -4575,6 +4575,24 @@ namespace Ganymede.SDK
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.1.0))")]
+    public enum GenderTypes
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NotSet")]
+        NotSet = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Male")]
+        Male = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Female")]
+        Female = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Other")]
+        Other = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.1.0))")]
     public partial class CustomerAccountDto
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -4623,6 +4641,10 @@ namespace Ganymede.SDK
 
         [Newtonsoft.Json.JsonProperty("nationalityIso", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string NationalityIso { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("gender", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public GenderTypes Gender { get; set; }
 
     }
 
@@ -4725,6 +4747,10 @@ namespace Ganymede.SDK
         [Newtonsoft.Json.JsonProperty("nationalityIso", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string NationalityIso { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("gender", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public GenderTypes Gender { get; set; }
+
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? Id { get; set; }
 
@@ -4820,6 +4846,10 @@ namespace Ganymede.SDK
         [Newtonsoft.Json.JsonProperty("nationalityIso", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string NationalityIso { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("gender", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public GenderTypes Gender { get; set; }
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.1.0))")]
@@ -4910,6 +4940,10 @@ namespace Ganymede.SDK
 
         [Newtonsoft.Json.JsonProperty("nationalityIso", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string NationalityIso { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("gender", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public GenderTypes Gender { get; set; }
 
     }
 
@@ -5497,6 +5531,9 @@ namespace Ganymede.SDK
         [System.Runtime.Serialization.EnumMember(Value = @"TimedOut")]
         TimedOut = 7,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"FailedOnBlockChain")]
+        FailedOnBlockChain = 8,
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.1.0))")]
@@ -5526,6 +5563,9 @@ namespace Ganymede.SDK
 
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Amount { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("tokenizedAsset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public TokenizedAssetDto TokenizedAsset { get; set; }
 
     }
 
@@ -5935,6 +5975,15 @@ namespace Ganymede.SDK
 
         [Newtonsoft.Json.JsonProperty("retailWalletSeedId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid RetailWalletSeedId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("accountId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid AccountId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("created", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset Created { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("transfers", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<TokenizedAssetTransferDto> Transfers { get; set; }
 
     }
 

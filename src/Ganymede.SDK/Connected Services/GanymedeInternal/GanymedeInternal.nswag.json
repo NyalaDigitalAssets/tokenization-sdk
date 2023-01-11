@@ -2470,6 +2470,37 @@
           }
         }
       },
+      "GenderTypes": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "NotSet",
+          "Male",
+          "Female",
+          "Other"
+        ],
+        "x-custom-enum": {
+          "name": "GenderTypes",
+          "enumObjects": [
+            {
+              "label": "NotSet",
+              "value": 0
+            },
+            {
+              "label": "Male",
+              "value": 1
+            },
+            {
+              "label": "Female",
+              "value": 2
+            },
+            {
+              "label": "Other",
+              "value": 3
+            }
+          ]
+        }
+      },
       "CustomerAccountDto": {
         "type": "object",
         "additionalProperties": false,
@@ -2532,6 +2563,9 @@
           "nationalityIso": {
             "type": "string",
             "nullable": true
+          },
+          "gender": {
+            "$ref": "#/components/schemas/GenderTypes"
           }
         }
       },
@@ -2664,6 +2698,9 @@
             "type": "string",
             "nullable": true
           },
+          "gender": {
+            "$ref": "#/components/schemas/GenderTypes"
+          },
           "id": {
             "type": "string",
             "format": "uuid",
@@ -2789,6 +2826,9 @@
           "nationalityIso": {
             "type": "string",
             "nullable": true
+          },
+          "gender": {
+            "$ref": "#/components/schemas/GenderTypes"
           }
         }
       },
@@ -2901,6 +2941,9 @@
           "nationalityIso": {
             "type": "string",
             "nullable": true
+          },
+          "gender": {
+            "$ref": "#/components/schemas/GenderTypes"
           }
         }
       },
@@ -3729,7 +3772,8 @@
           "Sent",
           "Successful",
           "Failed",
-          "TimedOut"
+          "TimedOut",
+          "FailedOnBlockChain"
         ],
         "x-custom-enum": {
           "name": "WalletTransactionStatus",
@@ -3765,6 +3809,10 @@
             {
               "label": "TimedOut",
               "value": 7
+            },
+            {
+              "label": "FailedOnBlockChain",
+              "value": 8
             }
           ]
         }
@@ -3803,6 +3851,9 @@
           "amount": {
             "type": "string",
             "nullable": true
+          },
+          "tokenizedAsset": {
+            "$ref": "#/components/schemas/TokenizedAssetDto"
           }
         }
       },
@@ -4370,6 +4421,24 @@
           "retailWalletSeedId": {
             "type": "string",
             "format": "uuid"
+          },
+          "accountId": {
+            "type": "string",
+            "readOnly": true,
+            "format": "uuid"
+          },
+          "created": {
+            "type": "string",
+            "readOnly": true,
+            "format": "date-time"
+          },
+          "transfers": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/TokenizedAssetTransferDto"
+            }
           }
         }
       },
