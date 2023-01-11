@@ -518,7 +518,7 @@
         "tags": [
           "Issuer Wallet"
         ],
-        "summary": "Generates backup PDF file containing mnemonic seed and removes the seed entry from the custodian database.",
+        "summary": "Not implemented yet",
         "operationId": "DeleteIssuerWalletSeed",
         "parameters": [
           {
@@ -533,26 +533,6 @@
             }
           }
         ],
-        "requestBody": {
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success",
@@ -1507,58 +1487,6 @@
             }
           }
         }
-      },
-      "delete": {
-        "tags": [
-          "Retail Wallet"
-        ],
-        "summary": "Generates and returns a PDF file containing the 24-word mnemonic seed for retail wallets.\r\nRemoves retail wallet seed from the custodian database.",
-        "operationId": "DeleteRetailWallets",
-        "parameters": [
-          {
-            "name": "customer-id",
-            "in": "path",
-            "required": true,
-            "description": "Customer Id",
-            "schema": {
-              "type": "string",
-              "description": "Customer Id",
-              "format": "uuid"
-            }
-          }
-        ],
-        "requestBody": {
-          "description": "Credentials to access the mnemonic seed. Encryption key file can be left empty, if it's stored on the Custodian side.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RetailWalletRecoveryKitFileDtoApiResponse"
-                }
-              }
-            }
-          }
-        }
       }
     },
     "/api/external/v1/customers/{customer-id}/retail-wallets/{blockchain}": {
@@ -1885,13 +1813,67 @@
         }
       }
     },
+    "/api/external/v1/customers/{customer-id}/delete-retail-wallets": {
+      "post": {
+        "tags": [
+          "Retail Wallet"
+        ],
+        "summary": "Generates and returns a PDF file containing the 24-word mnemonic seed for retail wallets.\r\nRemoves retail wallet seed from the custodian database.",
+        "operationId": "DeleteRetailWallets",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "Customer Id",
+            "schema": {
+              "type": "string",
+              "description": "Customer Id",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Credentials to access the mnemonic seed. Encryption key file can be left empty, if it's stored on the Custodian side.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RetailWalletRecoveryKitFileDtoApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/external/v1/retail-wallets/external": {
       "get": {
         "tags": [
           "External Retail Wallet"
         ],
         "summary": "List of external wallets",
-        "operationId": "ExternalRetailWalletGET",
+        "operationId": "GetExternalRetailWallet",
         "responses": {
           "200": {
             "description": "Success",
@@ -1909,7 +1891,7 @@
         "tags": [
           "External Retail Wallet"
         ],
-        "operationId": "ExternalRetailWalletPOST",
+        "operationId": "CreateExternalRetailWallet",
         "requestBody": {
           "content": {
             "application/json": {
@@ -2085,283 +2067,6 @@
             }
           }
         }
-      }
-    },
-    "/api/external/v1/customers/{customer-id}/wallets": {
-      "get": {
-        "tags": [
-          "Depricated"
-        ],
-        "summary": "Get wallet information for an account",
-        "operationId": "GetWalletBasicInfo",
-        "parameters": [
-          {
-            "name": "customer-id",
-            "in": "path",
-            "required": true,
-            "description": "",
-            "schema": {
-              "type": "string",
-              "description": "",
-              "format": "uuid"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/WalletBasicInfoDtoApiResponse"
-                }
-              }
-            }
-          }
-        },
-        "deprecated": true
-      }
-    },
-    "/api/external/v1/customers/{customer-id}/wallets/delete": {
-      "put": {
-        "tags": [
-          "Depricated"
-        ],
-        "summary": "Delete a standard wallet",
-        "operationId": "DeleteWallet",
-        "parameters": [
-          {
-            "name": "customer-id",
-            "in": "path",
-            "required": true,
-            "description": "Customer Id",
-            "schema": {
-              "type": "string",
-              "description": "Customer Id",
-              "format": "uuid"
-            }
-          }
-        ],
-        "requestBody": {
-          "description": "Request body containing the retail wallet pin",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DeleteWalletDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DeleteWalletDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/DeleteWalletDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/StringApiResponse"
-                }
-              }
-            }
-          }
-        },
-        "deprecated": true
-      }
-    },
-    "/api/external/v1/wallets": {
-      "post": {
-        "tags": [
-          "Depricated"
-        ],
-        "summary": "Returns empty response, does nothing",
-        "operationId": "BulkCreateWallet",
-        "requestBody": {
-          "description": "Request body containing the PIN and user ID pairs",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BulkCreateWalletDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BulkCreateWalletDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/BulkCreateWalletDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BulkResultDtoApiResponse"
-                }
-              }
-            }
-          }
-        },
-        "deprecated": true
-      }
-    },
-    "/api/external/v1/customers/{customer-id}/wallets/external": {
-      "post": {
-        "tags": [
-          "Depricated"
-        ],
-        "summary": "Returns empty response, does nothing",
-        "operationId": "CreateExternalWallet",
-        "parameters": [
-          {
-            "name": "customer-id",
-            "in": "path",
-            "required": true,
-            "description": "Customer Id",
-            "schema": {
-              "type": "string",
-              "description": "Customer Id",
-              "format": "uuid"
-            }
-          }
-        ],
-        "requestBody": {
-          "description": "Request body containing the public key and the account id",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExternalWalletDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExternalWalletDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExternalWalletDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ExternalWalletResponseDtoApiResponse"
-                }
-              }
-            }
-          }
-        },
-        "deprecated": true
-      }
-    },
-    "/api/external/v1/customers/{customer-id}/wallets/recoverpassword": {
-      "put": {
-        "tags": [
-          "Depricated"
-        ],
-        "summary": "Recover retail wallet pin/password",
-        "operationId": "RecoverWalletPassword",
-        "parameters": [
-          {
-            "name": "customer-id",
-            "in": "path",
-            "required": true,
-            "description": "Customer Id",
-            "schema": {
-              "type": "string",
-              "description": "Customer Id",
-              "format": "uuid"
-            }
-          }
-        ],
-        "requestBody": {
-          "description": "Request body containing the public key and the account id",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WalletPasswordRecoveryDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WalletPasswordRecoveryDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/WalletPasswordRecoveryDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/StringApiResponse"
-                }
-              }
-            }
-          }
-        },
-        "deprecated": true
-      }
-    },
-    "/api/external/v1/customers/{customer-id}/wallets/recovery-kit": {
-      "get": {
-        "tags": [
-          "Depricated"
-        ],
-        "summary": "Get retail wallet recovery kit",
-        "operationId": "GetWalletRecoveryKit",
-        "parameters": [
-          {
-            "name": "customer-id",
-            "in": "path",
-            "required": true,
-            "description": "Customer Id",
-            "schema": {
-              "type": "string",
-              "description": "Customer Id",
-              "format": "uuid"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FileResponseDtoApiResponse"
-                }
-              }
-            }
-          }
-        },
-        "deprecated": true
       }
     }
   },
@@ -4464,37 +4169,6 @@
           }
         }
       },
-      "RetailWalletRecoveryKitFileDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "content": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "RetailWalletRecoveryKitFileDtoApiResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "data": {
-            "$ref": "#/components/schemas/RetailWalletRecoveryKitFileDto"
-          }
-        }
-      },
       "RetailWalletDtoApiResponse": {
         "type": "object",
         "additionalProperties": false,
@@ -4601,6 +4275,37 @@
           "keyFileContent": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "RetailWalletRecoveryKitFileDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "content": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "RetailWalletRecoveryKitFileDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/RetailWalletRecoveryKitFileDto"
           }
         }
       },
@@ -4992,211 +4697,6 @@
             "type": "integer",
             "readOnly": true,
             "format": "int32"
-          }
-        }
-      },
-      "WalletType": {
-        "type": "string",
-        "format": "int32",
-        "enum": [
-          "NotSet",
-          "Standard",
-          "Issuer",
-          "External"
-        ],
-        "x-custom-enum": {
-          "name": "WalletType",
-          "enumObjects": [
-            {
-              "label": "NotSet",
-              "value": 0
-            },
-            {
-              "label": "Standard",
-              "value": 1
-            },
-            {
-              "label": "Issuer",
-              "value": 2
-            },
-            {
-              "label": "External",
-              "value": 3
-            }
-          ]
-        }
-      },
-      "WalletBasicInfoDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/WalletType"
-          },
-          "publicKey": {
-            "type": "string",
-            "nullable": true
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          }
-        }
-      },
-      "WalletBasicInfoDtoApiResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "data": {
-            "$ref": "#/components/schemas/WalletBasicInfoDto"
-          }
-        }
-      },
-      "DeleteWalletDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "pin": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "StringApiResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "data": {
-            "type": "string",
-            "readOnly": true,
-            "nullable": true
-          }
-        }
-      },
-      "CreateWalletDataDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "pin": {
-            "type": "string",
-            "nullable": true
-          },
-          "uuid": {
-            "type": "string",
-            "format": "uuid"
-          }
-        }
-      },
-      "BulkCreateWalletDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "walletData": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/CreateWalletDataDto"
-            }
-          }
-        }
-      },
-      "ExternalWalletDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "publicKey": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "ExternalWalletResponseDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          }
-        }
-      },
-      "ExternalWalletResponseDtoApiResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "data": {
-            "$ref": "#/components/schemas/ExternalWalletResponseDto"
-          }
-        }
-      },
-      "WalletPasswordRecoveryDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "passwordRecoveryString": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "FileResponseDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "type": "string",
-            "format": "byte",
-            "nullable": true
-          },
-          "contentType": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "FileResponseDtoApiResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "data": {
-            "$ref": "#/components/schemas/FileResponseDto"
           }
         }
       }
