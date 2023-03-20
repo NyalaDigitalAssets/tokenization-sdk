@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Ganymede.SDK.Tests
+namespace Tokenization.SDK.Tests
 {
     [TestFixture]
     public class ManualTestingExamples
@@ -28,8 +28,8 @@ namespace Ganymede.SDK.Tests
             .RuleFor(c => c.PostalCode, (f, c) => f.Random.Number(10000, 19999).ToString());
 
 
-        private readonly GanymedeClient _client =
-            new GanymedeClient("", "", "http://localhost:4447/");
+        private readonly TokenizationClient _client =
+            new TokenizationClient("", "", "http://localhost:4447/");
 
         [TestCase("C55B0489-059D-4739-A1F9-89606C4116DB")]
         [TestCase("1135C3EA-18A8-497B-86B8-12157D98880C")]

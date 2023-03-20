@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Ganymede.SDK
+namespace Tokenization.SDK
 {
-    public class GanymedeClient
+    public class TokenizationClient
     {
         private static readonly HttpClient _httpClient = new();
         private readonly Client _client;
 
         /// <summary>
-        /// Creates instance of the Ganymede client
+        /// Creates instance of the Tokenization client
         /// </summary>
         /// <param name="key">API public key</param>
         /// <param name="secret">API private secret</param>
         /// <param name="apiUrl">Defaults to https://api.bloxxon.co</param>
-        public GanymedeClient(string key, string secret, string apiUrl = "https://api.bloxxon.co")
+        public TokenizationClient(string key, string secret, string apiUrl = "https://api.bloxxon.co")
         {
             _client = new Client(key, secret, apiUrl, _httpClient);
         }
