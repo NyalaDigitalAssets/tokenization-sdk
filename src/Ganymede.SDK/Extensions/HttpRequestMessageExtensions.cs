@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Ganymede.SDK.Extensions
+namespace Tokenization.SDK.Extensions
 {
     public static class HttpRequestMessageExtensions
     {

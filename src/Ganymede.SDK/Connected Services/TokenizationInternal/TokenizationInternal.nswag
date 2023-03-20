@@ -4,7 +4,7 @@
   "documentGenerator": {
     "fromDocument": {
       "url": "http://localhost:4447/swagger/v1/swagger.json",
-      "output": "GanymedeInternal.nswag.json",
+      "output": "TokenizationInternal.nswag.json",
       "newLineBehavior": "Auto"
     }
   },
@@ -55,7 +55,7 @@
       "wrapResponseMethods": [],
       "generateResponseClasses": true,
       "responseClass": "SwaggerResponse",
-      "namespace": "Ganymede.SDK",
+      "namespace": "Tokenization.SDK",
       "requiredPropertiesMustBeDefined": true,
       "dateType": "System.DateTime",
       "jsonConverters": null,
@@ -92,7 +92,7 @@
       "enumNameGeneratorType": null,
       "serviceHost": null,
       "serviceSchemes": null,
-      "output": "GanymedeInternal.cs",
+      "output": "TokenizationInternal.cs",
       "newLineBehavior": "Auto"
     }
   }

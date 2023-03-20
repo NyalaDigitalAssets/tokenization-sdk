@@ -1,10 +1,10 @@
-# Ganymede.SDK
-##### Accessing the Bloxxon API from .NET applications
+# Tokenization.SDK
+##### Accessing the Nyala API from .NET applications
 
-## GanymedeClient
+## TokenizationClient
 
 ```
-var client = new GanymedeClient("API_KEY", "API_SECRET", "https://url-for-api.de");
+var client = new TokenizationClient("API_KEY", "API_SECRET", "https://url-for-api.de");
 ```
 
 

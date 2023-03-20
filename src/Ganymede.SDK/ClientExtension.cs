@@ -1,9 +1,9 @@
-﻿using Ganymede.SDK.Extensions;
+﻿using Tokenization.SDK.Extensions;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
-namespace Ganymede.SDK
+namespace Tokenization.SDK
 {
     internal partial class Client
     {

@@ -5,9 +5,9 @@
     "Uri": "https://github.com/unchase/Unchase.OpenAPI.Connectedservice/"
   },
   "ExtendedData": {
-    "ServiceName": "GanymedeInternal",
+    "ServiceName": "TokenizationInternal",
     "AcceptAllUntrustedCertificates": true,
-    "GeneratedFileName": "GanymedeInternal",
+    "GeneratedFileName": "TokenizationInternal",
     "Endpoint": "http://localhost:4447/swagger/v1/swagger.json",
     "GeneratedFileNamePrefix": null,
     "GenerateCSharpClient": true,
@@ -59,7 +59,7 @@
       "WrapResponseMethods": [],
       "GenerateResponseClasses": true,
       "ResponseClass": "SwaggerResponse",
-      "Namespace": "Ganymede.SDK",
+      "Namespace": "Tokenization.SDK",
       "RequiredPropertiesMustBeDefined": true,
       "DateType": "System.DateTime",
       "JsonConverters": null,
@@ -96,7 +96,7 @@
       "EnumNameGeneratorType": null,
       "ServiceHost": null,
       "ServiceSchemes": null,
-      "output": "GanymedeInternal.cs",
+      "output": "TokenizationInternal.cs",
       "newLineBehavior": 0
     },
     "ExcludeTypeNamesLater": false,

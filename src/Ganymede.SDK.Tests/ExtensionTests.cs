@@ -1,11 +1,11 @@
-﻿using Ganymede.SDK.Extensions;
+﻿using Tokenization.SDK.Extensions;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
 using System.Net.Http;
 using System.Text;
 
-namespace Ganymede.SDK.Tests
+namespace Tokenization.SDK.Tests
 {
     [TestFixture]
     public class ExtensionTests

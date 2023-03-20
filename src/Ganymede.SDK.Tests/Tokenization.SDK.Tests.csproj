@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ganymede.SDK\Ganymede.SDK.csproj" />
+    <ProjectReference Include="..\Ganymede.SDK\Tokenization.SDK.csproj" />
   </ItemGroup>
 
 </Project>
