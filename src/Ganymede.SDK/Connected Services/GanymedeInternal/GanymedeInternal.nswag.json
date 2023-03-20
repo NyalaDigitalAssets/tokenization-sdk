@@ -1,17 +1,17 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Bloxxon External API",
+    "title": "Nyala External API",
     "description": "The Kapilendo Crypto API offers:\r\n- Wealth Management as a Service \r\n- Retail Crypto Asset Wallet as a Service\r\n# Wealth Management as a Service \r\nCustomer are provided with the ability to onboard users to one of several ETF Portfolios, where depot and wealth management services are provided.\r\n# Retail Crypto Asset Wallet as a Service\r\nCustomer are provided with the ability to create blockchain wallets for users.\r\n",
     "contact": {
-      "name": "Bloxxon AG",
-      "url": "https://bloxxon.co",
-      "email": "p.tasner@bloxxon.co"
+      "name": "Nyala Digital Assets AG AG",
+      "url": "https://www.nyala.de",
+      "email": "developer@nyala.de"
     },
     "version": "v1",
     "x-logo": {
       "url": "/logo.png",
-      "altText": "Bloxxon External API"
+      "altText": "Nyala External API"
     }
   },
   "paths": {
@@ -2206,6 +2206,158 @@
           ]
         }
       },
+      "KycAddressDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "countryCodeIso2",
+          "postalCode",
+          "street",
+          "streetNo",
+          "town"
+        ],
+        "properties": {
+          "street": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "streetNo": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "postalCode": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "town": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "countryCodeIso2": {
+            "type": "string",
+            "maxLength": 2
+          }
+        }
+      },
+      "CustomerCompanyDetailDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "email",
+          "fullAddress",
+          "name",
+          "registerNumber"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "registerNumber": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "fullAddress": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 64
+          }
+        }
+      },
+      "KycDataDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "address",
+          "dateOfBirth",
+          "email",
+          "eulaAgreed",
+          "firstname",
+          "highCorruptionIndex",
+          "identVerified",
+          "lastname",
+          "nonPepPerson",
+          "nonSanctionedCountry",
+          "nonUsTaxPerson",
+          "placeOfBirth"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 0,
+            "nullable": true
+          },
+          "salutation": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstname": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 0
+          },
+          "lastname": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 0
+          },
+          "placeOfBirth": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 0
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 64,
+            "minLength": 0
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "nonPepPerson": {
+            "type": "boolean"
+          },
+          "highCorruptionIndex": {
+            "type": "boolean"
+          },
+          "nonSanctionedCountry": {
+            "type": "boolean"
+          },
+          "nonUsTaxPerson": {
+            "type": "boolean"
+          },
+          "identVerified": {
+            "type": "boolean"
+          },
+          "eulaAgreed": {
+            "type": "boolean"
+          },
+          "address": {
+            "$ref": "#/components/schemas/KycAddressDto"
+          },
+          "company": {
+            "$ref": "#/components/schemas/CustomerCompanyDetailDto"
+          },
+          "nationalityIso": {
+            "type": "string",
+            "nullable": true
+          },
+          "gender": {
+            "$ref": "#/components/schemas/GenderTypes"
+          }
+        }
+      },
       "CustomerAccountDto": {
         "type": "object",
         "additionalProperties": false,
@@ -2271,6 +2423,9 @@
           },
           "gender": {
             "$ref": "#/components/schemas/GenderTypes"
+          },
+          "kycData": {
+            "$ref": "#/components/schemas/KycDataDto"
           }
         }
       },
@@ -2293,35 +2448,6 @@
             "items": {
               "$ref": "#/components/schemas/CustomerAccountDto"
             }
-          }
-        }
-      },
-      "CustomerCompanyDetailDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "email",
-          "fullAddress",
-          "name",
-          "registerNumber"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "maxLength": 255
-          },
-          "registerNumber": {
-            "type": "string",
-            "maxLength": 255
-          },
-          "fullAddress": {
-            "type": "string",
-            "maxLength": 255
-          },
-          "email": {
-            "type": "string",
-            "format": "email",
-            "maxLength": 64
           }
         }
       },
@@ -2524,121 +2650,6 @@
             "type": "string",
             "maxLength": 2,
             "minLength": 2
-          },
-          "company": {
-            "$ref": "#/components/schemas/CustomerCompanyDetailDto"
-          },
-          "nationalityIso": {
-            "type": "string",
-            "nullable": true
-          },
-          "gender": {
-            "$ref": "#/components/schemas/GenderTypes"
-          }
-        }
-      },
-      "KycAddressDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "countryCodeIso2",
-          "postalCode",
-          "street",
-          "streetNo",
-          "town"
-        ],
-        "properties": {
-          "street": {
-            "type": "string",
-            "maxLength": 100
-          },
-          "streetNo": {
-            "type": "string",
-            "maxLength": 100
-          },
-          "postalCode": {
-            "type": "string",
-            "maxLength": 100
-          },
-          "town": {
-            "type": "string",
-            "maxLength": 100
-          },
-          "countryCodeIso2": {
-            "type": "string",
-            "maxLength": 2
-          }
-        }
-      },
-      "KycDataDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "address",
-          "dateOfBirth",
-          "email",
-          "eulaAgreed",
-          "firstname",
-          "highCorruptionIndex",
-          "identVerified",
-          "lastname",
-          "nonPepPerson",
-          "nonSanctionedCountry",
-          "nonUsTaxPerson",
-          "placeOfBirth"
-        ],
-        "properties": {
-          "title": {
-            "type": "string",
-            "maxLength": 64,
-            "minLength": 0,
-            "nullable": true
-          },
-          "firstname": {
-            "type": "string",
-            "maxLength": 64,
-            "minLength": 0
-          },
-          "lastname": {
-            "type": "string",
-            "maxLength": 64,
-            "minLength": 0
-          },
-          "placeOfBirth": {
-            "type": "string",
-            "maxLength": 100,
-            "minLength": 0
-          },
-          "dateOfBirth": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "email": {
-            "type": "string",
-            "format": "email",
-            "maxLength": 64,
-            "minLength": 0
-          },
-          "nonPepPerson": {
-            "type": "boolean"
-          },
-          "highCorruptionIndex": {
-            "type": "boolean"
-          },
-          "nonSanctionedCountry": {
-            "type": "boolean"
-          },
-          "nonUsTaxPerson": {
-            "type": "boolean"
-          },
-          "identVerified": {
-            "type": "boolean"
-          },
-          "eulaAgreed": {
-            "type": "boolean"
-          },
-          "address": {
-            "$ref": "#/components/schemas/KycAddressDto"
           },
           "company": {
             "$ref": "#/components/schemas/CustomerCompanyDetailDto"
@@ -3666,7 +3677,8 @@
           "Rejected",
           "Approved",
           "Revoked",
-          "AuthorizationFailed"
+          "AuthorizationFailed",
+          "Pending"
         ],
         "x-custom-enum": {
           "name": "OptInStatus",
@@ -3698,6 +3710,10 @@
             {
               "label": "AuthorizationFailed",
               "value": 6
+            },
+            {
+              "label": "Pending",
+              "value": 7
             }
           ]
         }
@@ -4102,6 +4118,63 @@
           }
         }
       },
+      "RetailWalletType": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "RetailWallet",
+          "RetailWalletRequest"
+        ],
+        "x-custom-enum": {
+          "name": "RetailWalletType",
+          "enumObjects": [
+            {
+              "label": "RetailWallet",
+              "value": 1
+            },
+            {
+              "label": "RetailWalletRequest",
+              "value": 2
+            }
+          ]
+        }
+      },
+      "RetailWalletRequestStatus": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "New",
+          "Approved",
+          "WalletCreated",
+          "UpdatedKYCData",
+          "Rejected"
+        ],
+        "x-custom-enum": {
+          "name": "RetailWalletRequestStatus",
+          "enumObjects": [
+            {
+              "label": "New",
+              "value": 0
+            },
+            {
+              "label": "Approved",
+              "value": 1
+            },
+            {
+              "label": "WalletCreated",
+              "value": 2
+            },
+            {
+              "label": "UpdatedKYCData",
+              "value": 3
+            },
+            {
+              "label": "Rejected",
+              "value": 4
+            }
+          ]
+        }
+      },
       "RetailWalletDto": {
         "type": "object",
         "additionalProperties": false,
@@ -4144,6 +4217,12 @@
             "items": {
               "$ref": "#/components/schemas/TokenizedAssetTransferDto"
             }
+          },
+          "type": {
+            "$ref": "#/components/schemas/RetailWalletType"
+          },
+          "status": {
+            "$ref": "#/components/schemas/RetailWalletRequestStatus"
           }
         }
       },

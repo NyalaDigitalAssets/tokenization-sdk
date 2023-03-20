@@ -1,6 +1,6 @@
 ﻿{
   "ProviderId": "Unchase.OpenAPI.ConnectedService",
-  "Version": "1.6.5.0",
+  "Version": "1.8.0.0",
   "GettingStartedDocument": {
     "Uri": "https://github.com/unchase/Unchase.OpenAPI.Connectedservice/"
   },
@@ -94,7 +94,6 @@
       "TypeNameGeneratorType": null,
       "PropertyNameGeneratorType": null,
       "EnumNameGeneratorType": null,
-      "ChecksumCacheEnabled": false,
       "ServiceHost": null,
       "ServiceSchemes": null,
       "output": "GanymedeInternal.cs",

@@ -29,23 +29,26 @@ namespace Ganymede.SDK.Tests
 
 
         private readonly GanymedeClient _client =
-            new GanymedeClient("", "", "http://localhost:4447");
+            new GanymedeClient("", "", "http://localhost:4447/");
 
-        //[Test]
-        public async Task CreateRetailWallets()
+        [TestCase("C55B0489-059D-4739-A1F9-89606C4116DB")]
+        [TestCase("1135C3EA-18A8-497B-86B8-12157D98880C")]
+        [TestCase("7FD4D028-2A32-4D5D-816D-7A631F86A9DD")]
+        [TestCase("42D554E9-329C-4FCF-986B-3DA44724F52B")]
+        [TestCase("851AF314-0ADF-4D9D-9500-EB784C86C18B")]
+        public async Task CreateRetailWallets(Guid customerId)
         {
-            var customerId = new Guid("2bc4db1d-2da8-42de-a1ae-009d2f368043");
-            var retailId = await _client.CreateRetailWalletsAsync(customerId, new SimpleAccessCredentialsDto
+            var retailId = await _client.CreateRetailWalletAsync(customerId, new SimpleAccessCredentialsDto
             {
-                Passphrase = "Bloxxon1234"
-            });
+                Passphrase = "Password123"
+            }, Blockchains.Algorand);
         }
 
         [Test]
         public void EmulateFunding()
         {
-            var xlmTokenId = Guid.Parse("c63275dc-4c28-4cc0-8daa-d992e87b2d0d");
-            var repeats = Enumerable.Repeat(0, 1);
+            var xlmTokenId = Guid.Parse("567bc204-bcef-440a-b964-8c780a49cf84");
+            var repeats = Enumerable.Repeat(0, 5);
 
             Parallel.ForEach(repeats, new ParallelOptions { MaxDegreeOfParallelism = 1 }, (_) =>
             {
@@ -77,18 +80,51 @@ namespace Ganymede.SDK.Tests
                     throw;
                 }
 
+
                 //Create wallets
-                var wallets = _client.CreateRetailWalletsAsync(customerId, new SimpleAccessCredentialsDto { Passphrase = "Bloxxon1234" }).ConfigureAwait(false).GetAwaiter().GetResult();
-                var xlmWallet = wallets.FirstOrDefault(w => w.Blockchain == Blockchains.Stellar);
-                Assert.NotNull(xlmWallet);
+                var wallets = _client.CreateRetailWalletsAsync(customerId, new SimpleAccessCredentialsDto { Passphrase = "Nyala1234567" }).ConfigureAwait(false).GetAwaiter().GetResult();
+                Assert.NotNull(wallets);
+
+
+                // Update kyc
+                var customerDto = new KycDataDto
+                {
+                    Title = customerData.Title,
+                    Firstname = customerData.Firstname,
+                    Lastname = customerData.Lastname,
+                    PlaceOfBirth = "Berlin",
+                    DateOfBirth = customerData.BirthDate.Value,
+                    Email = customerData.Email,
+                    NonPepPerson = true,
+                    HighCorruptionIndex = false,
+                    NonSanctionedCountry = true,
+                    NonUsTaxPerson = true,
+                    IdentVerified = true,
+                    EulaAgreed = true,
+                    Address = new KycAddressDto()
+                    {
+                        CountryCodeIso2 = customerData.CountryIso,
+                        PostalCode = customerData.PostalCode,
+                        Street = customerData.Street,
+                        StreetNo = customerData.StreetNo,
+                        Town = customerData.Town
+                    },
+                    NationalityIso = customerData.NationalityIso,
+                    Gender = customerData.Gender
+                };
+
+                var response = _client.UpdateCustomerKycDataAsync(customerId, customerDto).GetAwaiter().GetResult();
+
+
+                Assert.IsTrue(response);
 
                 // Opt-In for token
-                var success = _client.CreateTokenizedAssetOptInAsync(customerId, xlmWallet.Id, new RetailWalletOptInDto
+                var success = _client.CreateTokenizedAssetOptInAsync(customerId, wallets.FirstOrDefault(o => o.Blockchain == Blockchains.Stellar).Id, new RetailWalletOptInDto
                 {
                     TokenizedAssetId = xlmTokenId,
                     Credentials = new SimpleAccessCredentialsDto
                     {
-                        Passphrase = "Bloxxon1234",
+                        Passphrase = "Nyala1234567",
                     }
                 })
                 .ConfigureAwait(false).GetAwaiter().GetResult();
@@ -96,17 +132,33 @@ namespace Ganymede.SDK.Tests
             });
         }
 
-        [Test]
-        public async Task Should_Update_KYC_Data()
+        [TestCase("E3D86A22-7E6F-4C74-ADFA-9892178B8F93", "2BDBDE7E-F9AB-4F51-8789-027ACB83A7B4")]
+        public void Should_Optin_For_Token(Guid customerId, Guid retailWalletId)
+        {
+            // Opt-In for token
+            var success = _client.CreateTokenizedAssetOptInAsync(customerId, retailWalletId, new RetailWalletOptInDto
+            {
+                TokenizedAssetId = Guid.Parse("567bc204-bcef-440a-b964-8c780a49cf84"),
+                Credentials = new SimpleAccessCredentialsDto
+                {
+                    Passphrase = "Nyala1234567",
+                }
+            })
+            .ConfigureAwait(false).GetAwaiter().GetResult();
+            Assert.IsTrue(success);
+        }
+
+        [TestCase("E3D86A22-7E6F-4C74-ADFA-9892178B8F93")]
+        public async Task Should_Update_KYC_Data(Guid customerId)
         {
             var customerDto = new KycDataDto
             {
                 Title = "Mr.",
-                Firstname = "John",
-                Lastname = "Doe",
+                Firstname = "Deontae",
+                Lastname = "Jacob",
                 PlaceOfBirth = "Berlin",
                 DateOfBirth = DateTime.Now.AddYears(-37),
-                Email = "example@nyala.de",
+                Email = "test-ace79e82-9422-4024-af7d-172db7ec79be1@faker.com",
                 NonPepPerson = true,
                 HighCorruptionIndex = false,
                 NonSanctionedCountry = true,
@@ -125,9 +177,21 @@ namespace Ganymede.SDK.Tests
                 Gender = GenderTypes.Male
             };
 
-            var response = await _client.UpdateCustomerKycDataAsync(Guid.Parse("690F635F-2E83-4665-A2F7-A9225334ADC4"), customerDto);
-            Assert.AreEqual(response.ToString(), "OK");
+            var response = await _client.UpdateCustomerKycDataAsync(customerId, customerDto);
+            Assert.IsTrue(response);
+        }
 
+        [TestCase("E3D86A22-7E6F-4C74-ADFA-9892178B8F93", "Nyala1234567")]
+        public async Task Should_Check_Retail_Wallet_Passphrase(Guid customerId, string passphrase)
+        {
+            var response = await _client.CheckRetailWalletPassphrase(customerId, passphrase);
+            Assert.IsTrue(response);
+        }
+        [TestCase("ADB983B8-7ED3-43EA-8B2F-FFDC70C736ED")]
+        public async Task Should_Get_Retail_Wallet(Guid customerId)
+        {
+            var response = await _client.GetRetailWalletsAsync(customerId);
+            Assert.NotNull(response);
         }
     }
 }
