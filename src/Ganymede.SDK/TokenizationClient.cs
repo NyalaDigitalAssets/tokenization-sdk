@@ -143,6 +143,16 @@ namespace Tokenization.SDK
         }
 
         /// <summary>
+        /// Create an Opt In for a specified Tokenized Asset.
+        /// </summary>
+        /// <param name="customerId">The GUID ID of the customer</param>
+        public async Task<bool> CreateTokenizedAssetOptInAsync(Guid customerId, RetailWalletOptInDto data)
+        {
+            var response = await _client.ApiExternalV1CustomersOptInAsync(customerId, data);
+            return response.Data;
+        }
+
+        /// <summary>
         /// Initiates the retail wallet recovery process and return a one-time usable recovery key
         /// </summary>
         /// <param name="customerId"></param>
