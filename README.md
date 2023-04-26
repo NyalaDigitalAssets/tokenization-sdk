@@ -72,7 +72,7 @@ var customerId = Guid.Parse("67d78d46-ff24-4e18-90a1-a5738349b606");
 var tokenizedAssetId = Guid.Parse("5d9492c0-40fe-48b6-880f-bdbd96b5fffd");
 await _client.CreateTokenizedAssetOptInAsync(customerId, new RetailWalletOptInDto
 {
-    TokenizedAssetId = ,tokenizedAssetId,
+    TokenizedAssetId = tokenizedAssetId,
     Credentials = new SimpleAccessCredentialsDto
     {
         Passphrase = "012345",
