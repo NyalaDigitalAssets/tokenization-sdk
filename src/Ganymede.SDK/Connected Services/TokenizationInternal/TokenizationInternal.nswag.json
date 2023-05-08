@@ -4,7 +4,7 @@
     "title": "Nyala External API",
     "description": "The Kapilendo Crypto API offers:\r\n- Wealth Management as a Service \r\n- Retail Crypto Asset Wallet as a Service\r\n# Wealth Management as a Service \r\nCustomer are provided with the ability to onboard users to one of several ETF Portfolios, where depot and wealth management services are provided.\r\n# Retail Crypto Asset Wallet as a Service\r\nCustomer are provided with the ability to create blockchain wallets for users.\r\n",
     "contact": {
-      "name": "Nyala Digital Assets AG AG",
+      "name": "Nyala Digital Asset AG",
       "url": "https://www.nyala.de",
       "email": "developer@nyala.de"
     },
@@ -2206,6 +2206,32 @@
           ]
         }
       },
+      "IdentVerifiedType": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "NotSet",
+          "Normal",
+          "Plain"
+        ],
+        "x-custom-enum": {
+          "name": "IdentVerifiedType",
+          "enumObjects": [
+            {
+              "label": "NotSet",
+              "value": 1
+            },
+            {
+              "label": "Normal",
+              "value": 2
+            },
+            {
+              "label": "Plain",
+              "value": 3
+            }
+          ]
+        }
+      },
       "KycAddressDto": {
         "type": "object",
         "additionalProperties": false,
@@ -2340,6 +2366,9 @@
           "identVerified": {
             "type": "boolean"
           },
+          "identVerifiedType": {
+            "$ref": "#/components/schemas/IdentVerifiedType"
+          },
           "eulaAgreed": {
             "type": "boolean"
           },
@@ -2355,6 +2384,10 @@
           },
           "gender": {
             "$ref": "#/components/schemas/GenderTypes"
+          },
+          "bic": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -3183,6 +3216,9 @@
           },
           "isFungible": {
             "type": "boolean"
+          },
+          "reportEnable": {
+            "type": "boolean"
           }
         }
       },
@@ -3826,6 +3862,9 @@
             "nullable": true
           },
           "isFungible": {
+            "type": "boolean"
+          },
+          "reportEnable": {
             "type": "boolean"
           },
           "transfers": {
