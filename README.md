@@ -65,3 +65,41 @@ await _client.RecoverRetailWalletSeedAccessAsync(customerId, new ResetRetailWall
     RecoveryKey = seedRecoveryData.RecoveryKey,
 });
 ```
+
+
+## Update kyc data for customer
+```
+[TestCase("14af41bd-fad6-478a-9113-c26496e26d5f")]
+public async Task Should_Update_KYC_Data(Guid customerId)
+{
+    var customerDto = new KycDataDto
+    {
+        Title = "Mr.",
+        Firstname = "Deontae",
+        Lastname = "Jacob",
+        PlaceOfBirth = "Berlin",
+        DateOfBirth = DateTime.Now.AddYears(-37),
+        Email = "test-ace79e82-9422-4024-af7d-172db7ec79be3@faker.com",
+        NonPepPerson = true,
+        HighCorruptionIndex = false,
+        NonSanctionedCountry = true,
+        NonUsTaxPerson = true,
+        IdentVerified = true,
+        IdentVerifiedType = IdentVerifiedType.Normal,
+        EulaAgreed = true,
+        Address = new KycAddressDto()
+        {
+            CountryCodeIso2 = "DE",
+            PostalCode = "71345",
+            Street = "Right",
+            StreetNo = "30",
+            Town = "Berlin"
+        },
+        NationalityIso = "DE",
+        Gender = GenderTypes.Male,
+        Bic = "BIC-New-up"
+    };
+
+    var response = await _client.UpdateCustomerKycDataAsync(customerId, customerDto);
+}
+```
