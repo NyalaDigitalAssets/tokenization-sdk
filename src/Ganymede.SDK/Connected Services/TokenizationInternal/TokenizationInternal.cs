@@ -4045,6 +4045,21 @@ namespace Tokenization.SDK
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.1.0))")]
+    public enum IdentVerifiedType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NotSet")]
+        NotSet = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Normal")]
+        Normal = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Plain")]
+        Plain = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.1.0))")]
     public partial class KycAddressDto
     {
         [Newtonsoft.Json.JsonProperty("street", Required = Newtonsoft.Json.Required.Always)]
@@ -4151,6 +4166,10 @@ namespace Tokenization.SDK
         [Newtonsoft.Json.JsonProperty("identVerified", Required = Newtonsoft.Json.Required.Always)]
         public bool IdentVerified { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("identVerifiedType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public IdentVerifiedType IdentVerifiedType { get; set; }
+
         [Newtonsoft.Json.JsonProperty("eulaAgreed", Required = Newtonsoft.Json.Required.Always)]
         public bool EulaAgreed { get; set; }
 
@@ -4167,6 +4186,9 @@ namespace Tokenization.SDK
         [Newtonsoft.Json.JsonProperty("gender", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public GenderTypes Gender { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("bic", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Bic { get; set; }
 
     }
 
@@ -4749,6 +4771,9 @@ namespace Tokenization.SDK
         [Newtonsoft.Json.JsonProperty("isFungible", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsFungible { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("reportEnable", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool ReportEnable { get; set; }
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.1.0))")]
@@ -5205,6 +5230,9 @@ namespace Tokenization.SDK
 
         [Newtonsoft.Json.JsonProperty("isFungible", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsFungible { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("reportEnable", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool ReportEnable { get; set; }
 
         [Newtonsoft.Json.JsonProperty("transfers", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<TokenizedAssetTransferDto> Transfers { get; set; }
