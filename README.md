@@ -66,6 +66,40 @@ await _client.RecoverRetailWalletSeedAccessAsync(customerId, new ResetRetailWall
 });
 ```
 
+
+## Update kyc data for customer
+```
+var customerId = Guid.Parse("67d78d46-ff24-4e18-90a1-a5738349b606");
+var customerDto = new KycDataDto
+{
+    Title = "Mr.",
+    Firstname = "Deontae",
+    Lastname = "Jacob",
+    PlaceOfBirth = "Berlin",
+    DateOfBirth = DateTime.Now.AddYears(-37),
+    Email = "test-ace79e82-9422-4024-af7d-172db7ec79be3@faker.com",
+    NonPepPerson = true,
+    HighCorruptionIndex = false,
+    NonSanctionedCountry = true,
+    NonUsTaxPerson = true,
+    IdentVerified = true,
+    IdentVerifiedType = IdentVerifiedType.Normal,
+    EulaAgreed = true,
+    Address = new KycAddressDto()
+    {
+        CountryCodeIso2 = "DE",
+        PostalCode = "71345",
+        Street = "Right",
+        StreetNo = "30",
+        Town = "Berlin"
+    },
+    NationalityIso = "DE",
+    Gender = GenderTypes.Male,
+    Bic = "BIC-New-up"
+};
+var response = await _client.UpdateCustomerKycDataAsync(customerId, customerDto);
+```
+
 ## Optin for an asset with an account id
 ```
 var customerId = Guid.Parse("67d78d46-ff24-4e18-90a1-a5738349b606");

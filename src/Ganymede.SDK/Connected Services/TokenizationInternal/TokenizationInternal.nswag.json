@@ -2260,6 +2260,32 @@
           ]
         }
       },
+      "IdentVerifiedType": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "NotSet",
+          "Normal",
+          "Plain"
+        ],
+        "x-custom-enum": {
+          "name": "IdentVerifiedType",
+          "enumObjects": [
+            {
+              "label": "NotSet",
+              "value": 1
+            },
+            {
+              "label": "Normal",
+              "value": 2
+            },
+            {
+              "label": "Plain",
+              "value": 3
+            }
+          ]
+        }
+      },
       "KycAddressDto": {
         "type": "object",
         "additionalProperties": false,
@@ -2394,6 +2420,9 @@
           "identVerified": {
             "type": "boolean"
           },
+          "identVerifiedType": {
+            "$ref": "#/components/schemas/IdentVerifiedType"
+          },
           "eulaAgreed": {
             "type": "boolean"
           },
@@ -2409,6 +2438,10 @@
           },
           "gender": {
             "$ref": "#/components/schemas/GenderTypes"
+          },
+          "bic": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
