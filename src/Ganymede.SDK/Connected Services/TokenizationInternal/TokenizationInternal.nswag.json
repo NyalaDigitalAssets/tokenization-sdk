@@ -183,7 +183,7 @@
           }
         ],
         "requestBody": {
-          "description": "CUstomer data to be updated",
+          "description": "Customer data to be updated",
           "content": {
             "application/json": {
               "schema": {
@@ -1619,6 +1619,60 @@
         }
       }
     },
+    "/api/external/v1/customers/{customer-id}/opt-in": {
+      "post": {
+        "tags": [
+          "Retail Wallet"
+        ],
+        "summary": "Request to hold a certain tokenized asset in customer retail wallet",
+        "operationId": "OptInWithAccountId",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "",
+            "schema": {
+              "type": "string",
+              "description": "",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RetailWalletOptInDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RetailWalletOptInDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RetailWalletOptInDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/external/v1/customers/{customer-id}/retail-wallets/lock": {
       "put": {
         "tags": [
@@ -2962,7 +3016,9 @@
         "format": "int32",
         "enum": [
           "Issuer",
-          "Distributor"
+          "Distributor",
+          "ClaimIssuer",
+          "Agent"
         ],
         "x-custom-enum": {
           "name": "IssuerWalletRoles",
@@ -2974,6 +3030,14 @@
             {
               "label": "Distributor",
               "value": 2
+            },
+            {
+              "label": "ClaimIssuer",
+              "value": 3
+            },
+            {
+              "label": "Agent",
+              "value": 4
             }
           ]
         }
@@ -3144,6 +3208,125 @@
           ]
         }
       },
+      "ProjectEntryType": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "Collective",
+          "Individual"
+        ],
+        "x-custom-enum": {
+          "name": "ProjectEntryType",
+          "enumObjects": [
+            {
+              "label": "Collective",
+              "value": 0
+            },
+            {
+              "label": "Individual",
+              "value": 1
+            }
+          ]
+        }
+      },
+      "ProjectStatus": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "OnGoing",
+          "Completed"
+        ],
+        "x-custom-enum": {
+          "name": "ProjectStatus",
+          "enumObjects": [
+            {
+              "label": "OnGoing",
+              "value": 1
+            },
+            {
+              "label": "Completed",
+              "value": 2
+            }
+          ]
+        }
+      },
+      "ProjectDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "institutionId",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "name": {
+            "type": "string"
+          },
+          "institutionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "startOfSubscription": {
+            "type": "string",
+            "nullable": true
+          },
+          "endOfSubscription": {
+            "type": "string",
+            "nullable": true
+          },
+          "targetIssuanceDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "price": {
+            "type": "string",
+            "maxLength": 100,
+            "nullable": true
+          },
+          "duration": {
+            "type": "string",
+            "nullable": true
+          },
+          "interestRate": {
+            "type": "string",
+            "nullable": true
+          },
+          "dueDateOfPayments": {
+            "type": "string",
+            "nullable": true
+          },
+          "terminationRights": {
+            "type": "string",
+            "nullable": true
+          },
+          "issueSize": {
+            "type": "string",
+            "nullable": true
+          },
+          "nominalAmountPerToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "issuerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "entryType": {
+            "$ref": "#/components/schemas/ProjectEntryType"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ProjectStatus"
+          },
+          "created": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
       "TokenizedAssetDto": {
         "type": "object",
         "additionalProperties": false,
@@ -3163,6 +3346,7 @@
           },
           "unitName": {
             "type": "string",
+            "maxLength": 10,
             "nullable": true
           },
           "totalSupply": {
@@ -3217,8 +3401,72 @@
           "isFungible": {
             "type": "boolean"
           },
+          "projectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isin": {
+            "type": "string",
+            "maxLength": 20,
+            "nullable": true
+          },
+          "isRegulatedSecurity": {
+            "type": "boolean"
+          },
+          "agentWalletId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "claimIssuerWalletId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "issuerTxId": {
+            "type": "string",
+            "nullable": true
+          },
+          "issuerAccountIndex": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "agentTxId": {
+            "type": "string",
+            "nullable": true
+          },
+          "agentAccountIndex": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "agentAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "cissuerAdress": {
+            "type": "string",
+            "nullable": true
+          },
+          "tokeFactoryAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "projectName": {
+            "type": "string",
+            "nullable": true
+          },
+          "issuerWallet": {
+            "$ref": "#/components/schemas/IssuerWalletDto"
+          },
+          "project": {
+            "$ref": "#/components/schemas/ProjectDto"
+          },
           "reportEnable": {
             "type": "boolean"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
@@ -3275,7 +3523,12 @@
           },
           "nativeCryptoAssetId": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "nullable": true
+          },
+          "isLocked": {
+            "type": "boolean",
+            "nullable": true
           }
         }
       },
@@ -3297,6 +3550,10 @@
             "items": {
               "$ref": "#/components/schemas/IssuerWalletDto"
             }
+          },
+          "isLocked": {
+            "type": "boolean",
+            "nullable": true
           }
         }
       },
@@ -3457,6 +3714,9 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "blockchain": {
+            "$ref": "#/components/schemas/Blockchains"
+          },
           "name": {
             "type": "string",
             "nullable": true
@@ -3491,7 +3751,28 @@
             "type": "string",
             "format": "uuid"
           },
+          "agentWalletId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "claimIssuerWalletId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "isFungible": {
+            "type": "boolean"
+          },
+          "projectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isin": {
+            "type": "string",
+            "nullable": true
+          },
+          "isRegulatedSecurity": {
             "type": "boolean"
           }
         }
@@ -3625,7 +3906,9 @@
           "Unstake",
           "WithdrawRewards",
           "IssueFungibleAsset",
-          "TxFungibleAsset"
+          "TxFungibleAsset",
+          "DeployIdentity",
+          "RegisterIdentity"
         ],
         "x-custom-enum": {
           "name": "TransactionActions",
@@ -3681,6 +3964,14 @@
             {
               "label": "TxFungibleAsset",
               "value": 13
+            },
+            {
+              "label": "DeployIdentity",
+              "value": 14
+            },
+            {
+              "label": "RegisterIdentity",
+              "value": 15
             }
           ]
         }
@@ -3714,7 +4005,10 @@
           "Approved",
           "Revoked",
           "AuthorizationFailed",
-          "Pending"
+          "Pending",
+          "KycClaimAdded",
+          "IdentityDeployed",
+          "IdentityRegistered"
         ],
         "x-custom-enum": {
           "name": "OptInStatus",
@@ -3750,6 +4044,18 @@
             {
               "label": "Pending",
               "value": 7
+            },
+            {
+              "label": "KycClaimAdded",
+              "value": 8
+            },
+            {
+              "label": "IdentityDeployed",
+              "value": 9
+            },
+            {
+              "label": "IdentityRegistered",
+              "value": 10
             }
           ]
         }
@@ -3778,6 +4084,10 @@
             "type": "string",
             "format": "uuid"
           },
+          "customerName": {
+            "type": "string",
+            "nullable": true
+          },
           "retailWalletId": {
             "type": "string",
             "format": "uuid"
@@ -3788,6 +4098,9 @@
           },
           "status": {
             "$ref": "#/components/schemas/OptInStatus"
+          },
+          "walletAccess": {
+            "$ref": "#/components/schemas/RetailWalletAccessLevels"
           }
         }
       },
@@ -3810,6 +4123,7 @@
           },
           "unitName": {
             "type": "string",
+            "maxLength": 10,
             "nullable": true
           },
           "totalSupply": {
@@ -3864,8 +4178,72 @@
           "isFungible": {
             "type": "boolean"
           },
+          "projectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isin": {
+            "type": "string",
+            "maxLength": 20,
+            "nullable": true
+          },
+          "isRegulatedSecurity": {
+            "type": "boolean"
+          },
+          "agentWalletId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "claimIssuerWalletId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "issuerTxId": {
+            "type": "string",
+            "nullable": true
+          },
+          "issuerAccountIndex": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "agentTxId": {
+            "type": "string",
+            "nullable": true
+          },
+          "agentAccountIndex": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "agentAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "cissuerAdress": {
+            "type": "string",
+            "nullable": true
+          },
+          "tokeFactoryAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "projectName": {
+            "type": "string",
+            "nullable": true
+          },
+          "issuerWallet": {
+            "$ref": "#/components/schemas/IssuerWalletDto"
+          },
+          "project": {
+            "$ref": "#/components/schemas/ProjectDto"
+          },
           "reportEnable": {
             "type": "boolean"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
           },
           "transfers": {
             "type": "array",
@@ -4241,17 +4619,14 @@
           },
           "accountId": {
             "type": "string",
-            "readOnly": true,
             "format": "uuid"
           },
           "created": {
             "type": "string",
-            "readOnly": true,
             "format": "date-time"
           },
           "transfers": {
             "type": "array",
-            "readOnly": true,
             "nullable": true,
             "items": {
               "$ref": "#/components/schemas/TokenizedAssetTransferDto"

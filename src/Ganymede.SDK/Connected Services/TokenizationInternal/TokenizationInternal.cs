@@ -397,7 +397,7 @@ namespace Tokenization.SDK
         /// Update customer inside the institution
         /// </summary>
         /// <param name="customer_id">The customer ID</param>
-        /// <param name="body">CUstomer data to be updated</param>
+        /// <param name="body">Customer data to be updated</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual System.Threading.Tasks.Task<GuidApiResponse> ApiExternalV1CustomersPutAsync(System.Guid customer_id, UpdateCustomerAccountDto body)
@@ -410,7 +410,7 @@ namespace Tokenization.SDK
         /// Update customer inside the institution
         /// </summary>
         /// <param name="customer_id">The customer ID</param>
-        /// <param name="body">CUstomer data to be updated</param>
+        /// <param name="body">Customer data to be updated</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<GuidApiResponse> ApiExternalV1CustomersPutAsync(System.Guid customer_id, UpdateCustomerAccountDto body, System.Threading.CancellationToken cancellationToken)
@@ -2859,6 +2859,94 @@ namespace Tokenization.SDK
         }
 
         /// <summary>
+        /// Request to hold a certain tokenized asset in customer retail wallet
+        /// </summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<BooleanApiResponse> ApiExternalV1CustomersOptInAsync(System.Guid customer_id, RetailWalletOptInDto body)
+        {
+            return ApiExternalV1CustomersOptInAsync(customer_id, body, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Request to hold a certain tokenized asset in customer retail wallet
+        /// </summary>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<BooleanApiResponse> ApiExternalV1CustomersOptInAsync(System.Guid customer_id, RetailWalletOptInDto body, System.Threading.CancellationToken cancellationToken)
+        {
+            if (customer_id == null)
+                throw new System.ArgumentNullException("customer_id");
+
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/external/v1/customers/{customer-id}/opt-in");
+            urlBuilder_.Replace("{customer-id}", System.Uri.EscapeDataString(ConvertToString(customer_id, System.Globalization.CultureInfo.InvariantCulture)));
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<BooleanApiResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
         /// Freezes or unfreezes all customer retail wallets by locking access to the mnemonic seed
         /// </summary>
         /// <returns>Success</returns>
@@ -4610,6 +4698,12 @@ namespace Tokenization.SDK
         [System.Runtime.Serialization.EnumMember(Value = @"Distributor")]
         Distributor = 1,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"ClaimIssuer")]
+        ClaimIssuer = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Agent")]
+        Agent = 3,
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.1.0))")]
@@ -4713,6 +4807,91 @@ namespace Tokenization.SDK
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.1.0))")]
+    public enum ProjectEntryType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Collective")]
+        Collective = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Individual")]
+        Individual = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.1.0))")]
+    public enum ProjectStatus
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"OnGoing")]
+        OnGoing = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Completed")]
+        Completed = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.1.0))")]
+    public partial class ProjectDto
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Name { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("institutionId", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public System.Guid InstitutionId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("startOfSubscription", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string StartOfSubscription { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("endOfSubscription", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string EndOfSubscription { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("targetIssuanceDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string TargetIssuanceDate { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("price", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string Price { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("duration", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Duration { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("interestRate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string InterestRate { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("dueDateOfPayments", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string DueDateOfPayments { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("terminationRights", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string TerminationRights { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("issueSize", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string IssueSize { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("nominalAmountPerToken", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string NominalAmountPerToken { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("issuerName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string IssuerName { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("entryType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public ProjectEntryType EntryType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public ProjectStatus Status { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("created", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Created { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.1.0))")]
     public partial class TokenizedAssetDto
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -4725,6 +4904,7 @@ namespace Tokenization.SDK
         public string Name { get; set; }
 
         [Newtonsoft.Json.JsonProperty("unitName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(10)]
         public string UnitName { get; set; }
 
         [Newtonsoft.Json.JsonProperty("totalSupply", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -4771,8 +4951,57 @@ namespace Tokenization.SDK
         [Newtonsoft.Json.JsonProperty("isFungible", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsFungible { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("projectId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid ProjectId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isin", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(20)]
+        public string Isin { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isRegulatedSecurity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsRegulatedSecurity { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("agentWalletId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? AgentWalletId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("claimIssuerWalletId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? ClaimIssuerWalletId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("issuerTxId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string IssuerTxId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("issuerAccountIndex", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int IssuerAccountIndex { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("agentTxId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string AgentTxId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("agentAccountIndex", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int AgentAccountIndex { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("agentAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string AgentAddress { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("cissuerAdress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CissuerAdress { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("tokeFactoryAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string TokeFactoryAddress { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("projectName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ProjectName { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("issuerWallet", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IssuerWalletDto IssuerWallet { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("project", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ProjectDto Project { get; set; }
+
         [Newtonsoft.Json.JsonProperty("reportEnable", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool ReportEnable { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("created", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Created { get; set; }
 
     }
 
@@ -4817,8 +5046,11 @@ namespace Tokenization.SDK
         [Newtonsoft.Json.JsonProperty("nativeCryptoAssetSymbol", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string NativeCryptoAssetSymbol { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("nativeCryptoAssetId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid NativeCryptoAssetId { get; set; }
+        [Newtonsoft.Json.JsonProperty("nativeCryptoAssetId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? NativeCryptoAssetId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isLocked", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? IsLocked { get; set; }
 
     }
 
@@ -4833,6 +5065,9 @@ namespace Tokenization.SDK
 
         [Newtonsoft.Json.JsonProperty("wallets", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<IssuerWalletDto> Wallets { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isLocked", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? IsLocked { get; set; }
 
     }
 
@@ -4946,6 +5181,10 @@ namespace Tokenization.SDK
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.1.0))")]
     public partial class InitTokenizedAssetCreationDto
     {
+        [Newtonsoft.Json.JsonProperty("blockchain", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public Blockchains Blockchain { get; set; }
+
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
 
@@ -4973,8 +5212,23 @@ namespace Tokenization.SDK
         [Newtonsoft.Json.JsonProperty("distributorWalletId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid DistributorWalletId { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("agentWalletId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? AgentWalletId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("claimIssuerWalletId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? ClaimIssuerWalletId { get; set; }
+
         [Newtonsoft.Json.JsonProperty("isFungible", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsFungible { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("projectId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid ProjectId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isin", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Isin { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isRegulatedSecurity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsRegulatedSecurity { get; set; }
 
     }
 
@@ -5098,6 +5352,12 @@ namespace Tokenization.SDK
         [System.Runtime.Serialization.EnumMember(Value = @"TxFungibleAsset")]
         TxFungibleAsset = 12,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"DeployIdentity")]
+        DeployIdentity = 13,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"RegisterIdentity")]
+        RegisterIdentity = 14,
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.1.0))")]
@@ -5143,6 +5403,15 @@ namespace Tokenization.SDK
         [System.Runtime.Serialization.EnumMember(Value = @"Pending")]
         Pending = 7,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"KycClaimAdded")]
+        KycClaimAdded = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"IdentityDeployed")]
+        IdentityDeployed = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"IdentityRegistered")]
+        IdentityRegistered = 10,
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.1.0))")]
@@ -5160,6 +5429,9 @@ namespace Tokenization.SDK
         [Newtonsoft.Json.JsonProperty("customerId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid CustomerId { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("customerName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CustomerName { get; set; }
+
         [Newtonsoft.Json.JsonProperty("retailWalletId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid RetailWalletId { get; set; }
 
@@ -5169,6 +5441,10 @@ namespace Tokenization.SDK
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public OptInStatus Status { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("walletAccess", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public RetailWalletAccessLevels WalletAccess { get; set; }
 
     }
 
@@ -5185,6 +5461,7 @@ namespace Tokenization.SDK
         public string Name { get; set; }
 
         [Newtonsoft.Json.JsonProperty("unitName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(10)]
         public string UnitName { get; set; }
 
         [Newtonsoft.Json.JsonProperty("totalSupply", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -5231,8 +5508,57 @@ namespace Tokenization.SDK
         [Newtonsoft.Json.JsonProperty("isFungible", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool IsFungible { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("projectId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid ProjectId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isin", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(20)]
+        public string Isin { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isRegulatedSecurity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsRegulatedSecurity { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("agentWalletId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? AgentWalletId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("claimIssuerWalletId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? ClaimIssuerWalletId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("issuerTxId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string IssuerTxId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("issuerAccountIndex", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int IssuerAccountIndex { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("agentTxId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string AgentTxId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("agentAccountIndex", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int AgentAccountIndex { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("agentAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string AgentAddress { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("cissuerAdress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CissuerAdress { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("tokeFactoryAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string TokeFactoryAddress { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("projectName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ProjectName { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("issuerWallet", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IssuerWalletDto IssuerWallet { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("project", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ProjectDto Project { get; set; }
+
         [Newtonsoft.Json.JsonProperty("reportEnable", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool ReportEnable { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("created", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Created { get; set; }
 
         [Newtonsoft.Json.JsonProperty("transfers", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<TokenizedAssetTransferDto> Transfers { get; set; }
