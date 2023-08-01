@@ -129,7 +129,6 @@ namespace Tokenization.SDK.Tests
                 })
                 .ConfigureAwait(false).GetAwaiter().GetResult();
                 Assert.IsTrue(success);
-            });
         }
 
         [TestCase("E3D86A22-7E6F-4C74-ADFA-9892178B8F93", "2BDBDE7E-F9AB-4F51-8789-027ACB83A7B4")]
@@ -191,6 +190,35 @@ namespace Tokenization.SDK.Tests
         public async Task Should_Get_Retail_Wallet(Guid customerId)
         {
             var response = await _client.GetRetailWalletsAsync(customerId);
+            Assert.NotNull(response);
+        }
+
+        [TestCase("08C0ED42-C4B1-42CC-A671-681364FD6480")]
+        public async Task Should_Reset_Retail_wallet_pin(Guid customerId)
+        {
+            var response = await _client.InitiateCustomersRetailWalletsRecoveryAsync(customerId);
+            var recoveryResponse = await _client.RecoverRetailWalletSeedAccessAsync(customerId, new ResetRetailWalletAccessCredentialsDto
+            {
+                RecoveryKey = response.RecoveryKey,
+                Passphrase = "456789"
+            });
+            Assert.NotNull(recoveryResponse);
+        }
+        [TestCase("770F3603-836E-48AD-B591-BC82E763C198", "BAFFAB43-5B82-4A27-A595-B6DAB0A125D8", "A7C65347-A255-448C-8ADA-8446F372CB0E",
+                  "0x47b6B94D436e4433D53584Df1453D555142f7db1", 10)]
+        public async Task Should_Initiate_Retail_Wallet_Asset_Transfer_Request(Guid customerId, Guid retailWalletId, Guid tokenizedAssetId, string recipeintAddress, double amount)
+        {
+            var response = await _client.InitiateRetailWalletAssetTransfer(customerId, retailWalletId, new CreateRetailWalletAssetTransactionDto
+            {
+                TokenizedAssetId = tokenizedAssetId,
+                RecipientPublicAddress = recipeintAddress,
+                Amount = amount,
+                Message = "Some message",
+                Credentials = new SimpleAccessCredentialsDto() 
+                { 
+                    Passphrase = "123456"
+                }
+            });
             Assert.NotNull(response);
         }
     }
