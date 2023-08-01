@@ -10,7 +10,7 @@
     },
     "version": "v1",
     "x-logo": {
-      "url": "/logo.png",
+      "url": "https://developer.nyala.de/logo.png",
       "altText": "Nyala External API"
     }
   },
@@ -20,7 +20,7 @@
         "tags": [
           "Customer"
         ],
-        "summary": "Getting a list of customers from institution",
+        "summary": "Getting a list of customers from institution.",
         "operationId": "GetCustomers",
         "responses": {
           "200": {
@@ -39,10 +39,10 @@
         "tags": [
           "Customer"
         ],
-        "summary": "Creates a new customer inside the institution",
+        "summary": "Creates a new customer inside the institution.",
         "operationId": "CreateCustomer",
         "requestBody": {
-          "description": "",
+          "description": "Data.",
           "content": {
             "application/json": {
               "schema": {
@@ -80,26 +80,26 @@
         "tags": [
           "Customer"
         ],
-        "summary": "Searches for a customer by firstname lastname or email",
+        "summary": "Searches for a customer by firstname lastname or email.",
         "operationId": "QueryCustomers",
         "parameters": [
           {
             "name": "searchText",
             "in": "query",
-            "description": "",
+            "description": "search text.",
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "search text.",
               "nullable": true
             }
           },
           {
             "name": "take",
             "in": "query",
-            "description": "",
+            "description": "take.",
             "schema": {
               "type": "integer",
-              "description": "",
+              "description": "take.",
               "format": "int32",
               "default": 100
             }
@@ -107,10 +107,10 @@
           {
             "name": "skip",
             "in": "query",
-            "description": "",
+            "description": "skip.",
             "schema": {
               "type": "integer",
-              "description": "",
+              "description": "skip.",
               "format": "int32",
               "default": 0
             }
@@ -135,17 +135,17 @@
         "tags": [
           "Customer"
         ],
-        "summary": "Getting a customer by Id",
+        "summary": "Getting a customer by Id.",
         "operationId": "GetCustomer",
         "parameters": [
           {
             "name": "customer-id",
             "in": "path",
             "required": true,
-            "description": "",
+            "description": "Customer id.",
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "Customer id.",
               "format": "uuid"
             }
           }
@@ -167,23 +167,23 @@
         "tags": [
           "Customer"
         ],
-        "summary": "Update customer inside the institution",
+        "summary": "Update customer inside the institution.",
         "operationId": "UpdateCustomer",
         "parameters": [
           {
             "name": "customer-id",
             "in": "path",
             "required": true,
-            "description": "The customer ID",
+            "description": "The customer ID.",
             "schema": {
               "type": "string",
-              "description": "The customer ID",
+              "description": "The customer ID.",
               "format": "uuid"
             }
           }
         ],
         "requestBody": {
-          "description": "Customer data to be updated",
+          "description": "Customer data to be updated.",
           "content": {
             "application/json": {
               "schema": {
@@ -221,23 +221,23 @@
         "tags": [
           "Customer"
         ],
-        "summary": "Saving KYC data for custodying customer wallets",
+        "summary": "Saving KYC data for custodying customer wallets.",
         "operationId": "SubmitCustomerKycData",
         "parameters": [
           {
             "name": "customer-id",
             "in": "path",
             "required": true,
-            "description": "",
+            "description": "Customer id.",
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "Customer id.",
               "format": "uuid"
             }
           }
         ],
         "requestBody": {
-          "description": "",
+          "description": "Data.",
           "content": {
             "application/json": {
               "schema": {
@@ -275,17 +275,17 @@
         "tags": [
           "Electronic Security"
         ],
-        "summary": "Information regarding an asset",
+        "summary": "Information regarding an asset.",
         "operationId": "GetAssetInfo",
         "parameters": [
           {
             "name": "asset-id",
             "in": "path",
             "required": true,
-            "description": "The id of the asset",
+            "description": "The id of the asset.",
             "schema": {
               "type": "string",
-              "description": "The id of the asset",
+              "description": "The id of the asset.",
               "format": "uuid"
             }
           }
@@ -309,23 +309,23 @@
         "tags": [
           "Electronic Security"
         ],
-        "summary": "Allows for creating many trustlines in bulk",
+        "summary": "Allows for creating many trustlines in bulk.",
         "operationId": "CreateTrustLines",
         "parameters": [
           {
             "name": "asset-id",
             "in": "path",
             "required": true,
-            "description": "The asset to which the trustline is being created",
+            "description": "The asset to which the trustline is being created.",
             "schema": {
               "type": "string",
-              "description": "The asset to which the trustline is being created",
+              "description": "The asset to which the trustline is being created.",
               "format": "uuid"
             }
           }
         ],
         "requestBody": {
-          "description": "Request body containing the PIN and user ID pairs",
+          "description": "Request body containing the PIN and user ID pairs.",
           "content": {
             "application/json": {
               "schema": {
@@ -363,10 +363,10 @@
         "tags": [
           "Faucet"
         ],
-        "summary": "Allows users to request funding for retail and issuer wallets",
+        "summary": "Allows users to request funding for retail and issuer wallets.",
         "operationId": "RequestWalletFunding",
         "requestBody": {
-          "description": "List of issuer and retail wallet ids",
+          "description": "List of issuer and retail wallet ids.",
           "content": {
             "application/json": {
               "schema": {
@@ -423,7 +423,7 @@
         "tags": [
           "Issuer Wallet"
         ],
-        "summary": "Generates a 24-word mnemonic seed for the institution, encrypts it with the given credentials. \r\nIssuer wallet seed id will be returned",
+        "summary": "Generates a 24-word mnemonic seed for the institution, encrypts it with the given credentials.\r\nIssuer wallet seed id will be returned.",
         "operationId": "CreateIssuerWalletSeed",
         "requestBody": {
           "description": "Name and credentials.",
@@ -471,16 +471,16 @@
             "name": "issuer-wallet-seed-id",
             "in": "path",
             "required": true,
-            "description": "",
+            "description": "Wallet seed.",
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "Wallet seed.",
               "format": "uuid"
             }
           }
         ],
         "requestBody": {
-          "description": "",
+          "description": "Data.",
           "content": {
             "application/json": {
               "schema": {
@@ -518,17 +518,17 @@
         "tags": [
           "Issuer Wallet"
         ],
-        "summary": "Not implemented yet",
+        "summary": "Not implemented yet.",
         "operationId": "DeleteIssuerWalletSeed",
         "parameters": [
           {
             "name": "issuer-seed-wallet-id",
             "in": "path",
             "required": true,
-            "description": "",
+            "description": "Wallet seed id.",
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "Wallet seed id.",
               "format": "uuid"
             }
           }
@@ -559,8 +559,10 @@
             "name": "issuer-wallet-seed-id",
             "in": "path",
             "required": true,
+            "description": "Wallet seed id.",
             "schema": {
               "type": "string",
+              "description": "Wallet seed id.",
               "format": "uuid"
             }
           }
@@ -584,17 +586,17 @@
         "tags": [
           "Issuer Wallet"
         ],
-        "summary": "Returns a list of issuer wallet derived from the given seed, includes the tokenized assets issued by the wallet",
+        "summary": "Returns a list of issuer wallet derived from the given seed, includes the tokenized assets issued by the wallet.",
         "operationId": "GetIssuerWallets",
         "parameters": [
           {
             "name": "issuer-wallet-seed-id",
             "in": "path",
             "required": true,
-            "description": "",
+            "description": "Wallet seed id.",
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "Wallet seed id.",
               "format": "uuid"
             }
           }
@@ -618,15 +620,17 @@
         "tags": [
           "Tokenized Assets"
         ],
-        "summary": "Initialize tokenized asset creation",
+        "summary": "Initialize tokenized asset creation.",
         "operationId": "InitializeTokenizedAssetCreation",
         "parameters": [
           {
             "name": "issuer-wallet-seed-id",
             "in": "path",
             "required": true,
+            "description": "Wallet seed id.",
             "schema": {
               "type": "string",
+              "description": "Wallet seed id.",
               "format": "uuid"
             }
           },
@@ -634,13 +638,16 @@
             "name": "issuer-wallet-id",
             "in": "path",
             "required": true,
+            "description": "Wallet id.",
             "schema": {
               "type": "string",
+              "description": "Wallet id.",
               "format": "uuid"
             }
           }
         ],
         "requestBody": {
+          "description": "data.",
           "content": {
             "application/json": {
               "schema": {
@@ -678,15 +685,17 @@
         "tags": [
           "Tokenized Assets"
         ],
-        "summary": "Finalized tokenized asset creation",
+        "summary": "Finalized tokenized asset creation.",
         "operationId": "CreateTokenizedAsset",
         "parameters": [
           {
             "name": "issuer-wallet-seed-id",
             "in": "path",
             "required": true,
+            "description": "Wallet seed id.",
             "schema": {
               "type": "string",
+              "description": "Wallet seed id.",
               "format": "uuid"
             }
           },
@@ -694,8 +703,10 @@
             "name": "issuer-wallet-id",
             "in": "path",
             "required": true,
+            "description": "Wallet id.",
             "schema": {
               "type": "string",
+              "description": "Wallet id.",
               "format": "uuid"
             }
           },
@@ -703,13 +714,16 @@
             "name": "tokenized-asset-id",
             "in": "path",
             "required": true,
+            "description": "Asset Id.",
             "schema": {
               "type": "string",
+              "description": "Asset Id.",
               "format": "uuid"
             }
           }
         ],
         "requestBody": {
+          "description": "Credentials.",
           "content": {
             "application/json": {
               "schema": {
@@ -745,15 +759,17 @@
         "tags": [
           "Tokenized Assets"
         ],
-        "summary": "Returns details about the given tokenized asset. Details include transfers, open opt-in requests and",
+        "summary": "Returns details about the given tokenized asset. Details include transfers, open opt-in requests and.",
         "operationId": "GetTokenizedAssetDetails",
         "parameters": [
           {
             "name": "issuer-wallet-seed-id",
             "in": "path",
             "required": true,
+            "description": "Wallet seed id.",
             "schema": {
               "type": "string",
+              "description": "Wallet seed id.",
               "format": "uuid"
             }
           },
@@ -761,8 +777,10 @@
             "name": "issuer-wallet-id",
             "in": "path",
             "required": true,
+            "description": "Wallet id.",
             "schema": {
               "type": "string",
+              "description": "Wallet id.",
               "format": "uuid"
             }
           },
@@ -770,8 +788,10 @@
             "name": "tokenized-asset-id",
             "in": "path",
             "required": true,
+            "description": "Asset id.",
             "schema": {
               "type": "string",
+              "description": "Asset id.",
               "format": "uuid"
             }
           }
@@ -802,8 +822,10 @@
             "name": "issuer-wallet-seed-id",
             "in": "path",
             "required": true,
+            "description": "Wallet seed id.",
             "schema": {
               "type": "string",
+              "description": "Wallet seed id.",
               "format": "uuid"
             }
           },
@@ -811,8 +833,10 @@
             "name": "issuer-wallet-id",
             "in": "path",
             "required": true,
+            "description": "Wallet id.",
             "schema": {
               "type": "string",
+              "description": "Wallet id.",
               "format": "uuid"
             }
           },
@@ -820,13 +844,16 @@
             "name": "tokenized-asset-id",
             "in": "path",
             "required": true,
+            "description": "Asset id.",
             "schema": {
               "type": "string",
+              "description": "Asset id.",
               "format": "uuid"
             }
           }
         ],
         "requestBody": {
+          "description": "Data.",
           "content": {
             "application/json": {
               "schema": {
@@ -864,15 +891,17 @@
         "tags": [
           "Tokenized Assets"
         ],
-        "summary": "Send fungible tokenized assets to retail wallets.\r\nReturns a list of transfer ids.",
+        "summary": " Send fungible tokenized assets to retail wallets.\r\nReturns a list of transfer ids.",
         "operationId": "TransferFungibleAssets",
         "parameters": [
           {
             "name": "issuer-wallet-id",
             "in": "path",
             "required": true,
+            "description": "Wallet id.",
             "schema": {
               "type": "string",
+              "description": "Wallet id.",
               "format": "uuid"
             }
           },
@@ -880,13 +909,16 @@
             "name": "tokenized-asset-id",
             "in": "path",
             "required": true,
+            "description": "Asset id.",
             "schema": {
               "type": "string",
+              "description": "Asset id.",
               "format": "uuid"
             }
           }
         ],
         "requestBody": {
+          "description": "data.",
           "content": {
             "application/json": {
               "schema": {
@@ -924,17 +956,17 @@
         "tags": [
           "Tokenized Assets"
         ],
-        "summary": "Permanently locks issuer wallet ( won't be able to create new tokens anymore)",
+        "summary": "Permanently locks issuer wallet ( won't be able to create new tokens anymore).",
         "operationId": "LockIssuerWallet",
         "parameters": [
           {
             "name": "issuer-wallet-seed-id",
             "in": "path",
             "required": true,
-            "description": "",
+            "description": "Wallet seed id.",
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "Wallet seed id.",
               "format": "uuid"
             }
           },
@@ -942,16 +974,16 @@
             "name": "issuer-wallet-id",
             "in": "path",
             "required": true,
-            "description": "",
+            "description": "Wallet id.",
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "Wallet id.",
               "format": "uuid"
             }
           }
         ],
         "requestBody": {
-          "description": "",
+          "description": "Credentials.",
           "content": {
             "application/json": {
               "schema": {
@@ -989,17 +1021,17 @@
         "tags": [
           "Tokenized Assets"
         ],
-        "summary": "Approve opt-in for retail wallet",
+        "summary": "Approve opt-in for retail wallet.",
         "operationId": "AuthorizeOptIn",
         "parameters": [
           {
             "name": "issuer-wallet-seed-id",
             "in": "path",
             "required": true,
-            "description": "",
+            "description": "Wallet seed id.",
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "Wallet seed id.",
               "format": "uuid"
             }
           },
@@ -1007,10 +1039,10 @@
             "name": "issuer-wallet-id",
             "in": "path",
             "required": true,
-            "description": "",
+            "description": "Wallet id.",
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "Wallet id.",
               "format": "uuid"
             }
           },
@@ -1018,16 +1050,16 @@
             "name": "tokenized-asset-id",
             "in": "path",
             "required": true,
-            "description": "",
+            "description": "Asset id.",
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "Asset id.",
               "format": "uuid"
             }
           }
         ],
         "requestBody": {
-          "description": "",
+          "description": "Data.",
           "content": {
             "application/json": {
               "schema": {
@@ -1065,17 +1097,17 @@
         "tags": [
           "Tokenized Assets"
         ],
-        "summary": "Revokes opt-in as a result tokenized assets in the retail wallet will be frozen, if called after delivery",
+        "summary": "Revokes opt-in as a result tokenized assets in the retail wallet will be frozen, if called after delivery.",
         "operationId": "RevokeOptIn",
         "parameters": [
           {
             "name": "issuer-wallet-seed-id",
             "in": "path",
             "required": true,
-            "description": "",
+            "description": "Wallet seed id.",
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "Wallet seed id.",
               "format": "uuid"
             }
           },
@@ -1083,10 +1115,10 @@
             "name": "issuer-wallet-id",
             "in": "path",
             "required": true,
-            "description": "",
+            "description": "Wallet id.",
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "Wallet id.",
               "format": "uuid"
             }
           },
@@ -1094,16 +1126,16 @@
             "name": "tokenized-asset-id",
             "in": "path",
             "required": true,
-            "description": "",
+            "description": "Asset id.",
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "Asset id.",
               "format": "uuid"
             }
           }
         ],
         "requestBody": {
-          "description": "",
+          "description": "Data.",
           "content": {
             "application/json": {
               "schema": {
@@ -1141,17 +1173,17 @@
         "tags": [
           "Tokenized Assets"
         ],
-        "summary": "Clawback asset from an account",
+        "summary": "Clawback asset from an account.",
         "operationId": "ClawbackAsset",
         "parameters": [
           {
             "name": "issuer-wallet-seed-id",
             "in": "path",
             "required": true,
-            "description": "",
+            "description": "Wallet seed id.",
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "Wallet seed id.",
               "format": "uuid"
             }
           },
@@ -1159,10 +1191,10 @@
             "name": "issuer-wallet-id",
             "in": "path",
             "required": true,
-            "description": "",
+            "description": "Wallet id.",
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "Wallet id.",
               "format": "uuid"
             }
           },
@@ -1170,16 +1202,16 @@
             "name": "tokenized-asset-id",
             "in": "path",
             "required": true,
-            "description": "",
+            "description": "Asset id.",
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "Asset id.",
               "format": "uuid"
             }
           }
         ],
         "requestBody": {
-          "description": "",
+          "description": "Data.",
           "content": {
             "application/json": {
               "schema": {
@@ -1217,17 +1249,17 @@
         "tags": [
           "Tokenized Assets"
         ],
-        "summary": "Burn x amount of tokens",
+        "summary": "Burn x amount of tokens.",
         "operationId": "BurnAsset",
         "parameters": [
           {
             "name": "issuer-wallet-seed-id",
             "in": "path",
             "required": true,
-            "description": "",
+            "description": "Wallet seed id.",
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "Wallet seed id.",
               "format": "uuid"
             }
           },
@@ -1235,10 +1267,10 @@
             "name": "issuer-wallet-id",
             "in": "path",
             "required": true,
-            "description": "",
+            "description": "Wallet id.",
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "Wallet id.",
               "format": "uuid"
             }
           },
@@ -1246,16 +1278,16 @@
             "name": "tokenized-asset-id",
             "in": "path",
             "required": true,
-            "description": "",
+            "description": "Asset id.",
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "Asset id.",
               "format": "uuid"
             }
           }
         ],
         "requestBody": {
-          "description": "",
+          "description": "Data.",
           "content": {
             "application/json": {
               "schema": {
@@ -1293,17 +1325,17 @@
         "tags": [
           "Tokenized Assets"
         ],
-        "summary": "Build .toml file for token",
+        "summary": "Build .toml file for token.",
         "operationId": "BuildAndSubmitMetadaFile",
         "parameters": [
           {
             "name": "issuer-wallet-seed-id",
             "in": "path",
             "required": true,
-            "description": "",
+            "description": "Seed id.",
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "Seed id.",
               "format": "uuid"
             }
           },
@@ -1311,10 +1343,10 @@
             "name": "issuer-wallet-id",
             "in": "path",
             "required": true,
-            "description": "",
+            "description": "Wallet id.",
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "Wallet id.",
               "format": "uuid"
             }
           },
@@ -1322,10 +1354,10 @@
             "name": "tokenized-asset-id",
             "in": "path",
             "required": true,
-            "description": "",
+            "description": "Asset id.",
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "Asset id.",
               "format": "uuid"
             }
           }
@@ -1338,18 +1370,18 @@
                 "properties": {
                   "metaDataFormData": {
                     "type": "string",
-                    "description": "",
+                    "description": "form data.",
                     "nullable": true
                   },
                   "orgImageFile": {
                     "type": "string",
-                    "description": "",
+                    "description": "org image file.",
                     "format": "binary",
                     "nullable": true
                   },
                   "tokenImageFile": {
                     "type": "string",
-                    "description": "",
+                    "description": "token image file.",
                     "format": "binary",
                     "nullable": true
                   }
@@ -1415,10 +1447,10 @@
             "name": "customer-id",
             "in": "path",
             "required": true,
-            "description": "Customer Id",
+            "description": "Customer Id.",
             "schema": {
               "type": "string",
-              "description": "Customer Id",
+              "description": "Customer Id.",
               "format": "uuid"
             }
           }
@@ -1440,17 +1472,17 @@
         "tags": [
           "Retail Wallet"
         ],
-        "summary": "Generates a 24-word mnemonic seed for the customer encrypts it with the given credentials. \r\nA list of retail wallet objects are being returned, which can be derived from the seed.",
+        "summary": "Generates a 24-word mnemonic seed for the customer encrypts it with the given credentials.\r\nA list of retail wallet objects are being returned, which can be derived from the seed.",
         "operationId": "InitiateRetailWallet",
         "parameters": [
           {
             "name": "customer-id",
             "in": "path",
             "required": true,
-            "description": "Customer Id",
+            "description": "Customer Id.",
             "schema": {
               "type": "string",
-              "description": "Customer Id",
+              "description": "Customer Id.",
               "format": "uuid"
             }
           }
@@ -1501,10 +1533,10 @@
             "name": "customer-id",
             "in": "path",
             "required": true,
-            "description": "Customer Id",
+            "description": "Customer Id.",
             "schema": {
               "type": "string",
-              "description": "Customer Id",
+              "description": "Customer Id.",
               "format": "uuid"
             }
           },
@@ -1512,10 +1544,10 @@
             "name": "blockchain",
             "in": "path",
             "required": true,
-            "description": "Blockchain for wallet",
+            "description": "Blockchain for wallet.",
             "schema": {
               "type": "integer",
-              "description": "Blockchain for wallet",
+              "description": "Blockchain for wallet.",
               "format": "int32"
             }
           }
@@ -1559,17 +1591,17 @@
         "tags": [
           "Retail Wallet"
         ],
-        "summary": "Request to hold a certain tokenized asset in given retail wallet",
+        "summary": "Request to hold a certain tokenized asset in given retail wallet.",
         "operationId": "OptInWithRetailWallet",
         "parameters": [
           {
             "name": "customer-id",
             "in": "path",
             "required": true,
-            "description": "",
+            "description": "Customer id.",
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "Customer id.",
               "format": "uuid"
             }
           },
@@ -1577,16 +1609,16 @@
             "name": "retail-wallet-id",
             "in": "path",
             "required": true,
-            "description": "",
+            "description": "Wallet id.",
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "Wallet id.",
               "format": "uuid"
             }
           }
         ],
         "requestBody": {
-          "description": "",
+          "description": "Data.",
           "content": {
             "application/json": {
               "schema": {
@@ -1624,23 +1656,23 @@
         "tags": [
           "Retail Wallet"
         ],
-        "summary": "Request to hold a certain tokenized asset in customer retail wallet",
+        "summary": "Request to hold a certain tokenized asset in customer retail wallet.",
         "operationId": "OptInWithAccountId",
         "parameters": [
           {
             "name": "customer-id",
             "in": "path",
             "required": true,
-            "description": "",
+            "description": "Customer id.",
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "Customer id.",
               "format": "uuid"
             }
           }
         ],
         "requestBody": {
-          "description": "",
+          "description": "Data.",
           "content": {
             "application/json": {
               "schema": {
@@ -1678,23 +1710,23 @@
         "tags": [
           "Retail Wallet"
         ],
-        "summary": "Freezes or unfreezes all customer retail wallets by locking access to the mnemonic seed",
+        "summary": "Freezes or unfreezes all customer retail wallets by locking access to the mnemonic seed.",
         "operationId": "LockRetailWallets",
         "parameters": [
           {
             "name": "customer-id",
             "in": "path",
             "required": true,
-            "description": "",
+            "description": "Customer id.",
             "schema": {
               "type": "string",
-              "description": "",
+              "description": "Customer id.",
               "format": "uuid"
             }
           }
         ],
         "requestBody": {
-          "description": "",
+          "description": "Data.",
           "content": {
             "application/json": {
               "schema": {
@@ -1732,17 +1764,17 @@
         "tags": [
           "Retail Wallet"
         ],
-        "summary": "Checks if the passphrase is correct for the given customer retail wallet",
+        "summary": "Checks if the passphrase is correct for the given customer retail wallet.",
         "operationId": "CheckRetailWalletPassphrase",
         "parameters": [
           {
             "name": "customer-id",
             "in": "path",
             "required": true,
-            "description": "Customer Id",
+            "description": "Customer Id.",
             "schema": {
               "type": "string",
-              "description": "Customer Id",
+              "description": "Customer Id.",
               "format": "uuid"
             }
           }
@@ -1786,17 +1818,17 @@
         "tags": [
           "Retail Wallet"
         ],
-        "summary": "Initiates retail wallet passphrase recovery",
+        "summary": "Initiates retail wallet passphrase recovery.",
         "operationId": "InitiateRetailWalletPassphraseRecovery",
         "parameters": [
           {
             "name": "customer-id",
             "in": "path",
             "required": true,
-            "description": "Customer Id",
+            "description": "Customer Id.",
             "schema": {
               "type": "string",
-              "description": "Customer Id",
+              "description": "Customer Id.",
               "format": "uuid"
             }
           }
@@ -1818,17 +1850,17 @@
         "tags": [
           "Retail Wallet"
         ],
-        "summary": "Resets retail-wallet's encryption passphrase",
+        "summary": "Resets retail-wallet's encryption passphrase.",
         "operationId": "RecoverRetailWalletSeedAccess",
         "parameters": [
           {
             "name": "customer-id",
             "in": "path",
             "required": true,
-            "description": "Customer Id",
+            "description": "Customer Id.",
             "schema": {
               "type": "string",
-              "description": "Customer Id",
+              "description": "Customer Id.",
               "format": "uuid"
             }
           }
@@ -1879,10 +1911,10 @@
             "name": "customer-id",
             "in": "path",
             "required": true,
-            "description": "Customer Id",
+            "description": "Customer Id.",
             "schema": {
               "type": "string",
-              "description": "Customer Id",
+              "description": "Customer Id.",
               "format": "uuid"
             }
           }
@@ -1921,12 +1953,77 @@
         }
       }
     },
+    "/api/external/v1/customers/{customer-id}/retail-wallets/{retail-wallet-id}/asset-transfer": {
+      "post": {
+        "tags": [
+          "Retail Wallet"
+        ],
+        "summary": "Create a request for tokenized asset transfer to another wallet.",
+        "operationId": "CreateRetailWalletAssetTransfer",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "Customer Id.",
+            "schema": {
+              "type": "string",
+              "description": "Customer Id.",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "retail-wallet-id",
+            "in": "path",
+            "required": true,
+            "description": "Sender retail wallet id.",
+            "schema": {
+              "type": "string",
+              "description": "Sender retail wallet id.",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Contains information for the transfer including amount, recipient address and credentials. Credentials to access the mnemonic seed. Encryption key file can be left empty, if it's stored on the Custodian side.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRetailWalletAssetTransactionDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRetailWalletAssetTransactionDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRetailWalletAssetTransactionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/external/v1/retail-wallets/external": {
       "get": {
         "tags": [
           "External Retail Wallet"
         ],
-        "summary": "List of external wallets",
+        "summary": "List of external wallets.",
         "operationId": "GetExternalRetailWallet",
         "responses": {
           "200": {
@@ -1945,8 +2042,10 @@
         "tags": [
           "External Retail Wallet"
         ],
+        "summary": "Import external wallets into the system.",
         "operationId": "CreateExternalRetailWallet",
         "requestBody": {
+          "description": "External wallets' public addresses with some metadata.",
           "content": {
             "application/json": {
               "schema": {
@@ -1984,7 +2083,7 @@
         "tags": [
           "Status"
         ],
-        "summary": "Get status of API",
+        "summary": "Get status of API.",
         "operationId": "Get",
         "responses": {
           "200": {
@@ -1998,7 +2097,7 @@
         "tags": [
           "Status"
         ],
-        "summary": "Returns the Users identity, if HMAC authentication worked",
+        "summary": "Returns the Users identity, if HMAC authentication worked.",
         "operationId": "GetAuth",
         "responses": {
           "200": {
@@ -2264,6 +2363,7 @@
         "type": "string",
         "format": "int32",
         "enum": [
+          "None",
           "NotSet",
           "Normal",
           "Plain"
@@ -2271,6 +2371,10 @@
         "x-custom-enum": {
           "name": "IdentVerifiedType",
           "enumObjects": [
+            {
+              "label": "None",
+              "value": 0
+            },
             {
               "label": "NotSet",
               "value": 1
@@ -2513,6 +2617,9 @@
           },
           "kycData": {
             "$ref": "#/components/schemas/KycDataDto"
+          },
+          "company": {
+            "$ref": "#/components/schemas/CustomerCompanyDetailDto"
           }
         }
       },
@@ -3324,6 +3431,9 @@
           "created": {
             "type": "string",
             "nullable": true
+          },
+          "registryExtract": {
+            "type": "boolean"
           }
         }
       },
@@ -3337,6 +3447,10 @@
             "nullable": true
           },
           "assetId": {
+            "type": "string",
+            "nullable": true
+          },
+          "toiFilePathS3": {
             "type": "string",
             "nullable": true
           },
@@ -3466,7 +3580,11 @@
           },
           "created": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
+          },
+          "hashValue": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -3908,7 +4026,9 @@
           "IssueFungibleAsset",
           "TxFungibleAsset",
           "DeployIdentity",
-          "RegisterIdentity"
+          "RegisterIdentity",
+          "RemoveIdentity",
+          "TxRetailAsset"
         ],
         "x-custom-enum": {
           "name": "TransactionActions",
@@ -3972,6 +4092,14 @@
             {
               "label": "RegisterIdentity",
               "value": 15
+            },
+            {
+              "label": "RemoveIdentity",
+              "value": 16
+            },
+            {
+              "label": "TxRetailAsset",
+              "value": 17
             }
           ]
         }
@@ -4008,7 +4136,8 @@
           "Pending",
           "KycClaimAdded",
           "IdentityDeployed",
-          "IdentityRegistered"
+          "IdentityRegistered",
+          "IdentityRemoved"
         ],
         "x-custom-enum": {
           "name": "OptInStatus",
@@ -4056,6 +4185,10 @@
             {
               "label": "IdentityRegistered",
               "value": 10
+            },
+            {
+              "label": "IdentityRemoved",
+              "value": 11
             }
           ]
         }
@@ -4114,6 +4247,10 @@
             "nullable": true
           },
           "assetId": {
+            "type": "string",
+            "nullable": true
+          },
+          "toiFilePathS3": {
             "type": "string",
             "nullable": true
           },
@@ -4243,7 +4380,11 @@
           },
           "created": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
+          },
+          "hashValue": {
+            "type": "string",
+            "nullable": true
           },
           "transfers": {
             "type": "array",
@@ -4416,8 +4557,8 @@
         "additionalProperties": false,
         "properties": {
           "amount": {
-            "type": "number",
-            "format": "double"
+            "type": "integer",
+            "format": "int64"
           },
           "credentials": {
             "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
@@ -4799,6 +4940,31 @@
           },
           "data": {
             "$ref": "#/components/schemas/RetailWalletRecoveryKitFileDto"
+          }
+        }
+      },
+      "CreateRetailWalletAssetTransactionDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "tokenizedAssetId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "recipientPublicAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "credentials": {
+            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
           }
         }
       },

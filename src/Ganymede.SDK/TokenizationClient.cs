@@ -190,6 +190,19 @@ namespace Tokenization.SDK
             return response.Data;
         }
 
+        /// <summary>
+        /// Initiate the request for retail wallet asset transfer
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <param name="retailWalletId"></param>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public async Task<Guid> InitiateRetailWalletAssetTransferRequest(Guid customerId, Guid retailWalletId, CreateRetailWalletAssetTransactionDto data)
+        {
+            var response = await _client.ApiExternalV1CustomersRetailWalletsAssetTransferAsync(customerId, retailWalletId, data);
+            return response.Data;
+        }
+
         #endregion
     }
 }
