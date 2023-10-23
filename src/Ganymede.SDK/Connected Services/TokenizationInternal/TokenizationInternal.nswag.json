@@ -88,9 +88,7 @@
             "in": "query",
             "description": "search text.",
             "schema": {
-              "type": "string",
-              "description": "search text.",
-              "nullable": true
+              "type": "string"
             }
           },
           {
@@ -99,7 +97,6 @@
             "description": "take.",
             "schema": {
               "type": "integer",
-              "description": "take.",
               "format": "int32",
               "default": 100
             }
@@ -110,7 +107,6 @@
             "description": "skip.",
             "schema": {
               "type": "integer",
-              "description": "skip.",
               "format": "int32",
               "default": 0
             }
@@ -145,7 +141,6 @@
             "description": "Customer id.",
             "schema": {
               "type": "string",
-              "description": "Customer id.",
               "format": "uuid"
             }
           }
@@ -177,7 +172,6 @@
             "description": "The customer ID.",
             "schema": {
               "type": "string",
-              "description": "The customer ID.",
               "format": "uuid"
             }
           }
@@ -231,7 +225,6 @@
             "description": "Customer id.",
             "schema": {
               "type": "string",
-              "description": "Customer id.",
               "format": "uuid"
             }
           }
@@ -285,7 +278,6 @@
             "description": "The id of the asset.",
             "schema": {
               "type": "string",
-              "description": "The id of the asset.",
               "format": "uuid"
             }
           }
@@ -319,7 +311,6 @@
             "description": "The asset to which the trustline is being created.",
             "schema": {
               "type": "string",
-              "description": "The asset to which the trustline is being created.",
               "format": "uuid"
             }
           }
@@ -474,7 +465,6 @@
             "description": "Wallet seed.",
             "schema": {
               "type": "string",
-              "description": "Wallet seed.",
               "format": "uuid"
             }
           }
@@ -505,7 +495,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GuidApiResponse"
+                  "$ref": "#/components/schemas/GuidListApiResponse"
                 }
               }
             }
@@ -528,7 +518,6 @@
             "description": "Wallet seed id.",
             "schema": {
               "type": "string",
-              "description": "Wallet seed id.",
               "format": "uuid"
             }
           }
@@ -562,7 +551,6 @@
             "description": "Wallet seed id.",
             "schema": {
               "type": "string",
-              "description": "Wallet seed id.",
               "format": "uuid"
             }
           }
@@ -596,7 +584,6 @@
             "description": "Wallet seed id.",
             "schema": {
               "type": "string",
-              "description": "Wallet seed id.",
               "format": "uuid"
             }
           }
@@ -630,7 +617,6 @@
             "description": "Wallet seed id.",
             "schema": {
               "type": "string",
-              "description": "Wallet seed id.",
               "format": "uuid"
             }
           },
@@ -641,7 +627,6 @@
             "description": "Wallet id.",
             "schema": {
               "type": "string",
-              "description": "Wallet id.",
               "format": "uuid"
             }
           }
@@ -695,7 +680,6 @@
             "description": "Wallet seed id.",
             "schema": {
               "type": "string",
-              "description": "Wallet seed id.",
               "format": "uuid"
             }
           },
@@ -706,7 +690,6 @@
             "description": "Wallet id.",
             "schema": {
               "type": "string",
-              "description": "Wallet id.",
               "format": "uuid"
             }
           },
@@ -717,7 +700,6 @@
             "description": "Asset Id.",
             "schema": {
               "type": "string",
-              "description": "Asset Id.",
               "format": "uuid"
             }
           }
@@ -769,7 +751,6 @@
             "description": "Wallet seed id.",
             "schema": {
               "type": "string",
-              "description": "Wallet seed id.",
               "format": "uuid"
             }
           },
@@ -780,7 +761,6 @@
             "description": "Wallet id.",
             "schema": {
               "type": "string",
-              "description": "Wallet id.",
               "format": "uuid"
             }
           },
@@ -791,7 +771,6 @@
             "description": "Asset id.",
             "schema": {
               "type": "string",
-              "description": "Asset id.",
               "format": "uuid"
             }
           }
@@ -825,7 +804,6 @@
             "description": "Wallet seed id.",
             "schema": {
               "type": "string",
-              "description": "Wallet seed id.",
               "format": "uuid"
             }
           },
@@ -836,7 +814,6 @@
             "description": "Wallet id.",
             "schema": {
               "type": "string",
-              "description": "Wallet id.",
               "format": "uuid"
             }
           },
@@ -847,7 +824,6 @@
             "description": "Asset id.",
             "schema": {
               "type": "string",
-              "description": "Asset id.",
               "format": "uuid"
             }
           }
@@ -901,7 +877,6 @@
             "description": "Wallet id.",
             "schema": {
               "type": "string",
-              "description": "Wallet id.",
               "format": "uuid"
             }
           },
@@ -912,7 +887,6 @@
             "description": "Asset id.",
             "schema": {
               "type": "string",
-              "description": "Asset id.",
               "format": "uuid"
             }
           }
@@ -966,7 +940,6 @@
             "description": "Wallet seed id.",
             "schema": {
               "type": "string",
-              "description": "Wallet seed id.",
               "format": "uuid"
             }
           },
@@ -977,7 +950,6 @@
             "description": "Wallet id.",
             "schema": {
               "type": "string",
-              "description": "Wallet id.",
               "format": "uuid"
             }
           }
@@ -1031,7 +1003,6 @@
             "description": "Wallet seed id.",
             "schema": {
               "type": "string",
-              "description": "Wallet seed id.",
               "format": "uuid"
             }
           },
@@ -1042,7 +1013,6 @@
             "description": "Wallet id.",
             "schema": {
               "type": "string",
-              "description": "Wallet id.",
               "format": "uuid"
             }
           },
@@ -1053,7 +1023,6 @@
             "description": "Asset id.",
             "schema": {
               "type": "string",
-              "description": "Asset id.",
               "format": "uuid"
             }
           }
@@ -1107,7 +1076,6 @@
             "description": "Wallet seed id.",
             "schema": {
               "type": "string",
-              "description": "Wallet seed id.",
               "format": "uuid"
             }
           },
@@ -1118,7 +1086,6 @@
             "description": "Wallet id.",
             "schema": {
               "type": "string",
-              "description": "Wallet id.",
               "format": "uuid"
             }
           },
@@ -1129,7 +1096,6 @@
             "description": "Asset id.",
             "schema": {
               "type": "string",
-              "description": "Asset id.",
               "format": "uuid"
             }
           }
@@ -1183,7 +1149,6 @@
             "description": "Wallet seed id.",
             "schema": {
               "type": "string",
-              "description": "Wallet seed id.",
               "format": "uuid"
             }
           },
@@ -1194,7 +1159,6 @@
             "description": "Wallet id.",
             "schema": {
               "type": "string",
-              "description": "Wallet id.",
               "format": "uuid"
             }
           },
@@ -1205,7 +1169,6 @@
             "description": "Asset id.",
             "schema": {
               "type": "string",
-              "description": "Asset id.",
               "format": "uuid"
             }
           }
@@ -1259,7 +1222,6 @@
             "description": "Wallet seed id.",
             "schema": {
               "type": "string",
-              "description": "Wallet seed id.",
               "format": "uuid"
             }
           },
@@ -1270,7 +1232,6 @@
             "description": "Wallet id.",
             "schema": {
               "type": "string",
-              "description": "Wallet id.",
               "format": "uuid"
             }
           },
@@ -1281,7 +1242,6 @@
             "description": "Asset id.",
             "schema": {
               "type": "string",
-              "description": "Asset id.",
               "format": "uuid"
             }
           }
@@ -1335,7 +1295,6 @@
             "description": "Seed id.",
             "schema": {
               "type": "string",
-              "description": "Seed id.",
               "format": "uuid"
             }
           },
@@ -1346,7 +1305,6 @@
             "description": "Wallet id.",
             "schema": {
               "type": "string",
-              "description": "Wallet id.",
               "format": "uuid"
             }
           },
@@ -1357,7 +1315,6 @@
             "description": "Asset id.",
             "schema": {
               "type": "string",
-              "description": "Asset id.",
               "format": "uuid"
             }
           }
@@ -1369,21 +1326,15 @@
                 "type": "object",
                 "properties": {
                   "metaDataFormData": {
-                    "type": "string",
-                    "description": "form data.",
-                    "nullable": true
+                    "type": "string"
                   },
                   "orgImageFile": {
                     "type": "string",
-                    "description": "org image file.",
-                    "format": "binary",
-                    "nullable": true
+                    "format": "binary"
                   },
                   "tokenImageFile": {
                     "type": "string",
-                    "description": "token image file.",
-                    "format": "binary",
-                    "nullable": true
+                    "format": "binary"
                   }
                 }
               },
@@ -1450,7 +1401,6 @@
             "description": "Customer Id.",
             "schema": {
               "type": "string",
-              "description": "Customer Id.",
               "format": "uuid"
             }
           }
@@ -1482,7 +1432,6 @@
             "description": "Customer Id.",
             "schema": {
               "type": "string",
-              "description": "Customer Id.",
               "format": "uuid"
             }
           }
@@ -1536,7 +1485,6 @@
             "description": "Customer Id.",
             "schema": {
               "type": "string",
-              "description": "Customer Id.",
               "format": "uuid"
             }
           },
@@ -1547,7 +1495,6 @@
             "description": "Blockchain for wallet.",
             "schema": {
               "type": "integer",
-              "description": "Blockchain for wallet.",
               "format": "int32"
             }
           }
@@ -1601,7 +1548,6 @@
             "description": "Customer id.",
             "schema": {
               "type": "string",
-              "description": "Customer id.",
               "format": "uuid"
             }
           },
@@ -1612,7 +1558,6 @@
             "description": "Wallet id.",
             "schema": {
               "type": "string",
-              "description": "Wallet id.",
               "format": "uuid"
             }
           }
@@ -1666,7 +1611,6 @@
             "description": "Customer id.",
             "schema": {
               "type": "string",
-              "description": "Customer id.",
               "format": "uuid"
             }
           }
@@ -1720,7 +1664,6 @@
             "description": "Customer id.",
             "schema": {
               "type": "string",
-              "description": "Customer id.",
               "format": "uuid"
             }
           }
@@ -1774,7 +1717,6 @@
             "description": "Customer Id.",
             "schema": {
               "type": "string",
-              "description": "Customer Id.",
               "format": "uuid"
             }
           }
@@ -1828,7 +1770,6 @@
             "description": "Customer Id.",
             "schema": {
               "type": "string",
-              "description": "Customer Id.",
               "format": "uuid"
             }
           }
@@ -1860,7 +1801,6 @@
             "description": "Customer Id.",
             "schema": {
               "type": "string",
-              "description": "Customer Id.",
               "format": "uuid"
             }
           }
@@ -1914,7 +1854,6 @@
             "description": "Customer Id.",
             "schema": {
               "type": "string",
-              "description": "Customer Id.",
               "format": "uuid"
             }
           }
@@ -1968,7 +1907,6 @@
             "description": "Customer Id.",
             "schema": {
               "type": "string",
-              "description": "Customer Id.",
               "format": "uuid"
             }
           },
@@ -1979,7 +1917,6 @@
             "description": "Sender retail wallet id.",
             "schema": {
               "type": "string",
-              "description": "Sender retail wallet id.",
               "format": "uuid"
             }
           }
@@ -2251,30 +2188,298 @@
           ]
         }
       },
-      "RetailWalletAccessLevels": {
+      "AuthenticatedInstitutionDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "institutionName": {
+            "type": "string",
+            "nullable": true
+          },
+          "productAccess": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/Products"
+            }
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "AuthenticatedInstitutionDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/AuthenticatedInstitutionDto"
+          }
+        }
+      },
+      "BalancesInDecimalDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "nativeBalance": {
+            "$ref": "#/components/schemas/DecimalBalanceAmount"
+          },
+          "nativeFreeDecimalBalanceString": {
+            "type": "string",
+            "readOnly": true,
+            "nullable": true
+          },
+          "nativeLockedDecimalBalanceString": {
+            "type": "string",
+            "readOnly": true,
+            "nullable": true
+          },
+          "nonNativeBalances": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "number",
+              "format": "double",
+              "nullable": true
+            }
+          },
+          "nonNativeBalancesString": {
+            "type": "object",
+            "readOnly": true,
+            "nullable": true,
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        }
+      },
+      "Blockchains": {
         "type": "string",
         "format": "int32",
         "enum": [
-          "None",
-          "Basic",
-          "Full"
+          "NotSet",
+          "Bitcoin",
+          "Ethereum",
+          "Stellar",
+          "Litecoin",
+          "Polkadot",
+          "Kusama",
+          "Algorand",
+          "Cosmos",
+          "Terra",
+          "Polymesh",
+          "Binance",
+          "Solana",
+          "Cardano",
+          "Polygon",
+          "Avalanche"
         ],
         "x-custom-enum": {
-          "name": "RetailWalletAccessLevels",
+          "name": "Blockchains",
           "enumObjects": [
             {
-              "label": "None",
+              "label": "NotSet",
               "value": 0
             },
             {
-              "label": "Basic",
+              "label": "Bitcoin",
               "value": 1
             },
             {
-              "label": "Full",
+              "label": "Ethereum",
               "value": 2
+            },
+            {
+              "label": "Stellar",
+              "value": 3
+            },
+            {
+              "label": "Litecoin",
+              "value": 4
+            },
+            {
+              "label": "Polkadot",
+              "value": 5
+            },
+            {
+              "label": "Kusama",
+              "value": 6
+            },
+            {
+              "label": "Algorand",
+              "value": 7
+            },
+            {
+              "label": "Cosmos",
+              "value": 8
+            },
+            {
+              "label": "Terra",
+              "value": 9
+            },
+            {
+              "label": "Polymesh",
+              "value": 10
+            },
+            {
+              "label": "Binance",
+              "value": 11
+            },
+            {
+              "label": "Solana",
+              "value": 12
+            },
+            {
+              "label": "Cardano",
+              "value": 13
+            },
+            {
+              "label": "Polygon",
+              "value": 14
+            },
+            {
+              "label": "Avalanche",
+              "value": 15
             }
           ]
+        }
+      },
+      "BooleanApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        }
+      },
+      "BulkCreateTrustLineDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "trustLineData": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/CreateTrustLineInternalDto"
+            }
+          }
+        }
+      },
+      "BulkResultDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/BulkResultItemDto"
+            }
+          }
+        }
+      },
+      "BulkResultDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/BulkResultDto"
+          }
+        }
+      },
+      "BulkResultItemDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "requestId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/BulkResultItemStatus"
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "BulkResultItemStatus": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "NotSet",
+          "Ok",
+          "Failed",
+          "Duplicate"
+        ],
+        "x-custom-enum": {
+          "name": "BulkResultItemStatus",
+          "enumObjects": [
+            {
+              "label": "NotSet",
+              "value": 0
+            },
+            {
+              "label": "Ok",
+              "value": 1
+            },
+            {
+              "label": "Failed",
+              "value": 10
+            },
+            {
+              "label": "Duplicate",
+              "value": 11
+            }
+          ]
+        }
+      },
+      "CancelTransactionsDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "transactionIds": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
         }
       },
       "CountryDto": {
@@ -2296,6 +2501,334 @@
           "name": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "CreateCustomerAccountDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "countryIso",
+          "email",
+          "firstname",
+          "lastname",
+          "postalCode",
+          "street",
+          "streetNo",
+          "town",
+          "type"
+        ],
+        "properties": {
+          "salutation": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 0,
+            "nullable": true
+          },
+          "firstname": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 0
+          },
+          "lastname": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 0
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "format": "tel",
+            "maxLength": 64,
+            "minLength": 0,
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/AccountTypes"
+          },
+          "street": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+          },
+          "streetNo": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+          },
+          "postalCode": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+          },
+          "town": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+          },
+          "countryIso": {
+            "type": "string",
+            "maxLength": 2,
+            "minLength": 2
+          },
+          "company": {
+            "$ref": "#/components/schemas/CustomerCompanyDetailDto"
+          },
+          "nationalityIso": {
+            "type": "string",
+            "nullable": true
+          },
+          "gender": {
+            "$ref": "#/components/schemas/GenderTypes"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 64,
+            "minLength": 0
+          }
+        }
+      },
+      "CreateExternalRetailWalletDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "blockchain": {
+            "$ref": "#/components/schemas/Blockchains"
+          },
+          "publicAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "nativeCryptoAssetId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          }
+        }
+      },
+      "CreateIssuerWalletSeedDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "blockchain",
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "blockchain": {
+            "$ref": "#/components/schemas/Blockchains"
+          },
+          "credentials": {
+            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+          }
+        }
+      },
+      "CreateMetadataFileDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "documentation": {
+            "$ref": "#/components/schemas/MetadataOrganizationDocumentation"
+          },
+          "principals": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/MetadataPrincipal"
+            }
+          },
+          "currency": {
+            "$ref": "#/components/schemas/MetadataCurrency"
+          },
+          "subDomain": {
+            "type": "string",
+            "nullable": true
+          },
+          "orgLogoBytes": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "tokenLogoBytes": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "credentials": {
+            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+          }
+        }
+      },
+      "CreateRetailWalletAssetTransactionDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "tokenizedAssetId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "recipientPublicAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "credentials": {
+            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+          }
+        }
+      },
+      "CreateTrustLineInternalDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "pin": {
+            "type": "string",
+            "nullable": true
+          },
+          "uuid": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "CustomerAccountDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "institutionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "institutionName": {
+            "type": "string",
+            "nullable": true
+          },
+          "salutation": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/AccountTypes"
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstname": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastname": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "walletAccess": {
+            "$ref": "#/components/schemas/RetailWalletAccessLevels"
+          },
+          "address": {
+            "$ref": "#/components/schemas/CustomerAddressDto"
+          },
+          "nationalityId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "nationalityIso": {
+            "type": "string",
+            "nullable": true
+          },
+          "gender": {
+            "$ref": "#/components/schemas/GenderTypes"
+          },
+          "kycData": {
+            "$ref": "#/components/schemas/KycDataDto"
+          },
+          "company": {
+            "$ref": "#/components/schemas/CustomerCompanyDetailDto"
+          }
+        }
+      },
+      "CustomerAccountDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/CustomerAccountDto"
+          }
+        }
+      },
+      "CustomerAccountDtoListApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/CustomerAccountDto"
+            }
           }
         }
       },
@@ -2326,6 +2859,280 @@
           "country": {
             "$ref": "#/components/schemas/CountryDto"
           }
+        }
+      },
+      "CustomerCompanyDetailDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "email",
+          "fullAddress",
+          "name",
+          "registerNumber"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1
+          },
+          "registerNumber": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1
+          },
+          "fullAddress": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 64,
+            "minLength": 1
+          }
+        }
+      },
+      "CustomerRetailWalletDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "customerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "retailWalletId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "DecimalBalanceAmount": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "free": {
+            "type": "number",
+            "format": "double"
+          },
+          "locked": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "DeriveIssuerWalletFromSeedDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "accountIndex",
+          "blockchain",
+          "roles"
+        ],
+        "properties": {
+          "blockchain": {
+            "$ref": "#/components/schemas/Blockchains"
+          },
+          "accountIndex": {
+            "type": "integer",
+            "format": "int32",
+            "maximum": 1024.0,
+            "minimum": 0.0
+          },
+          "credentials": {
+            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IssuerWalletRoles"
+            }
+          }
+        }
+      },
+      "ElectronicSecurityBasicInfoDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "issuerWalletPubKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "ElectronicSecurityBasicInfoDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/ElectronicSecurityBasicInfoDto"
+          }
+        }
+      },
+      "EmptyResult": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ExtTradeOrderDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "event": {
+            "type": "string",
+            "nullable": true
+          },
+          "trade_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "order_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "client_order_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "client_order_id_1": {
+            "type": "string",
+            "nullable": true
+          },
+          "client_order_id_2": {
+            "type": "string",
+            "nullable": true
+          },
+          "side": {
+            "type": "string",
+            "nullable": true
+          },
+          "order_type": {
+            "type": "string",
+            "nullable": true
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "instrument": {
+            "type": "string",
+            "nullable": true
+          },
+          "confirmed_price": {
+            "type": "number",
+            "format": "double"
+          },
+          "executed_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "total_amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "order_status": {
+            "type": "string",
+            "nullable": true
+          },
+          "seq_no": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "ExternalRetailWalletDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "blockchain": {
+            "$ref": "#/components/schemas/Blockchains"
+          },
+          "publicAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ExternalRetailWalletDtoListApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ExternalRetailWalletDto"
+            }
+          }
+        }
+      },
+      "FaucetFundingResult": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "Initiated",
+          "NotEligible",
+          "Failed"
+        ],
+        "x-custom-enum": {
+          "name": "FaucetFundingResult",
+          "enumObjects": [
+            {
+              "label": "Initiated",
+              "value": 1
+            },
+            {
+              "label": "Failed",
+              "value": -2
+            },
+            {
+              "label": "NotEligible",
+              "value": -1
+            }
+          ]
         }
       },
       "GenderTypes": {
@@ -2359,6 +3166,48 @@
           ]
         }
       },
+      "GuidApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "string",
+            "readOnly": true,
+            "format": "uuid"
+          }
+        }
+      },
+      "GuidListApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
       "IdentVerifiedType": {
         "type": "string",
         "format": "int32",
@@ -2390,6 +3239,355 @@
           ]
         }
       },
+      "ImportExternalRetailWalletDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "wallets": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/CreateExternalRetailWalletDto"
+            }
+          }
+        }
+      },
+      "InitTokenizedAssetCreationDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "blockchain": {
+            "$ref": "#/components/schemas/Blockchains"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitName": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalSupply": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "decimals": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "enableFreeze": {
+            "type": "boolean"
+          },
+          "enableClawback": {
+            "type": "boolean"
+          },
+          "url": {
+            "type": "string",
+            "nullable": true
+          },
+          "issuingMemo": {
+            "type": "string",
+            "nullable": true
+          },
+          "distributorWalletId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "agentWalletId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "claimIssuerWalletId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "isFungible": {
+            "type": "boolean"
+          },
+          "projectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isin": {
+            "type": "string",
+            "nullable": true
+          },
+          "isRegulatedSecurity": {
+            "type": "boolean"
+          },
+          "hasAIPSupport": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Int32ApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "integer",
+            "readOnly": true,
+            "format": "int32"
+          }
+        }
+      },
+      "IssuerWalletDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "groupId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "issuerWalletSeedId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "role": {
+            "$ref": "#/components/schemas/IssuerWalletRoles"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "blockchain": {
+            "$ref": "#/components/schemas/Blockchains"
+          },
+          "publicAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "accountIndex": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "balance": {
+            "$ref": "#/components/schemas/BalancesInDecimalDto"
+          },
+          "tokenizedAssets": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/TokenizedAssetDto"
+            }
+          },
+          "seedLockStatus": {
+            "type": "boolean"
+          },
+          "nativeCryptoAssetSymbol": {
+            "type": "string",
+            "nullable": true
+          },
+          "nativeCryptoAssetId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "isLocked": {
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "IssuerWalletDtoListApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/IssuerWalletDto"
+            }
+          }
+        }
+      },
+      "IssuerWalletFungibleAssetTransferDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "transfers": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/TokenizedAssetToExternalRetailWallet"
+            }
+          },
+          "credentials": {
+            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+          }
+        }
+      },
+      "IssuerWalletRecoveryKitFileDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "content": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "IssuerWalletRecoveryKitFileDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/IssuerWalletRecoveryKitFileDto"
+          }
+        }
+      },
+      "IssuerWalletRoles": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "Issuer",
+          "Distributor",
+          "ClaimIssuer",
+          "Agent"
+        ],
+        "x-custom-enum": {
+          "name": "IssuerWalletRoles",
+          "enumObjects": [
+            {
+              "label": "Issuer",
+              "value": 1
+            },
+            {
+              "label": "Distributor",
+              "value": 2
+            },
+            {
+              "label": "ClaimIssuer",
+              "value": 3
+            },
+            {
+              "label": "Agent",
+              "value": 4
+            }
+          ]
+        }
+      },
+      "IssuerWalletSeedDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdDt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "wallets": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/IssuerWalletDto"
+            }
+          },
+          "isLocked": {
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "IssuerWalletSeedDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/IssuerWalletSeedDto"
+          }
+        }
+      },
+      "IssuerWalletSeedDtoListApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/IssuerWalletSeedDto"
+            }
+          }
+        }
+      },
+      "IssuerWalletTokenizedAssetTransferDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "transfers": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/TokenizedAssetToRetailWallet"
+            }
+          },
+          "credentials": {
+            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+          }
+        }
+      },
       "KycAddressDto": {
         "type": "object",
         "additionalProperties": false,
@@ -2403,52 +3601,28 @@
         "properties": {
           "street": {
             "type": "string",
-            "maxLength": 100
+            "maxLength": 100,
+            "minLength": 1
           },
           "streetNo": {
             "type": "string",
-            "maxLength": 100
+            "maxLength": 100,
+            "minLength": 1
           },
           "postalCode": {
             "type": "string",
-            "maxLength": 100
+            "maxLength": 100,
+            "minLength": 1
           },
           "town": {
             "type": "string",
-            "maxLength": 100
+            "maxLength": 100,
+            "minLength": 1
           },
           "countryCodeIso2": {
             "type": "string",
-            "maxLength": 2
-          }
-        }
-      },
-      "CustomerCompanyDetailDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "email",
-          "fullAddress",
-          "name",
-          "registerNumber"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "maxLength": 255
-          },
-          "registerNumber": {
-            "type": "string",
-            "maxLength": 255
-          },
-          "fullAddress": {
-            "type": "string",
-            "maxLength": 255
-          },
-          "email": {
-            "type": "string",
-            "format": "email",
-            "maxLength": 64
+            "maxLength": 2,
+            "minLength": 1
           }
         }
       },
@@ -2549,333 +3723,30 @@
           }
         }
       },
-      "CustomerAccountDto": {
+      "LockWalletsDto": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "institutionId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "institutionName": {
-            "type": "string",
-            "nullable": true
-          },
-          "salutation": {
-            "type": "string",
-            "nullable": true
-          },
-          "type": {
-            "$ref": "#/components/schemas/AccountTypes"
-          },
-          "birthDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "firstname": {
-            "type": "string",
-            "nullable": true
-          },
-          "lastname": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "phoneNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "walletAccess": {
-            "$ref": "#/components/schemas/RetailWalletAccessLevels"
-          },
-          "address": {
-            "$ref": "#/components/schemas/CustomerAddressDto"
-          },
-          "nationalityId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "nationalityIso": {
-            "type": "string",
-            "nullable": true
-          },
-          "gender": {
-            "$ref": "#/components/schemas/GenderTypes"
-          },
-          "kycData": {
-            "$ref": "#/components/schemas/KycDataDto"
-          },
-          "company": {
-            "$ref": "#/components/schemas/CustomerCompanyDetailDto"
+          "lock": {
+            "type": "boolean"
           }
         }
       },
-      "CustomerAccountDtoListApiResponse": {
+      "MetadataCurrency": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
+          "description": {
+            "type": "string",
+            "nullable": true
           },
-          "data": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/CustomerAccountDto"
-            }
+          "imageUrl": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
-      "CreateCustomerAccountDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "countryIso",
-          "email",
-          "firstname",
-          "lastname",
-          "postalCode",
-          "street",
-          "streetNo",
-          "town",
-          "type"
-        ],
-        "properties": {
-          "salutation": {
-            "type": "string",
-            "nullable": true
-          },
-          "title": {
-            "type": "string",
-            "maxLength": 64,
-            "minLength": 0,
-            "nullable": true
-          },
-          "firstname": {
-            "type": "string",
-            "maxLength": 64,
-            "minLength": 0
-          },
-          "lastname": {
-            "type": "string",
-            "maxLength": 64,
-            "minLength": 0
-          },
-          "birthDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "phoneNumber": {
-            "type": "string",
-            "format": "tel",
-            "maxLength": 64,
-            "minLength": 0,
-            "nullable": true
-          },
-          "type": {
-            "$ref": "#/components/schemas/AccountTypes"
-          },
-          "street": {
-            "type": "string",
-            "maxLength": 100
-          },
-          "streetNo": {
-            "type": "string",
-            "maxLength": 100
-          },
-          "postalCode": {
-            "type": "string",
-            "maxLength": 100
-          },
-          "town": {
-            "type": "string",
-            "maxLength": 100
-          },
-          "countryIso": {
-            "type": "string",
-            "maxLength": 2,
-            "minLength": 2
-          },
-          "company": {
-            "$ref": "#/components/schemas/CustomerCompanyDetailDto"
-          },
-          "nationalityIso": {
-            "type": "string",
-            "nullable": true
-          },
-          "gender": {
-            "$ref": "#/components/schemas/GenderTypes"
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "format": "email",
-            "maxLength": 64,
-            "minLength": 0
-          }
-        }
-      },
-      "GuidApiResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "data": {
-            "type": "string",
-            "readOnly": true,
-            "format": "uuid"
-          }
-        }
-      },
-      "CustomerAccountDtoApiResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "data": {
-            "$ref": "#/components/schemas/CustomerAccountDto"
-          }
-        }
-      },
-      "UpdateCustomerAccountDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "countryIso",
-          "firstname",
-          "lastname",
-          "postalCode",
-          "street",
-          "streetNo",
-          "town",
-          "type"
-        ],
-        "properties": {
-          "salutation": {
-            "type": "string",
-            "nullable": true
-          },
-          "title": {
-            "type": "string",
-            "maxLength": 64,
-            "minLength": 0,
-            "nullable": true
-          },
-          "firstname": {
-            "type": "string",
-            "maxLength": 64,
-            "minLength": 0
-          },
-          "lastname": {
-            "type": "string",
-            "maxLength": 64,
-            "minLength": 0
-          },
-          "birthDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "phoneNumber": {
-            "type": "string",
-            "format": "tel",
-            "maxLength": 64,
-            "minLength": 0,
-            "nullable": true
-          },
-          "type": {
-            "$ref": "#/components/schemas/AccountTypes"
-          },
-          "street": {
-            "type": "string",
-            "maxLength": 100
-          },
-          "streetNo": {
-            "type": "string",
-            "maxLength": 100
-          },
-          "postalCode": {
-            "type": "string",
-            "maxLength": 100
-          },
-          "town": {
-            "type": "string",
-            "maxLength": 100
-          },
-          "countryIso": {
-            "type": "string",
-            "maxLength": 2,
-            "minLength": 2
-          },
-          "company": {
-            "$ref": "#/components/schemas/CustomerCompanyDetailDto"
-          },
-          "nationalityIso": {
-            "type": "string",
-            "nullable": true
-          },
-          "gender": {
-            "$ref": "#/components/schemas/GenderTypes"
-          }
-        }
-      },
-      "BooleanApiResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "data": {
-            "type": "boolean",
-            "readOnly": true
-          }
-        }
-      },
-      "ElectronicSecurityBasicInfoDto": {
+      "MetadataOrganizationDocumentation": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -2883,476 +3754,162 @@
             "type": "string",
             "nullable": true
           },
-          "issuerWalletPubKey": {
+          "dba": {
             "type": "string",
             "nullable": true
           },
-          "total": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "ElectronicSecurityBasicInfoDtoApiResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "data": {
-            "$ref": "#/components/schemas/ElectronicSecurityBasicInfoDto"
-          }
-        }
-      },
-      "CreateTrustLineInternalDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "pin": {
+          "url": {
             "type": "string",
             "nullable": true
           },
-          "uuid": {
+          "logoUrl": {
             "type": "string",
-            "format": "uuid"
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
-      "BulkCreateTrustLineDto": {
+      "MetadataPrincipal": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "trustLineData": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/CreateTrustLineInternalDto"
-            }
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
-      "BulkResultItemStatus": {
+      "MissingModelsContainer": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "metadataFile": {
+            "$ref": "#/components/schemas/CreateMetadataFileDto"
+          }
+        }
+      },
+      "OptInStatus": {
         "type": "string",
         "format": "int32",
         "enum": [
-          "NotSet",
-          "Ok",
+          "NotExisting",
+          "New",
+          "Sent",
           "Failed",
-          "Duplicate"
+          "Rejected",
+          "Approved",
+          "Revoked",
+          "AuthorizationFailed",
+          "Pending",
+          "KycClaimAdded",
+          "IdentityDeployed",
+          "IdentityRegistered",
+          "IdentityRemoved",
+          "TransferInitiated",
+          "TransferCompleted"
         ],
         "x-custom-enum": {
-          "name": "BulkResultItemStatus",
+          "name": "OptInStatus",
           "enumObjects": [
             {
-              "label": "NotSet",
+              "label": "New",
               "value": 0
             },
             {
-              "label": "Ok",
+              "label": "Sent",
               "value": 1
             },
             {
               "label": "Failed",
+              "value": 2
+            },
+            {
+              "label": "Rejected",
+              "value": 3
+            },
+            {
+              "label": "Approved",
+              "value": 4
+            },
+            {
+              "label": "Revoked",
+              "value": 5
+            },
+            {
+              "label": "AuthorizationFailed",
+              "value": 6
+            },
+            {
+              "label": "Pending",
+              "value": 7
+            },
+            {
+              "label": "KycClaimAdded",
+              "value": 8
+            },
+            {
+              "label": "IdentityDeployed",
+              "value": 9
+            },
+            {
+              "label": "IdentityRegistered",
               "value": 10
             },
             {
-              "label": "Duplicate",
+              "label": "IdentityRemoved",
               "value": 11
-            }
-          ]
-        }
-      },
-      "BulkResultItemDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "requestId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "locationId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "status": {
-            "$ref": "#/components/schemas/BulkResultItemStatus"
-          },
-          "reason": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "BulkResultDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "items": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/BulkResultItemDto"
-            }
-          }
-        }
-      },
-      "BulkResultDtoApiResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "data": {
-            "$ref": "#/components/schemas/BulkResultDto"
-          }
-        }
-      },
-      "RequestFaucetFundingDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "retailWallets": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          "issuerWallets": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        }
-      },
-      "FaucetFundingResult": {
-        "type": "string",
-        "format": "int32",
-        "enum": [
-          "Initiated",
-          "NotEligible",
-          "Failed"
-        ],
-        "x-custom-enum": {
-          "name": "FaucetFundingResult",
-          "enumObjects": [
-            {
-              "label": "Initiated",
-              "value": 1
             },
             {
-              "label": "Failed",
-              "value": -2
+              "label": "TransferInitiated",
+              "value": 12
             },
             {
-              "label": "NotEligible",
+              "label": "TransferCompleted",
+              "value": 13
+            },
+            {
+              "label": "NotExisting",
               "value": -1
             }
           ]
         }
       },
-      "WalletFundingResult": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "walletId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "result": {
-            "$ref": "#/components/schemas/FaucetFundingResult"
-          }
-        }
-      },
-      "WalletFundingResultsDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "retailFundingResults": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/WalletFundingResult"
-            }
-          },
-          "issuerFundingResults": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/WalletFundingResult"
-            }
-          }
-        }
-      },
-      "WalletFundingResultsDtoApiResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "data": {
-            "$ref": "#/components/schemas/WalletFundingResultsDto"
-          }
-        }
-      },
-      "IssuerWalletRoles": {
+      "Products": {
         "type": "string",
         "format": "int32",
         "enum": [
-          "Issuer",
-          "Distributor",
-          "ClaimIssuer",
-          "Agent"
+          "RetailWallet",
+          "Tokenization"
         ],
         "x-custom-enum": {
-          "name": "IssuerWalletRoles",
+          "name": "Products",
           "enumObjects": [
             {
-              "label": "Issuer",
-              "value": 1
+              "label": "RetailWallet",
+              "value": 101
             },
             {
-              "label": "Distributor",
-              "value": 2
-            },
-            {
-              "label": "ClaimIssuer",
-              "value": 3
-            },
-            {
-              "label": "Agent",
-              "value": 4
-            }
-          ]
-        }
-      },
-      "Blockchains": {
-        "type": "string",
-        "format": "int32",
-        "enum": [
-          "NotSet",
-          "Bitcoin",
-          "Ethereum",
-          "Stellar",
-          "Litecoin",
-          "Polkadot",
-          "Kusama",
-          "Algorand",
-          "Cosmos",
-          "Terra",
-          "Polymesh",
-          "Binance",
-          "Solana",
-          "Cardano",
-          "Polygon",
-          "Avalanche"
-        ],
-        "x-custom-enum": {
-          "name": "Blockchains",
-          "enumObjects": [
-            {
-              "label": "NotSet",
-              "value": 0
-            },
-            {
-              "label": "Bitcoin",
-              "value": 1
-            },
-            {
-              "label": "Ethereum",
-              "value": 2
-            },
-            {
-              "label": "Stellar",
-              "value": 3
-            },
-            {
-              "label": "Litecoin",
-              "value": 4
-            },
-            {
-              "label": "Polkadot",
-              "value": 5
-            },
-            {
-              "label": "Kusama",
-              "value": 6
-            },
-            {
-              "label": "Algorand",
-              "value": 7
-            },
-            {
-              "label": "Cosmos",
-              "value": 8
-            },
-            {
-              "label": "Terra",
-              "value": 9
-            },
-            {
-              "label": "Polymesh",
-              "value": 10
-            },
-            {
-              "label": "Binance",
-              "value": 11
-            },
-            {
-              "label": "Solana",
-              "value": 12
-            },
-            {
-              "label": "Cardano",
-              "value": 13
-            },
-            {
-              "label": "Polygon",
-              "value": 14
-            },
-            {
-              "label": "Avalanche",
-              "value": 15
-            }
-          ]
-        }
-      },
-      "DecimalBalanceAmount": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "free": {
-            "type": "number",
-            "format": "double"
-          },
-          "locked": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
-      "BalancesInDecimalDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "nativeBalance": {
-            "$ref": "#/components/schemas/DecimalBalanceAmount"
-          },
-          "nativeFreeDecimalBalanceString": {
-            "type": "string",
-            "readOnly": true,
-            "nullable": true
-          },
-          "nativeLockedDecimalBalanceString": {
-            "type": "string",
-            "readOnly": true,
-            "nullable": true
-          },
-          "nonNativeBalances": {
-            "type": "object",
-            "nullable": true,
-            "additionalProperties": {
-              "type": "number",
-              "format": "double"
-            }
-          },
-          "nonNativeBalancesString": {
-            "type": "object",
-            "readOnly": true,
-            "nullable": true,
-            "additionalProperties": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "ReviewDecision": {
-        "type": "string",
-        "format": "int32",
-        "enum": [
-          "Pending",
-          "Approved",
-          "Rejected"
-        ],
-        "x-custom-enum": {
-          "name": "ReviewDecision",
-          "enumObjects": [
-            {
-              "label": "Pending",
-              "value": 0
-            },
-            {
-              "label": "Approved",
-              "value": 1
-            },
-            {
-              "label": "Rejected",
-              "value": 2
-            }
-          ]
-        }
-      },
-      "ProjectEntryType": {
-        "type": "string",
-        "format": "int32",
-        "enum": [
-          "Collective",
-          "Individual"
-        ],
-        "x-custom-enum": {
-          "name": "ProjectEntryType",
-          "enumObjects": [
-            {
-              "label": "Collective",
-              "value": 0
-            },
-            {
-              "label": "Individual",
-              "value": 1
-            }
-          ]
-        }
-      },
-      "ProjectStatus": {
-        "type": "string",
-        "format": "int32",
-        "enum": [
-          "OnGoing",
-          "Completed"
-        ],
-        "x-custom-enum": {
-          "name": "ProjectStatus",
-          "enumObjects": [
-            {
-              "label": "OnGoing",
-              "value": 1
-            },
-            {
-              "label": "Completed",
-              "value": 2
+              "label": "Tokenization",
+              "value": 103
             }
           ]
         }
@@ -3371,7 +3928,8 @@
             "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           },
           "institutionId": {
             "type": "string",
@@ -3434,6 +3992,682 @@
           },
           "registryExtract": {
             "type": "boolean"
+          }
+        }
+      },
+      "ProjectEntryType": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "Collective",
+          "Individual"
+        ],
+        "x-custom-enum": {
+          "name": "ProjectEntryType",
+          "enumObjects": [
+            {
+              "label": "Collective",
+              "value": 0
+            },
+            {
+              "label": "Individual",
+              "value": 1
+            }
+          ]
+        }
+      },
+      "ProjectStatus": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "OnGoing",
+          "Completed"
+        ],
+        "x-custom-enum": {
+          "name": "ProjectStatus",
+          "enumObjects": [
+            {
+              "label": "OnGoing",
+              "value": 1
+            },
+            {
+              "label": "Completed",
+              "value": 2
+            }
+          ]
+        }
+      },
+      "RequestFaucetFundingDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "retailWallets": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "issuerWallets": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "ResetRetailWalletAccessCredentialsDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "recoveryKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "passphrase": {
+            "type": "string",
+            "nullable": true
+          },
+          "keyFileContent": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "RetailWalletAccessLevels": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "None",
+          "Basic",
+          "Full"
+        ],
+        "x-custom-enum": {
+          "name": "RetailWalletAccessLevels",
+          "enumObjects": [
+            {
+              "label": "None",
+              "value": 0
+            },
+            {
+              "label": "Basic",
+              "value": 1
+            },
+            {
+              "label": "Full",
+              "value": 2
+            }
+          ]
+        }
+      },
+      "RetailWalletDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "blockchain": {
+            "$ref": "#/components/schemas/Blockchains"
+          },
+          "publicAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "balance": {
+            "$ref": "#/components/schemas/BalancesInDecimalDto"
+          },
+          "seedLockStatus": {
+            "type": "boolean"
+          },
+          "retailWalletSeedId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "accountId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "transfers": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/TokenizedAssetTransferDto"
+            }
+          },
+          "type": {
+            "$ref": "#/components/schemas/RetailWalletType"
+          },
+          "status": {
+            "$ref": "#/components/schemas/RetailWalletRequestStatus"
+          }
+        }
+      },
+      "RetailWalletDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/RetailWalletDto"
+          }
+        }
+      },
+      "RetailWalletDtoListApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/RetailWalletDto"
+            }
+          }
+        }
+      },
+      "RetailWalletOptInDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "credentials",
+          "tokenizedAssetId"
+        ],
+        "properties": {
+          "tokenizedAssetId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "credentials": {
+            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+          },
+          "approvedForDelivery": {
+            "type": "boolean"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "RetailWalletRecoveryKitFileDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "content": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "RetailWalletRecoveryKitFileDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/RetailWalletRecoveryKitFileDto"
+          }
+        }
+      },
+      "RetailWalletRequestStatus": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "New",
+          "Approved",
+          "WalletCreated",
+          "UpdatedKYCData",
+          "Rejected",
+          "Withdrawn"
+        ],
+        "x-custom-enum": {
+          "name": "RetailWalletRequestStatus",
+          "enumObjects": [
+            {
+              "label": "New",
+              "value": 0
+            },
+            {
+              "label": "Approved",
+              "value": 1
+            },
+            {
+              "label": "WalletCreated",
+              "value": 2
+            },
+            {
+              "label": "UpdatedKYCData",
+              "value": 3
+            },
+            {
+              "label": "Rejected",
+              "value": 4
+            },
+            {
+              "label": "Withdrawn",
+              "value": 5
+            }
+          ]
+        }
+      },
+      "RetailWalletSeedRecoveryDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "institutionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "accountId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "recoveryKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "retailWalletSeedId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "closedDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "RetailWalletSeedRecoveryDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/RetailWalletSeedRecoveryDto"
+          }
+        }
+      },
+      "RetailWalletType": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "RetailWallet",
+          "RetailWalletRequest"
+        ],
+        "x-custom-enum": {
+          "name": "RetailWalletType",
+          "enumObjects": [
+            {
+              "label": "RetailWallet",
+              "value": 1
+            },
+            {
+              "label": "RetailWalletRequest",
+              "value": 2
+            }
+          ]
+        }
+      },
+      "ReviewDecision": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "Pending",
+          "Approved",
+          "Rejected",
+          "Withdrawn"
+        ],
+        "x-custom-enum": {
+          "name": "ReviewDecision",
+          "enumObjects": [
+            {
+              "label": "Pending",
+              "value": 0
+            },
+            {
+              "label": "Approved",
+              "value": 1
+            },
+            {
+              "label": "Rejected",
+              "value": 2
+            },
+            {
+              "label": "Withdrawn",
+              "value": 3
+            }
+          ]
+        }
+      },
+      "SimpleAccessCredentialsDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "passphrase"
+        ],
+        "properties": {
+          "passphrase": {
+            "type": "string",
+            "minLength": 1
+          },
+          "keyFileContent": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ToggleOptInAuthorizationDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "credentials": {
+            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+          },
+          "customerRetailWalletIds": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/CustomerRetailWalletDto"
+            }
+          }
+        }
+      },
+      "TokenizedAssetBurnDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "amount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "credentials": {
+            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+          }
+        }
+      },
+      "TokenizedAssetClawbackDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "clawbacks": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/TokenizedAssetClawbackTransfer"
+            }
+          },
+          "credentials": {
+            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+          }
+        }
+      },
+      "TokenizedAssetClawbackTransfer": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "retailWalletId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "TokenizedAssetDetailsDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "assetId": {
+            "type": "string",
+            "nullable": true
+          },
+          "toiFilePathS3": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "unitName": {
+            "type": "string",
+            "maxLength": 10,
+            "nullable": true
+          },
+          "totalSupply": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "decimals": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "enableFreeze": {
+            "type": "boolean"
+          },
+          "enableClawback": {
+            "type": "boolean"
+          },
+          "url": {
+            "type": "string",
+            "nullable": true
+          },
+          "metaData": {
+            "type": "string",
+            "nullable": true
+          },
+          "issuerAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "distributionAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "blockchain": {
+            "$ref": "#/components/schemas/Blockchains"
+          },
+          "reviewDecision": {
+            "$ref": "#/components/schemas/ReviewDecision"
+          },
+          "reviewedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "reviewer": {
+            "type": "string",
+            "nullable": true
+          },
+          "issuingMemo": {
+            "type": "string",
+            "nullable": true
+          },
+          "isFungible": {
+            "type": "boolean"
+          },
+          "projectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isin": {
+            "type": "string",
+            "maxLength": 20,
+            "nullable": true
+          },
+          "isRegulatedSecurity": {
+            "type": "boolean"
+          },
+          "agentWalletId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "claimIssuerWalletId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "issuerTxId": {
+            "type": "string",
+            "nullable": true
+          },
+          "issuerAccountIndex": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "agentTxId": {
+            "type": "string",
+            "nullable": true
+          },
+          "agentAccountIndex": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "agentAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "cissuerAdress": {
+            "type": "string",
+            "nullable": true
+          },
+          "tokeFactoryAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "projectName": {
+            "type": "string",
+            "nullable": true
+          },
+          "issuerWallet": {
+            "$ref": "#/components/schemas/IssuerWalletDto"
+          },
+          "project": {
+            "$ref": "#/components/schemas/ProjectDto"
+          },
+          "reportEnable": {
+            "type": "boolean"
+          },
+          "created": {
+            "type": "string",
+            "nullable": true
+          },
+          "hashValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "hasAIPSupport": {
+            "type": "boolean"
+          },
+          "aipSetup": {
+            "type": "boolean"
+          },
+          "aipLastBatchRun": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "aipBatchInterval": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "aiperC20TokenAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "aipInterestRate": {
+            "type": "number",
+            "format": "double"
+          },
+          "transfers": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/TokenizedAssetTransferDto"
+            }
+          },
+          "optIns": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/TokenizedAssetOptInDto"
+            }
+          },
+          "metaDataUrl": {
+            "type": "string",
+            "readOnly": true,
+            "nullable": true
+          }
+        }
+      },
+      "TokenizedAssetDetailsDtoApiResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "errorMessageCodes": {
+            "type": "array",
+            "readOnly": true,
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/TokenizedAssetDetailsDto"
           }
         }
       },
@@ -3585,313 +4819,28 @@
           "hashValue": {
             "type": "string",
             "nullable": true
-          }
-        }
-      },
-      "IssuerWalletDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
           },
-          "issuerWalletSeedId": {
-            "type": "string",
-            "format": "uuid"
+          "hasAIPSupport": {
+            "type": "boolean"
           },
-          "role": {
-            "$ref": "#/components/schemas/IssuerWalletRoles"
+          "aipSetup": {
+            "type": "boolean"
           },
-          "created": {
+          "aipLastBatchRun": {
             "type": "string",
             "format": "date-time"
           },
-          "blockchain": {
-            "$ref": "#/components/schemas/Blockchains"
-          },
-          "publicAddress": {
-            "type": "string",
-            "nullable": true
-          },
-          "accountIndex": {
+          "aipBatchInterval": {
             "type": "integer",
             "format": "int32"
           },
-          "name": {
+          "aiperC20TokenAddress": {
             "type": "string",
             "nullable": true
           },
-          "balance": {
-            "$ref": "#/components/schemas/BalancesInDecimalDto"
-          },
-          "tokenizedAssets": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/TokenizedAssetDto"
-            }
-          },
-          "seedLockStatus": {
-            "type": "boolean"
-          },
-          "nativeCryptoAssetSymbol": {
-            "type": "string",
-            "nullable": true
-          },
-          "nativeCryptoAssetId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "isLocked": {
-            "type": "boolean",
-            "nullable": true
-          }
-        }
-      },
-      "IssuerWalletSeedDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "createdDt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "wallets": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/IssuerWalletDto"
-            }
-          },
-          "isLocked": {
-            "type": "boolean",
-            "nullable": true
-          }
-        }
-      },
-      "IssuerWalletSeedDtoListApiResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "data": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/IssuerWalletSeedDto"
-            }
-          }
-        }
-      },
-      "SimpleAccessCredentialsDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "passphrase"
-        ],
-        "properties": {
-          "passphrase": {
-            "type": "string"
-          },
-          "keyFileContent": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "CreateIssuerWalletSeedDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "name"
-        ],
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "credentials": {
-            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
-          }
-        }
-      },
-      "IssuerWalletSeedDtoApiResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "data": {
-            "$ref": "#/components/schemas/IssuerWalletSeedDto"
-          }
-        }
-      },
-      "DeriveIssuerWalletFromSeedDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "accountIndex",
-          "blockchain",
-          "role"
-        ],
-        "properties": {
-          "blockchain": {
-            "$ref": "#/components/schemas/Blockchains"
-          },
-          "accountIndex": {
-            "type": "integer",
-            "format": "int32",
-            "maximum": 1024.0,
-            "minimum": 0.0
-          },
-          "credentials": {
-            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
-          },
-          "role": {
-            "$ref": "#/components/schemas/IssuerWalletRoles"
-          }
-        }
-      },
-      "IssuerWalletRecoveryKitFileDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "content": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "IssuerWalletRecoveryKitFileDtoApiResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "data": {
-            "$ref": "#/components/schemas/IssuerWalletRecoveryKitFileDto"
-          }
-        }
-      },
-      "EmptyResult": {
-        "type": "object",
-        "additionalProperties": false
-      },
-      "IssuerWalletDtoListApiResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "data": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/IssuerWalletDto"
-            }
-          }
-        }
-      },
-      "InitTokenizedAssetCreationDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "blockchain": {
-            "$ref": "#/components/schemas/Blockchains"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "unitName": {
-            "type": "string",
-            "nullable": true
-          },
-          "totalSupply": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "decimals": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "enableFreeze": {
-            "type": "boolean"
-          },
-          "enableClawback": {
-            "type": "boolean"
-          },
-          "url": {
-            "type": "string",
-            "nullable": true
-          },
-          "issuingMemo": {
-            "type": "string",
-            "nullable": true
-          },
-          "distributorWalletId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "agentWalletId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "claimIssuerWalletId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "isFungible": {
-            "type": "boolean"
-          },
-          "projectId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "isin": {
-            "type": "string",
-            "nullable": true
-          },
-          "isRegulatedSecurity": {
-            "type": "boolean"
+          "aipInterestRate": {
+            "type": "number",
+            "format": "double"
           }
         }
       },
@@ -3912,60 +4861,100 @@
           }
         }
       },
-      "WalletTransactionStatus": {
-        "type": "string",
-        "format": "int32",
-        "enum": [
-          "New",
-          "Pending",
-          "Rejected",
-          "Approved",
-          "Sent",
-          "Successful",
-          "Failed",
-          "TimedOut",
-          "FailedOnBlockChain"
-        ],
-        "x-custom-enum": {
-          "name": "WalletTransactionStatus",
-          "enumObjects": [
-            {
-              "label": "New",
-              "value": 0
-            },
-            {
-              "label": "Pending",
-              "value": 1
-            },
-            {
-              "label": "Rejected",
-              "value": 2
-            },
-            {
-              "label": "Approved",
-              "value": 3
-            },
-            {
-              "label": "Sent",
-              "value": 4
-            },
-            {
-              "label": "Successful",
-              "value": 5
-            },
-            {
-              "label": "Failed",
-              "value": 6
-            },
-            {
-              "label": "TimedOut",
-              "value": 7
-            },
-            {
-              "label": "FailedOnBlockChain",
-              "value": 8
+      "TokenizedAssetOptInDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "txIds": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/TransactionDto"
             }
-          ]
+          },
+          "modified": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "customerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "customerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "retailWalletId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "$ref": "#/components/schemas/OptInStatus"
+          },
+          "walletAccess": {
+            "$ref": "#/components/schemas/RetailWalletAccessLevels"
+          },
+          "approvedForDelivery": {
+            "type": "boolean"
+          },
+          "amount": {
+            "type": "string",
+            "nullable": true
+          },
+          "pricePerToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalPrice": {
+            "type": "string",
+            "readOnly": true,
+            "nullable": true
+          }
+        }
+      },
+      "TokenizedAssetToExternalRetailWallet": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "externalRetailWalletId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "TokenizedAssetToRetailWallet": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "retailWalletId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
         }
       },
       "TokenizedAssetTransferDto": {
@@ -4122,1132 +5111,6 @@
           }
         }
       },
-      "OptInStatus": {
-        "type": "string",
-        "format": "int32",
-        "enum": [
-          "New",
-          "Sent",
-          "Failed",
-          "Rejected",
-          "Approved",
-          "Revoked",
-          "AuthorizationFailed",
-          "Pending",
-          "KycClaimAdded",
-          "IdentityDeployed",
-          "IdentityRegistered",
-          "IdentityRemoved"
-        ],
-        "x-custom-enum": {
-          "name": "OptInStatus",
-          "enumObjects": [
-            {
-              "label": "New",
-              "value": 0
-            },
-            {
-              "label": "Sent",
-              "value": 1
-            },
-            {
-              "label": "Failed",
-              "value": 2
-            },
-            {
-              "label": "Rejected",
-              "value": 3
-            },
-            {
-              "label": "Approved",
-              "value": 4
-            },
-            {
-              "label": "Revoked",
-              "value": 5
-            },
-            {
-              "label": "AuthorizationFailed",
-              "value": 6
-            },
-            {
-              "label": "Pending",
-              "value": 7
-            },
-            {
-              "label": "KycClaimAdded",
-              "value": 8
-            },
-            {
-              "label": "IdentityDeployed",
-              "value": 9
-            },
-            {
-              "label": "IdentityRegistered",
-              "value": 10
-            },
-            {
-              "label": "IdentityRemoved",
-              "value": 11
-            }
-          ]
-        }
-      },
-      "TokenizedAssetOptInDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "txIds": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/TransactionDto"
-            }
-          },
-          "modified": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "customerId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "customerName": {
-            "type": "string",
-            "nullable": true
-          },
-          "retailWalletId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "created": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "status": {
-            "$ref": "#/components/schemas/OptInStatus"
-          },
-          "walletAccess": {
-            "$ref": "#/components/schemas/RetailWalletAccessLevels"
-          }
-        }
-      },
-      "TokenizedAssetDetailsDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "assetId": {
-            "type": "string",
-            "nullable": true
-          },
-          "toiFilePathS3": {
-            "type": "string",
-            "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "unitName": {
-            "type": "string",
-            "maxLength": 10,
-            "nullable": true
-          },
-          "totalSupply": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "decimals": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "enableFreeze": {
-            "type": "boolean"
-          },
-          "enableClawback": {
-            "type": "boolean"
-          },
-          "url": {
-            "type": "string",
-            "nullable": true
-          },
-          "metaData": {
-            "type": "string",
-            "nullable": true
-          },
-          "issuerAddress": {
-            "type": "string",
-            "nullable": true
-          },
-          "distributionAddress": {
-            "type": "string",
-            "nullable": true
-          },
-          "blockchain": {
-            "$ref": "#/components/schemas/Blockchains"
-          },
-          "reviewDecision": {
-            "$ref": "#/components/schemas/ReviewDecision"
-          },
-          "reviewedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "reviewer": {
-            "type": "string",
-            "nullable": true
-          },
-          "issuingMemo": {
-            "type": "string",
-            "nullable": true
-          },
-          "isFungible": {
-            "type": "boolean"
-          },
-          "projectId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "isin": {
-            "type": "string",
-            "maxLength": 20,
-            "nullable": true
-          },
-          "isRegulatedSecurity": {
-            "type": "boolean"
-          },
-          "agentWalletId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "claimIssuerWalletId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "issuerTxId": {
-            "type": "string",
-            "nullable": true
-          },
-          "issuerAccountIndex": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "agentTxId": {
-            "type": "string",
-            "nullable": true
-          },
-          "agentAccountIndex": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "agentAddress": {
-            "type": "string",
-            "nullable": true
-          },
-          "cissuerAdress": {
-            "type": "string",
-            "nullable": true
-          },
-          "tokeFactoryAddress": {
-            "type": "string",
-            "nullable": true
-          },
-          "projectName": {
-            "type": "string",
-            "nullable": true
-          },
-          "issuerWallet": {
-            "$ref": "#/components/schemas/IssuerWalletDto"
-          },
-          "project": {
-            "$ref": "#/components/schemas/ProjectDto"
-          },
-          "reportEnable": {
-            "type": "boolean"
-          },
-          "created": {
-            "type": "string",
-            "nullable": true
-          },
-          "hashValue": {
-            "type": "string",
-            "nullable": true
-          },
-          "transfers": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/TokenizedAssetTransferDto"
-            }
-          },
-          "optIns": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/TokenizedAssetOptInDto"
-            }
-          },
-          "metaDataUrl": {
-            "type": "string",
-            "readOnly": true,
-            "nullable": true
-          }
-        }
-      },
-      "TokenizedAssetDetailsDtoApiResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "data": {
-            "$ref": "#/components/schemas/TokenizedAssetDetailsDto"
-          }
-        }
-      },
-      "TokenizedAssetToRetailWallet": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "retailWalletId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "amount": {
-            "type": "number",
-            "format": "double"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "IssuerWalletTokenizedAssetTransferDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "transfers": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/TokenizedAssetToRetailWallet"
-            }
-          },
-          "credentials": {
-            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
-          }
-        }
-      },
-      "TokenizedAssetToExternalRetailWallet": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "externalRetailWalletId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "amount": {
-            "type": "number",
-            "format": "double"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "IssuerWalletFungibleAssetTransferDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "transfers": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/TokenizedAssetToExternalRetailWallet"
-            }
-          },
-          "credentials": {
-            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
-          }
-        }
-      },
-      "CustomerRetailWalletDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "customerId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "retailWalletId": {
-            "type": "string",
-            "format": "uuid"
-          }
-        }
-      },
-      "ToggleOptInAuthorizationDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "credentials": {
-            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
-          },
-          "customerRetailWalletIds": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/CustomerRetailWalletDto"
-            }
-          }
-        }
-      },
-      "TokenizedAssetClawbackTransfer": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "retailWalletId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "amount": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
-      "TokenizedAssetClawbackDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "clawbacks": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/TokenizedAssetClawbackTransfer"
-            }
-          },
-          "credentials": {
-            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
-          }
-        }
-      },
-      "TokenizedAssetBurnDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "amount": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "credentials": {
-            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
-          }
-        }
-      },
-      "MetadataOrganizationDocumentation": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "dba": {
-            "type": "string",
-            "nullable": true
-          },
-          "url": {
-            "type": "string",
-            "nullable": true
-          },
-          "logoUrl": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "address": {
-            "type": "string",
-            "nullable": true
-          },
-          "phoneNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "MetadataPrincipal": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "MetadataCurrency": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "imageUrl": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "CreateMetadataFileDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "documentation": {
-            "$ref": "#/components/schemas/MetadataOrganizationDocumentation"
-          },
-          "principals": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/MetadataPrincipal"
-            }
-          },
-          "currency": {
-            "$ref": "#/components/schemas/MetadataCurrency"
-          },
-          "subDomain": {
-            "type": "string",
-            "nullable": true
-          },
-          "orgLogoBytes": {
-            "type": "string",
-            "format": "byte",
-            "nullable": true
-          },
-          "tokenLogoBytes": {
-            "type": "string",
-            "format": "byte",
-            "nullable": true
-          },
-          "credentials": {
-            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
-          }
-        }
-      },
-      "MissingModelsContainer": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "metadataFile": {
-            "$ref": "#/components/schemas/CreateMetadataFileDto"
-          }
-        }
-      },
-      "RetailWalletType": {
-        "type": "string",
-        "format": "int32",
-        "enum": [
-          "RetailWallet",
-          "RetailWalletRequest"
-        ],
-        "x-custom-enum": {
-          "name": "RetailWalletType",
-          "enumObjects": [
-            {
-              "label": "RetailWallet",
-              "value": 1
-            },
-            {
-              "label": "RetailWalletRequest",
-              "value": 2
-            }
-          ]
-        }
-      },
-      "RetailWalletRequestStatus": {
-        "type": "string",
-        "format": "int32",
-        "enum": [
-          "New",
-          "Approved",
-          "WalletCreated",
-          "UpdatedKYCData",
-          "Rejected"
-        ],
-        "x-custom-enum": {
-          "name": "RetailWalletRequestStatus",
-          "enumObjects": [
-            {
-              "label": "New",
-              "value": 0
-            },
-            {
-              "label": "Approved",
-              "value": 1
-            },
-            {
-              "label": "WalletCreated",
-              "value": 2
-            },
-            {
-              "label": "UpdatedKYCData",
-              "value": 3
-            },
-            {
-              "label": "Rejected",
-              "value": 4
-            }
-          ]
-        }
-      },
-      "RetailWalletDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "blockchain": {
-            "$ref": "#/components/schemas/Blockchains"
-          },
-          "publicAddress": {
-            "type": "string",
-            "nullable": true
-          },
-          "balance": {
-            "$ref": "#/components/schemas/BalancesInDecimalDto"
-          },
-          "seedLockStatus": {
-            "type": "boolean"
-          },
-          "retailWalletSeedId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "accountId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "created": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "transfers": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/TokenizedAssetTransferDto"
-            }
-          },
-          "type": {
-            "$ref": "#/components/schemas/RetailWalletType"
-          },
-          "status": {
-            "$ref": "#/components/schemas/RetailWalletRequestStatus"
-          }
-        }
-      },
-      "RetailWalletDtoListApiResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "data": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/RetailWalletDto"
-            }
-          }
-        }
-      },
-      "RetailWalletDtoApiResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "data": {
-            "$ref": "#/components/schemas/RetailWalletDto"
-          }
-        }
-      },
-      "RetailWalletOptInDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "credentials",
-          "tokenizedAssetId"
-        ],
-        "properties": {
-          "tokenizedAssetId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "credentials": {
-            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
-          }
-        }
-      },
-      "LockWalletsDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "lock": {
-            "type": "boolean"
-          }
-        }
-      },
-      "RetailWalletSeedRecoveryDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "institutionId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "accountId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "recoveryKey": {
-            "type": "string",
-            "nullable": true
-          },
-          "retailWalletSeedId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "status": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "closedDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          }
-        }
-      },
-      "RetailWalletSeedRecoveryDtoApiResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "data": {
-            "$ref": "#/components/schemas/RetailWalletSeedRecoveryDto"
-          }
-        }
-      },
-      "ResetRetailWalletAccessCredentialsDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "recoveryKey": {
-            "type": "string",
-            "nullable": true
-          },
-          "passphrase": {
-            "type": "string",
-            "nullable": true
-          },
-          "keyFileContent": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "RetailWalletRecoveryKitFileDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "content": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "RetailWalletRecoveryKitFileDtoApiResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "data": {
-            "$ref": "#/components/schemas/RetailWalletRecoveryKitFileDto"
-          }
-        }
-      },
-      "CreateRetailWalletAssetTransactionDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "tokenizedAssetId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "recipientPublicAddress": {
-            "type": "string",
-            "nullable": true
-          },
-          "amount": {
-            "type": "number",
-            "format": "double"
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "credentials": {
-            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
-          }
-        }
-      },
-      "ExternalRetailWalletDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "blockchain": {
-            "$ref": "#/components/schemas/Blockchains"
-          },
-          "publicAddress": {
-            "type": "string",
-            "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "created": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "ExternalRetailWalletDtoListApiResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "data": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/ExternalRetailWalletDto"
-            }
-          }
-        }
-      },
-      "CreateExternalRetailWalletDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "blockchain": {
-            "$ref": "#/components/schemas/Blockchains"
-          },
-          "publicAddress": {
-            "type": "string",
-            "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "nativeCryptoAssetId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          }
-        }
-      },
-      "ImportExternalRetailWalletDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "wallets": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/CreateExternalRetailWalletDto"
-            }
-          }
-        }
-      },
-      "Products": {
-        "type": "string",
-        "format": "int32",
-        "enum": [
-          "RetailWallet",
-          "Tokenization"
-        ],
-        "x-custom-enum": {
-          "name": "Products",
-          "enumObjects": [
-            {
-              "label": "RetailWallet",
-              "value": 101
-            },
-            {
-              "label": "Tokenization",
-              "value": 103
-            }
-          ]
-        }
-      },
-      "AuthenticatedInstitutionDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "institutionName": {
-            "type": "string",
-            "nullable": true
-          },
-          "productAccess": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/Products"
-            }
-          },
-          "userName": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "AuthenticatedInstitutionDtoApiResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "data": {
-            "$ref": "#/components/schemas/AuthenticatedInstitutionDto"
-          }
-        }
-      },
-      "ExtTradeOrderDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "event": {
-            "type": "string",
-            "nullable": true
-          },
-          "trade_id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "order_id": {
-            "type": "string",
-            "nullable": true
-          },
-          "client_order_id": {
-            "type": "string",
-            "nullable": true
-          },
-          "client_order_id_1": {
-            "type": "string",
-            "nullable": true
-          },
-          "client_order_id_2": {
-            "type": "string",
-            "nullable": true
-          },
-          "side": {
-            "type": "string",
-            "nullable": true
-          },
-          "order_type": {
-            "type": "string",
-            "nullable": true
-          },
-          "amount": {
-            "type": "number",
-            "format": "double"
-          },
-          "instrument": {
-            "type": "string",
-            "nullable": true
-          },
-          "confirmed_price": {
-            "type": "number",
-            "format": "double"
-          },
-          "executed_at": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "currency": {
-            "type": "string",
-            "nullable": true
-          },
-          "total_amount": {
-            "type": "number",
-            "format": "double"
-          },
-          "order_status": {
-            "type": "string",
-            "nullable": true
-          },
-          "seq_no": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          }
-        }
-      },
-      "WalletTypes": {
-        "type": "string",
-        "format": "int32",
-        "enum": [
-          "Institutional",
-          "Retail",
-          "Issuer",
-          "Faucet"
-        ],
-        "x-custom-enum": {
-          "name": "WalletTypes",
-          "enumObjects": [
-            {
-              "label": "Institutional",
-              "value": 1
-            },
-            {
-              "label": "Retail",
-              "value": 2
-            },
-            {
-              "label": "Issuer",
-              "value": 3
-            },
-            {
-              "label": "Faucet",
-              "value": 4
-            }
-          ]
-        }
-      },
-      "TxStatus": {
-        "type": "string",
-        "format": "int32",
-        "enum": [
-          "New",
-          "Successful",
-          "Retrying",
-          "Failed",
-          "Canceled"
-        ],
-        "x-custom-enum": {
-          "name": "TxStatus",
-          "enumObjects": [
-            {
-              "label": "New",
-              "value": 1
-            },
-            {
-              "label": "Successful",
-              "value": 2
-            },
-            {
-              "label": "Canceled",
-              "value": -3
-            },
-            {
-              "label": "Failed",
-              "value": -2
-            },
-            {
-              "label": "Retrying",
-              "value": -1
-            }
-          ]
-        }
-      },
       "TransactionToShowDto": {
         "type": "object",
         "additionalProperties": false,
@@ -5326,21 +5189,162 @@
           }
         }
       },
-      "CancelTransactionsDto": {
+      "TxStatus": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "New",
+          "Successful",
+          "Retrying",
+          "Failed",
+          "Canceled"
+        ],
+        "x-custom-enum": {
+          "name": "TxStatus",
+          "enumObjects": [
+            {
+              "label": "New",
+              "value": 1
+            },
+            {
+              "label": "Successful",
+              "value": 2
+            },
+            {
+              "label": "Canceled",
+              "value": -3
+            },
+            {
+              "label": "Failed",
+              "value": -2
+            },
+            {
+              "label": "Retrying",
+              "value": -1
+            }
+          ]
+        }
+      },
+      "UpdateCustomerAccountDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "countryIso",
+          "firstname",
+          "lastname",
+          "postalCode",
+          "street",
+          "streetNo",
+          "town",
+          "type"
+        ],
+        "properties": {
+          "salutation": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 0,
+            "nullable": true
+          },
+          "firstname": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 0
+          },
+          "lastname": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 0
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "format": "tel",
+            "maxLength": 64,
+            "minLength": 0,
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/AccountTypes"
+          },
+          "street": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+          },
+          "streetNo": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+          },
+          "postalCode": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+          },
+          "town": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+          },
+          "countryIso": {
+            "type": "string",
+            "maxLength": 2,
+            "minLength": 2
+          },
+          "company": {
+            "$ref": "#/components/schemas/CustomerCompanyDetailDto"
+          },
+          "nationalityIso": {
+            "type": "string",
+            "nullable": true
+          },
+          "gender": {
+            "$ref": "#/components/schemas/GenderTypes"
+          }
+        }
+      },
+      "WalletFundingResult": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "transactionIds": {
+          "walletId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "result": {
+            "$ref": "#/components/schemas/FaucetFundingResult"
+          }
+        }
+      },
+      "WalletFundingResultsDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "retailFundingResults": {
             "type": "array",
             "nullable": true,
             "items": {
-              "type": "string",
-              "format": "uuid"
+              "$ref": "#/components/schemas/WalletFundingResult"
+            }
+          },
+          "issuerFundingResults": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/WalletFundingResult"
             }
           }
         }
       },
-      "Int32ApiResponse": {
+      "WalletFundingResultsDtoApiResponse": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -5353,10 +5357,95 @@
             }
           },
           "data": {
-            "type": "integer",
-            "readOnly": true,
-            "format": "int32"
+            "$ref": "#/components/schemas/WalletFundingResultsDto"
           }
+        }
+      },
+      "WalletTransactionStatus": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "New",
+          "Pending",
+          "Rejected",
+          "Approved",
+          "Sent",
+          "Successful",
+          "Failed",
+          "TimedOut",
+          "FailedOnBlockChain"
+        ],
+        "x-custom-enum": {
+          "name": "WalletTransactionStatus",
+          "enumObjects": [
+            {
+              "label": "New",
+              "value": 0
+            },
+            {
+              "label": "Pending",
+              "value": 1
+            },
+            {
+              "label": "Rejected",
+              "value": 2
+            },
+            {
+              "label": "Approved",
+              "value": 3
+            },
+            {
+              "label": "Sent",
+              "value": 4
+            },
+            {
+              "label": "Successful",
+              "value": 5
+            },
+            {
+              "label": "Failed",
+              "value": 6
+            },
+            {
+              "label": "TimedOut",
+              "value": 7
+            },
+            {
+              "label": "FailedOnBlockChain",
+              "value": 8
+            }
+          ]
+        }
+      },
+      "WalletTypes": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "Institutional",
+          "Retail",
+          "Issuer",
+          "Faucet"
+        ],
+        "x-custom-enum": {
+          "name": "WalletTypes",
+          "enumObjects": [
+            {
+              "label": "Institutional",
+              "value": 1
+            },
+            {
+              "label": "Retail",
+              "value": 2
+            },
+            {
+              "label": "Issuer",
+              "value": 3
+            },
+            {
+              "label": "Faucet",
+              "value": 4
+            }
+          ]
         }
       }
     }

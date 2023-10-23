@@ -129,6 +129,25 @@ namespace Tokenization.SDK.Tests
                 })
                 .ConfigureAwait(false).GetAwaiter().GetResult();
                 Assert.IsTrue(success);
+            });
+        }
+
+        [TestCase("E3D86A22-7E6F-4C74-ADFA-9892178B8F93")]
+        public void Should_Optin_Without_walletid_For_Token(Guid customerId)
+        {
+            // Opt-In for token
+            var success = _client.CreateTokenizedAssetOptInAsync(customerId, new RetailWalletOptInDto
+            {
+                TokenizedAssetId = Guid.Parse("567bc204-bcef-440a-b964-8c780a49cf84"),
+                Credentials = new SimpleAccessCredentialsDto
+                {
+                    Passphrase = "Nyala1234567",
+                },
+                Amount = 10,
+                ApprovedForDelivery = true
+            })
+            .ConfigureAwait(false).GetAwaiter().GetResult();
+            Assert.IsTrue(success);
         }
 
         [TestCase("E3D86A22-7E6F-4C74-ADFA-9892178B8F93", "2BDBDE7E-F9AB-4F51-8789-027ACB83A7B4")]
@@ -141,7 +160,9 @@ namespace Tokenization.SDK.Tests
                 Credentials = new SimpleAccessCredentialsDto
                 {
                     Passphrase = "Nyala1234567",
-                }
+                },
+                Amount = 10,
+                ApprovedForDelivery = true
             })
             .ConfigureAwait(false).GetAwaiter().GetResult();
             Assert.IsTrue(success);
@@ -208,14 +229,14 @@ namespace Tokenization.SDK.Tests
                   "0x47b6B94D436e4433D53584Df1453D555142f7db1", 10)]
         public async Task Should_Initiate_Retail_Wallet_Asset_Transfer_Request(Guid customerId, Guid retailWalletId, Guid tokenizedAssetId, string recipeintAddress, double amount)
         {
-            var response = await _client.InitiateRetailWalletAssetTransfer(customerId, retailWalletId, new CreateRetailWalletAssetTransactionDto
+            var response = await _client.InitiateRetailWalletAssetTransferRequest(customerId, retailWalletId, new CreateRetailWalletAssetTransactionDto
             {
                 TokenizedAssetId = tokenizedAssetId,
                 RecipientPublicAddress = recipeintAddress,
                 Amount = amount,
                 Message = "Some message",
-                Credentials = new SimpleAccessCredentialsDto() 
-                { 
+                Credentials = new SimpleAccessCredentialsDto()
+                {
                     Passphrase = "123456"
                 }
             });
