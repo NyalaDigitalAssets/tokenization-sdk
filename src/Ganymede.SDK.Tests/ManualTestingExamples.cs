@@ -242,5 +242,18 @@ namespace Tokenization.SDK.Tests
             });
             Assert.NotNull(response);
         }
+
+        [TestCase("F291384E-9D3E-4725-9829-9A4A08230381", "C9C986E6-D14D-4096-A1AF-72F314591BE0")]
+        public async Task Should_Update_OptIn(Guid customerId, Guid tokenizedAssetId)
+        {
+            var success = await _client.UpdateTokenizedAssetOptInAsync(customerId, new UpdateOptInDto
+            {
+                TokenizedAssetId = tokenizedAssetId,
+                ApprovedForDelivery = true,
+                Amount = 10,
+            }).ConfigureAwait(false);
+
+            Assert.IsTrue(success);
+        }
     }
 }
