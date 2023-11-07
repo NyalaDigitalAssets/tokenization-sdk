@@ -1602,7 +1602,7 @@
           "Retail Wallet"
         ],
         "summary": "Request to hold a certain tokenized asset in customer retail wallet.",
-        "operationId": "OptInWithAccountId",
+        "operationId": "OptInWithAccountIdPOST",
         "parameters": [
           {
             "name": "customer-id",
@@ -1631,6 +1631,57 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/RetailWalletOptInDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Retail Wallet"
+        ],
+        "summary": "Request to hold a certain tokenized asset in customer retail wallet.",
+        "operationId": "OptInWithAccountIdPATCH",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "Customer id.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Data.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateOptInDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateOptInDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateOptInDto"
               }
             }
           }
@@ -4893,6 +4944,10 @@
             "type": "string",
             "format": "uuid"
           },
+          "proposedRetailWalletId": {
+            "type": "string",
+            "format": "uuid"
+          },
           "created": {
             "type": "string",
             "format": "date-time"
@@ -5308,6 +5363,23 @@
           },
           "gender": {
             "$ref": "#/components/schemas/GenderTypes"
+          }
+        }
+      },
+      "UpdateOptInDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "tokenizedAssetId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "approvedForDelivery": {
+            "type": "boolean"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
           }
         }
       },

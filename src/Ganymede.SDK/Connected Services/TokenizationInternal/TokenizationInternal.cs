@@ -2980,9 +2980,9 @@ namespace Tokenization.SDK
         /// <param name="body">Data.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<BooleanApiResponse> ApiExternalV1CustomersOptInAsync(System.Guid customer_id, RetailWalletOptInDto body)
+        public virtual System.Threading.Tasks.Task<BooleanApiResponse> ApiExternalV1CustomersOptInPostAsync(System.Guid customer_id, RetailWalletOptInDto body)
         {
-            return ApiExternalV1CustomersOptInAsync(customer_id, body, System.Threading.CancellationToken.None);
+            return ApiExternalV1CustomersOptInPostAsync(customer_id, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -2993,7 +2993,7 @@ namespace Tokenization.SDK
         /// <param name="body">Data.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<BooleanApiResponse> ApiExternalV1CustomersOptInAsync(System.Guid customer_id, RetailWalletOptInDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<BooleanApiResponse> ApiExternalV1CustomersOptInPostAsync(System.Guid customer_id, RetailWalletOptInDto body, System.Threading.CancellationToken cancellationToken)
         {
             if (customer_id == null)
                 throw new System.ArgumentNullException("customer_id");
@@ -3013,6 +3013,98 @@ namespace Tokenization.SDK
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<BooleanApiResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Request to hold a certain tokenized asset in customer retail wallet.
+        /// </summary>
+        /// <param name="customer_id">Customer id.</param>
+        /// <param name="body">Data.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<BooleanApiResponse> ApiExternalV1CustomersOptInPatchAsync(System.Guid customer_id, UpdateOptInDto body)
+        {
+            return ApiExternalV1CustomersOptInPatchAsync(customer_id, body, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Request to hold a certain tokenized asset in customer retail wallet.
+        /// </summary>
+        /// <param name="customer_id">Customer id.</param>
+        /// <param name="body">Data.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<BooleanApiResponse> ApiExternalV1CustomersOptInPatchAsync(System.Guid customer_id, UpdateOptInDto body, System.Threading.CancellationToken cancellationToken)
+        {
+            if (customer_id == null)
+                throw new System.ArgumentNullException("customer_id");
+
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/external/v1/customers/{customer-id}/opt-in");
+            urlBuilder_.Replace("{customer-id}", System.Uri.EscapeDataString(ConvertToString(customer_id, System.Globalization.CultureInfo.InvariantCulture)));
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("PATCH");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
@@ -6201,6 +6293,9 @@ namespace Tokenization.SDK
         [Newtonsoft.Json.JsonProperty("retailWalletId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid RetailWalletId { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("proposedRetailWalletId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid ProposedRetailWalletId { get; set; }
+
         [Newtonsoft.Json.JsonProperty("created", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime Created { get; set; }
 
@@ -6505,6 +6600,20 @@ namespace Tokenization.SDK
         [Newtonsoft.Json.JsonProperty("gender", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public GenderTypes Gender { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.1.0))")]
+    public partial class UpdateOptInDto
+    {
+        [Newtonsoft.Json.JsonProperty("tokenizedAssetId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid TokenizedAssetId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("approvedForDelivery", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool ApprovedForDelivery { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double Amount { get; set; }
 
     }
 

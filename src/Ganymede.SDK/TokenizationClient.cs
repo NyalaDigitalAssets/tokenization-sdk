@@ -148,7 +148,7 @@ namespace Tokenization.SDK
         /// <param name="customerId">The GUID ID of the customer</param>
         public async Task<bool> CreateTokenizedAssetOptInAsync(Guid customerId, RetailWalletOptInDto data)
         {
-            var response = await _client.ApiExternalV1CustomersOptInAsync(customerId, data);
+            var response = await _client.ApiExternalV1CustomersOptInPostAsync(customerId, data);
             return response.Data;
         }
 
@@ -200,6 +200,18 @@ namespace Tokenization.SDK
         public async Task<Guid> InitiateRetailWalletAssetTransferRequest(Guid customerId, Guid retailWalletId, CreateRetailWalletAssetTransactionDto data)
         {
             var response = await _client.ApiExternalV1CustomersRetailWalletsAssetTransferAsync(customerId, retailWalletId, data);
+            return response.Data;
+        }
+
+        /// <summary>
+        /// Update optin
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public async Task<bool> UpdateTokenizedAssetOptInAsync(Guid customerId, UpdateOptInDto data)
+        {
+            var response = await _client.ApiExternalV1CustomersOptInPatchAsync(customerId, data);
             return response.Data;
         }
 
