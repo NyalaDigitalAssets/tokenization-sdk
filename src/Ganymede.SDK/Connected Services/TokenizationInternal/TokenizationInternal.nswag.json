@@ -2333,7 +2333,8 @@
           "Solana",
           "Cardano",
           "Polygon",
-          "Avalanche"
+          "Avalanche",
+          "EthereumSmartContract"
         ],
         "x-custom-enum": {
           "name": "Blockchains",
@@ -2401,6 +2402,10 @@
             {
               "label": "Avalanche",
               "value": 15
+            },
+            {
+              "label": "EthereumSmartContract",
+              "value": 16
             }
           ]
         }
@@ -2749,6 +2754,7 @@
           },
           "message": {
             "type": "string",
+            "maxLength": 28,
             "nullable": true
           },
           "credentials": {
@@ -2778,6 +2784,14 @@
             "type": "string",
             "format": "uuid"
           },
+          "firstname": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastname": {
+            "type": "string",
+            "nullable": true
+          },
           "institutionId": {
             "type": "string",
             "format": "uuid"
@@ -2799,14 +2813,6 @@
             "nullable": true
           },
           "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "firstname": {
-            "type": "string",
-            "nullable": true
-          },
-          "lastname": {
             "type": "string",
             "nullable": true
           },
@@ -3165,8 +3171,8 @@
         "format": "int32",
         "enum": [
           "Initiated",
-          "NotEligible",
-          "Failed"
+          "Failed",
+          "NotEligible"
         ],
         "x-custom-enum": {
           "name": "FaucetFundingResult",
@@ -3263,7 +3269,6 @@
         "type": "string",
         "format": "int32",
         "enum": [
-          "None",
           "NotSet",
           "Normal",
           "Plain"
@@ -3272,20 +3277,20 @@
           "name": "IdentVerifiedType",
           "enumObjects": [
             {
-              "label": "None",
+              "label": "NotSet",
               "value": 0
             },
             {
-              "label": "NotSet",
+              "label": "Normal",
               "value": 1
             },
             {
-              "label": "Normal",
+              "label": "Plain",
               "value": 2
             },
             {
-              "label": "Plain",
-              "value": 3
+              "label": "None",
+              "value": -1
             }
           ]
         }
@@ -3862,7 +3867,6 @@
         "type": "string",
         "format": "int32",
         "enum": [
-          "NotExisting",
           "New",
           "Sent",
           "Failed",
@@ -3876,7 +3880,8 @@
           "IdentityRegistered",
           "IdentityRemoved",
           "TransferInitiated",
-          "TransferCompleted"
+          "TransferCompleted",
+          "NotExisting"
         ],
         "x-custom-enum": {
           "name": "OptInStatus",
@@ -4385,6 +4390,43 @@
           }
         }
       },
+      "RetailWalletTokenizedAssetTransferDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "tokenizedAssetId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "txId": {
+            "type": "string",
+            "nullable": true
+          },
+          "senderAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "recipientAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "amount": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/WalletTransactionStatus"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
       "RetailWalletType": {
         "type": "string",
         "format": "int32",
@@ -4689,6 +4731,13 @@
             "nullable": true,
             "items": {
               "$ref": "#/components/schemas/TokenizedAssetTransferDto"
+            }
+          },
+          "secondaryMarketTransfers": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/RetailWalletTokenizedAssetTransferDto"
             }
           },
           "optIns": {
@@ -5250,9 +5299,9 @@
         "enum": [
           "New",
           "Successful",
-          "Retrying",
+          "Canceled",
           "Failed",
-          "Canceled"
+          "Retrying"
         ],
         "x-custom-enum": {
           "name": "TxStatus",
@@ -5445,7 +5494,9 @@
           "Successful",
           "Failed",
           "TimedOut",
-          "FailedOnBlockChain"
+          "FailedOnBlockChain",
+          "RecipientAddressNotFound",
+          "RecipientInvalidOptinStatus"
         ],
         "x-custom-enum": {
           "name": "WalletTransactionStatus",
@@ -5485,6 +5536,14 @@
             {
               "label": "FailedOnBlockChain",
               "value": 8
+            },
+            {
+              "label": "RecipientAddressNotFound",
+              "value": 9
+            },
+            {
+              "label": "RecipientInvalidOptinStatus",
+              "value": 10
             }
           ]
         }
