@@ -1,6 +1,6 @@
 ﻿{
   "ProviderId": "Unchase.OpenAPI.ConnectedService",
-  "Version": "1.9.1.0",
+  "Version": "1.6.5.0",
   "GettingStartedDocument": {
     "Uri": "https://github.com/unchase/Unchase.OpenAPI.Connectedservice/"
   },
@@ -94,6 +94,7 @@
       "TypeNameGeneratorType": null,
       "PropertyNameGeneratorType": null,
       "EnumNameGeneratorType": null,
+      "ChecksumCacheEnabled": false,
       "ServiceHost": null,
       "ServiceSchemes": null,
       "output": "TokenizationInternal.cs",
@@ -104,7 +105,7 @@
     "OpenApiToCSharpControllerCommand": null,
     "Variables": null,
     "Runtime": 0,
-    "CopySpecification": false,
+    "CopySpecification": true,
     "OpenGeneratedFilesOnComplete": false,
     "UseRelativePath": false,
     "ConvertFromOdata": false,

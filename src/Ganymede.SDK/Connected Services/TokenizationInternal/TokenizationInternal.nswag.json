@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Nyala External API",
-    "description": "The Kapilendo Crypto API offers:\r\n- Wealth Management as a Service \r\n- Retail Crypto Asset Wallet as a Service\r\n# Wealth Management as a Service \r\nCustomer are provided with the ability to onboard users to one of several ETF Portfolios, where depot and wealth management services are provided.\r\n# Retail Crypto Asset Wallet as a Service\r\nCustomer are provided with the ability to create blockchain wallets for users.\r\n",
+    "description": "",
     "contact": {
       "name": "Nyala Digital Asset AG",
       "url": "https://www.nyala.de",
@@ -234,17 +234,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/KycDataDto"
+                "$ref": "#/components/schemas/UpdateKycData"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/KycDataDto"
+                "$ref": "#/components/schemas/UpdateKycData"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/KycDataDto"
+                "$ref": "#/components/schemas/UpdateKycData"
               }
             }
           }
@@ -1437,21 +1437,21 @@
           }
         ],
         "requestBody": {
-          "description": "Credentials to access the mnemonic seed. Encryption key file can be left empty, if it's stored on the Custodian side.",
+          "description": "Contains Credentials to access the mnemonic seed. Encryption key file can be left empty, if it's stored on the Custodian side.",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+                "$ref": "#/components/schemas/CreateRetailWalletRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+                "$ref": "#/components/schemas/CreateRetailWalletRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+                "$ref": "#/components/schemas/CreateRetailWalletRequest"
               }
             }
           }
@@ -1682,6 +1682,69 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/UpdateOptInDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/external/v1/customers/{customer-id}/retail-wallets/{retail-wallet-id}/external-opt-in": {
+      "post": {
+        "tags": [
+          "Retail Wallet"
+        ],
+        "summary": "Request to hold a certain tokenized asset in given external retail wallet.",
+        "operationId": "OptInWithExternalRetailWallet",
+        "parameters": [
+          {
+            "name": "customer-id",
+            "in": "path",
+            "required": true,
+            "description": "Customer id.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "retail-wallet-id",
+            "in": "path",
+            "required": true,
+            "description": "External Wallet id.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Data.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExternalRetailWalletOptInDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExternalRetailWalletOptInDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExternalRetailWalletOptInDto"
               }
             }
           }
@@ -2033,21 +2096,21 @@
         "summary": "Import external wallets into the system.",
         "operationId": "CreateExternalRetailWallet",
         "requestBody": {
-          "description": "External wallets' public addresses with some metadata.",
+          "description": "External wallets' public addresse with some metadata.",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ImportExternalRetailWalletDto"
+                "$ref": "#/components/schemas/CreateExternalRetailWalletDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/ImportExternalRetailWalletDto"
+                "$ref": "#/components/schemas/CreateExternalRetailWalletDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/ImportExternalRetailWalletDto"
+                "$ref": "#/components/schemas/CreateExternalRetailWalletDto"
               }
             }
           }
@@ -2058,7 +2121,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BooleanApiResponse"
+                  "$ref": "#/components/schemas/GuidApiResponse"
                 }
               }
             }
@@ -2638,6 +2701,9 @@
           "company": {
             "$ref": "#/components/schemas/CustomerCompanyDetailDto"
           },
+          "tanganyLegalPerson": {
+            "$ref": "#/components/schemas/TanganyLegalPersonDto"
+          },
           "nationalityIso": {
             "type": "string",
             "nullable": true
@@ -2655,6 +2721,9 @@
             "format": "email",
             "maxLength": 64,
             "minLength": 0
+          },
+          "custodyProvider": {
+            "$ref": "#/components/schemas/CustodyProvider"
           }
         }
       },
@@ -2668,6 +2737,10 @@
           "publicAddress": {
             "type": "string",
             "nullable": true
+          },
+          "accountId": {
+            "type": "string",
+            "format": "uuid"
           },
           "name": {
             "type": "string",
@@ -2762,6 +2835,18 @@
           }
         }
       },
+      "CreateRetailWalletRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "credentials": {
+            "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
+          },
+          "custodyProvider": {
+            "$ref": "#/components/schemas/CustodyProvider"
+          }
+        }
+      },
       "CreateTrustLineInternalDto": {
         "type": "object",
         "additionalProperties": false,
@@ -2774,6 +2859,27 @@
             "type": "string",
             "format": "uuid"
           }
+        }
+      },
+      "CustodyProvider": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "HADC",
+          "Tangany"
+        ],
+        "x-custom-enum": {
+          "name": "CustodyProvider",
+          "enumObjects": [
+            {
+              "label": "HADC",
+              "value": 0
+            },
+            {
+              "label": "Tangany",
+              "value": 1
+            }
+          ]
         }
       },
       "CustomerAccountDto": {
@@ -2948,6 +3054,20 @@
             "format": "email",
             "maxLength": 64,
             "minLength": 1
+          }
+        }
+      },
+      "CustomerExternalRetailWalletDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "customerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "externalRetailWalletId": {
+            "type": "string",
+            "format": "uuid"
           }
         }
       },
@@ -3166,6 +3286,26 @@
           }
         }
       },
+      "ExternalRetailWalletOptInDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "tokenizedAssetId"
+        ],
+        "properties": {
+          "tokenizedAssetId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "approvedForDelivery": {
+            "type": "boolean"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
       "FaucetFundingResult": {
         "type": "string",
         "format": "int32",
@@ -3295,19 +3435,6 @@
           ]
         }
       },
-      "ImportExternalRetailWalletDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "wallets": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/CreateExternalRetailWalletDto"
-            }
-          }
-        }
-      },
       "InitTokenizedAssetCreationDto": {
         "type": "object",
         "additionalProperties": false,
@@ -3375,6 +3502,14 @@
           },
           "hasAIPSupport": {
             "type": "boolean"
+          },
+          "customAttributes": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            }
           }
         }
       },
@@ -3757,6 +3892,9 @@
           "identVerifiedType": {
             "$ref": "#/components/schemas/IdentVerifiedType"
           },
+          "tanganyIdentVerifiedType": {
+            "$ref": "#/components/schemas/TanganyIdentVerifiedType"
+          },
           "eulaAgreed": {
             "type": "boolean"
           },
@@ -3776,6 +3914,27 @@
           "bic": {
             "type": "string",
             "nullable": true
+          },
+          "tanganyLegalPerson": {
+            "$ref": "#/components/schemas/TanganyLegalPersonDto"
+          }
+        }
+      },
+      "LegalKycDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "businessDescription",
+          "isCreAvailable"
+        ],
+        "properties": {
+          "businessDescription": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1
+          },
+          "isCreAvailable": {
+            "type": "boolean"
           }
         }
       },
@@ -3881,6 +4040,7 @@
           "IdentityRemoved",
           "TransferInitiated",
           "TransferCompleted",
+          "TokenPaused",
           "NotExisting"
         ],
         "x-custom-enum": {
@@ -3941,6 +4101,10 @@
             {
               "label": "TransferCompleted",
               "value": 13
+            },
+            {
+              "label": "TokenPaused",
+              "value": 14
             },
             {
               "label": "NotExisting",
@@ -4093,6 +4257,38 @@
           ]
         }
       },
+      "RelatedItemDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "entityId",
+          "isFictitiousBeneficialOwner",
+          "isUltimateBeneficialOwner"
+        ],
+        "properties": {
+          "entityId": {
+            "type": "string",
+            "format": "uuid",
+            "minLength": 1
+          },
+          "position": {
+            "type": "string",
+            "maxLength": 255,
+            "nullable": true
+          },
+          "isFictitiousBeneficialOwner": {
+            "type": "boolean"
+          },
+          "isUltimateBeneficialOwner": {
+            "type": "boolean"
+          },
+          "sharePercentage": {
+            "type": "string",
+            "maxLength": 10,
+            "nullable": true
+          }
+        }
+      },
       "RequestFaucetFundingDto": {
         "type": "object",
         "additionalProperties": false,
@@ -4182,7 +4378,8 @@
           },
           "retailWalletSeedId": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "nullable": true
           },
           "accountId": {
             "type": "string",
@@ -4267,6 +4464,9 @@
           "amount": {
             "type": "number",
             "format": "double"
+          },
+          "custodyProvider": {
+            "$ref": "#/components/schemas/CustodyProvider"
           }
         }
       },
@@ -4496,6 +4696,247 @@
           }
         }
       },
+      "TanganyCustomerAddressDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "city",
+          "country",
+          "postcode",
+          "streetName",
+          "streetNumber"
+        ],
+        "properties": {
+          "country": {
+            "type": "string",
+            "maxLength": 2,
+            "minLength": 1
+          },
+          "city": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1
+          },
+          "postcode": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1
+          },
+          "streetName": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1
+          },
+          "streetNumber": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1
+          }
+        }
+      },
+      "TanganyCustomerKycDocumentDto": {
+        "type": "object",
+        "description": "The document which was used for verification. Note that a document is required for all verification methods except for in_person",
+        "additionalProperties": false,
+        "properties": {
+          "nationality": {
+            "type": "string",
+            "description": "Stated nationality. Must be a ISO 3166-1 Alpha-2 country code. Additionally \"XX\" is allowed for unknown states.",
+            "maxLength": 2,
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "description": "Document issuing country. Must be a ISO 3166-1 Alpha-2 country code. Additionally \"XX\" is allowed for unknown states. Nullable only for QES_bankident method - has to be set to null or removed from the object",
+            "maxLength": 2,
+            "nullable": true
+          },
+          "number": {
+            "type": "string",
+            "description": "ID of the document. Nullable only for eID and QES_bankident methods - has to be set to null or removed from the object",
+            "maxLength": 255,
+            "nullable": true
+          },
+          "issuedBy": {
+            "type": "string",
+            "description": "Name of the document issuer. Nullable only for eID and QES_bankident methods - has to be set to null or removed from the object",
+            "maxLength": 255,
+            "nullable": true
+          },
+          "issueDate": {
+            "type": "string",
+            "description": "Date of issuance in the format YYYY-MM-DD. Must be >= 1900-01-01. If not provided, can be set to n/a. Nullable only for QES_bankident method - has to be set to null or removed from the object",
+            "format": "date",
+            "nullable": true
+          },
+          "validUntil": {
+            "type": "string",
+            "description": "Stated expiration date of the document in the YYYY-MM-DD format. Must be >= 1900-01-01. Nullable only for QES_bankident method - has to be set to null or removed from the object",
+            "format": "date",
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/TanganyDocumentType"
+          },
+          "iban": {
+            "type": "string",
+            "description": "International Bank Account Number comprised of 34 characters, letters and numbers. Nullable for all methods except QES_bankident",
+            "maxLength": 34,
+            "nullable": true
+          },
+          "reference": {
+            "type": "string",
+            "description": "Reference or purpose of a transfer containing any characters. Nullable for all methods except QES_bankident",
+            "nullable": true
+          }
+        }
+      },
+      "TanganyDocumentType": {
+        "type": "string",
+        "description": "Type of the document. Nullable only for QES_bankident method - has to be set to null or removed from the object",
+        "format": "int32",
+        "enum": [
+          "Id_card",
+          "Passport",
+          "Other"
+        ],
+        "x-custom-enum": {
+          "name": "TanganyDocumentType",
+          "enumObjects": [
+            {
+              "label": "Id_card",
+              "value": 0
+            },
+            {
+              "label": "Passport",
+              "value": 1
+            },
+            {
+              "label": "Other",
+              "value": 2
+            }
+          ]
+        }
+      },
+      "TanganyIdentVerifiedType": {
+        "type": "string",
+        "format": "int32",
+        "enum": [
+          "Id_copy",
+          "Auto_ident",
+          "In_person",
+          "Eid",
+          "Post_ident",
+          "Qes_bankident"
+        ],
+        "x-custom-enum": {
+          "name": "TanganyIdentVerifiedType",
+          "enumObjects": [
+            {
+              "label": "Video_ident",
+              "value": 3
+            },
+            {
+              "label": "Id_copy",
+              "value": 4
+            },
+            {
+              "label": "Auto_ident",
+              "value": 5
+            },
+            {
+              "label": "In_person",
+              "value": 6
+            },
+            {
+              "label": "Eid",
+              "value": 7
+            },
+            {
+              "label": "Post_ident",
+              "value": 8
+            },
+            {
+              "label": "Qes_bankident",
+              "value": 9
+            }
+          ]
+        }
+      },
+      "TanganyLegalPersonDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "legalAddress",
+          "legalForm",
+          "name",
+          "related"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1
+          },
+          "legalForm": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1
+          },
+          "commercialRegister": {
+            "type": "string",
+            "maxLength": 255,
+            "nullable": true
+          },
+          "leiCode": {
+            "type": "string",
+            "maxLength": 255,
+            "nullable": true
+          },
+          "taxId": {
+            "type": "string",
+            "maxLength": 255,
+            "nullable": true
+          },
+          "vatId": {
+            "type": "string",
+            "maxLength": 255,
+            "nullable": true
+          },
+          "isinCode": {
+            "type": "string",
+            "maxLength": 255,
+            "nullable": true
+          },
+          "legalJurisdiction": {
+            "type": "string",
+            "maxLength": 2,
+            "nullable": true
+          },
+          "legalAddress": {
+            "$ref": "#/components/schemas/TanganyCustomerAddressDto"
+          },
+          "postalAddress": {
+            "$ref": "#/components/schemas/TanganyCustomerAddressDto"
+          },
+          "kyc": {
+            "$ref": "#/components/schemas/LegalKycDto"
+          },
+          "related": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/RelatedItemDto"
+            }
+          }
+        }
+      },
       "ToggleOptInAuthorizationDto": {
         "type": "object",
         "additionalProperties": false,
@@ -4503,11 +4944,26 @@
           "credentials": {
             "$ref": "#/components/schemas/SimpleAccessCredentialsDto"
           },
+          "optinIds": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
           "customerRetailWalletIds": {
             "type": "array",
             "nullable": true,
             "items": {
               "$ref": "#/components/schemas/CustomerRetailWalletDto"
+            }
+          },
+          "customerExternalRetailWallet": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/CustomerExternalRetailWalletDto"
             }
           }
         }
@@ -4726,6 +5182,14 @@
             "type": "number",
             "format": "double"
           },
+          "customAttributes": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            }
+          },
           "transfers": {
             "type": "array",
             "nullable": true,
@@ -4941,6 +5405,14 @@
           "aipInterestRate": {
             "type": "number",
             "format": "double"
+          },
+          "customAttributes": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            }
           }
         }
       },
@@ -4991,7 +5463,13 @@
           },
           "retailWalletId": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "nullable": true
+          },
+          "externalRetailWalletId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
           },
           "proposedRetailWalletId": {
             "type": "string",
@@ -5121,7 +5599,8 @@
           "DeployIdentity",
           "RegisterIdentity",
           "RemoveIdentity",
-          "TxRetailAsset"
+          "TxRetailAsset",
+          "PauseToken"
         ],
         "x-custom-enum": {
           "name": "TransactionActions",
@@ -5193,6 +5672,10 @@
             {
               "label": "TxRetailAsset",
               "value": 17
+            },
+            {
+              "label": "PauseToken",
+              "value": 18
             }
           ]
         }
@@ -5406,12 +5889,124 @@
           "company": {
             "$ref": "#/components/schemas/CustomerCompanyDetailDto"
           },
+          "tanganyLegalPerson": {
+            "$ref": "#/components/schemas/TanganyLegalPersonDto"
+          },
           "nationalityIso": {
             "type": "string",
             "nullable": true
           },
           "gender": {
             "$ref": "#/components/schemas/GenderTypes"
+          }
+        }
+      },
+      "UpdateKycData": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "address",
+          "dateOfBirth",
+          "email",
+          "eulaAgreed",
+          "firstname",
+          "highCorruptionIndex",
+          "identVerified",
+          "lastname",
+          "nonPepPerson",
+          "nonSanctionedCountry",
+          "nonUsTaxPerson",
+          "placeOfBirth"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 0,
+            "nullable": true
+          },
+          "salutation": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstname": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 0
+          },
+          "lastname": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 0
+          },
+          "placeOfBirth": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 0
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 64,
+            "minLength": 0
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "nonPepPerson": {
+            "type": "boolean"
+          },
+          "highCorruptionIndex": {
+            "type": "boolean"
+          },
+          "nonSanctionedCountry": {
+            "type": "boolean"
+          },
+          "nonUsTaxPerson": {
+            "type": "boolean"
+          },
+          "identVerified": {
+            "type": "boolean"
+          },
+          "identVerifiedType": {
+            "$ref": "#/components/schemas/IdentVerifiedType"
+          },
+          "tanganyIdentVerifiedType": {
+            "$ref": "#/components/schemas/TanganyIdentVerifiedType"
+          },
+          "eulaAgreed": {
+            "type": "boolean"
+          },
+          "address": {
+            "$ref": "#/components/schemas/KycAddressDto"
+          },
+          "company": {
+            "$ref": "#/components/schemas/CustomerCompanyDetailDto"
+          },
+          "nationalityIso": {
+            "type": "string",
+            "nullable": true
+          },
+          "gender": {
+            "$ref": "#/components/schemas/GenderTypes"
+          },
+          "bic": {
+            "type": "string",
+            "nullable": true
+          },
+          "tanganyLegalPerson": {
+            "$ref": "#/components/schemas/TanganyLegalPersonDto"
+          },
+          "custodyProvider": {
+            "$ref": "#/components/schemas/CustodyProvider"
+          },
+          "document": {
+            "$ref": "#/components/schemas/TanganyCustomerKycDocumentDto"
           }
         }
       },
@@ -5583,8 +6178,8 @@
   },
   "tags": [
     {
-      "name": "Wealth Management",
-      "description": "Wealth management services provide institution the ability to onbaord their customer for one of several ETF portfolios. Customers receive a depot where the ETF securities are stored, as well as quarterly reporting and daily depot performance data. "
+      "name": "Customer",
+      "description": "Customer management used for creating or listing new customer"
     }
   ]
 }
