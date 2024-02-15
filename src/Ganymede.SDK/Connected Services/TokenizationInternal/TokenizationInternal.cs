@@ -503,7 +503,7 @@ namespace Tokenization.SDK
         /// <param name="body">Data.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<BooleanApiResponse> ApiExternalV1CustomersKycAsync(System.Guid customer_id, KycDataDto body)
+        public virtual System.Threading.Tasks.Task<BooleanApiResponse> ApiExternalV1CustomersKycAsync(System.Guid customer_id, UpdateKycData body)
         {
             return ApiExternalV1CustomersKycAsync(customer_id, body, System.Threading.CancellationToken.None);
         }
@@ -516,7 +516,7 @@ namespace Tokenization.SDK
         /// <param name="body">Data.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<BooleanApiResponse> ApiExternalV1CustomersKycAsync(System.Guid customer_id, KycDataDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<BooleanApiResponse> ApiExternalV1CustomersKycAsync(System.Guid customer_id, UpdateKycData body, System.Threading.CancellationToken cancellationToken)
         {
             if (customer_id == null)
                 throw new System.ArgumentNullException("customer_id");
@@ -2688,10 +2688,10 @@ namespace Tokenization.SDK
         /// <br/>A list of retail wallet objects are being returned, which can be derived from the seed.
         /// </summary>
         /// <param name="customer_id">Customer Id.</param>
-        /// <param name="body">Credentials to access the mnemonic seed. Encryption key file can be left empty, if it's stored on the Custodian side.</param>
+        /// <param name="body">Contains Credentials to access the mnemonic seed. Encryption key file can be left empty, if it's stored on the Custodian side.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<RetailWalletDtoListApiResponse> ApiExternalV1CustomersRetailWalletsPostAsync(System.Guid customer_id, SimpleAccessCredentialsDto body)
+        public virtual System.Threading.Tasks.Task<RetailWalletDtoListApiResponse> ApiExternalV1CustomersRetailWalletsPostAsync(System.Guid customer_id, CreateRetailWalletRequest body)
         {
             return ApiExternalV1CustomersRetailWalletsPostAsync(customer_id, body, System.Threading.CancellationToken.None);
         }
@@ -2702,10 +2702,10 @@ namespace Tokenization.SDK
         /// <br/>A list of retail wallet objects are being returned, which can be derived from the seed.
         /// </summary>
         /// <param name="customer_id">Customer Id.</param>
-        /// <param name="body">Credentials to access the mnemonic seed. Encryption key file can be left empty, if it's stored on the Custodian side.</param>
+        /// <param name="body">Contains Credentials to access the mnemonic seed. Encryption key file can be left empty, if it's stored on the Custodian side.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<RetailWalletDtoListApiResponse> ApiExternalV1CustomersRetailWalletsPostAsync(System.Guid customer_id, SimpleAccessCredentialsDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<RetailWalletDtoListApiResponse> ApiExternalV1CustomersRetailWalletsPostAsync(System.Guid customer_id, CreateRetailWalletRequest body, System.Threading.CancellationToken cancellationToken)
         {
             if (customer_id == null)
                 throw new System.ArgumentNullException("customer_id");
@@ -3105,6 +3105,104 @@ namespace Tokenization.SDK
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("PATCH");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<BooleanApiResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Request to hold a certain tokenized asset in given external retail wallet.
+        /// </summary>
+        /// <param name="customer_id">Customer id.</param>
+        /// <param name="retail_wallet_id">External Wallet id.</param>
+        /// <param name="body">Data.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<BooleanApiResponse> ApiExternalV1CustomersRetailWalletsExternalOptInAsync(System.Guid customer_id, System.Guid retail_wallet_id, ExternalRetailWalletOptInDto body)
+        {
+            return ApiExternalV1CustomersRetailWalletsExternalOptInAsync(customer_id, retail_wallet_id, body, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Request to hold a certain tokenized asset in given external retail wallet.
+        /// </summary>
+        /// <param name="customer_id">Customer id.</param>
+        /// <param name="retail_wallet_id">External Wallet id.</param>
+        /// <param name="body">Data.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<BooleanApiResponse> ApiExternalV1CustomersRetailWalletsExternalOptInAsync(System.Guid customer_id, System.Guid retail_wallet_id, ExternalRetailWalletOptInDto body, System.Threading.CancellationToken cancellationToken)
+        {
+            if (customer_id == null)
+                throw new System.ArgumentNullException("customer_id");
+
+            if (retail_wallet_id == null)
+                throw new System.ArgumentNullException("retail_wallet_id");
+
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/external/v1/customers/{customer-id}/retail-wallets/{retail-wallet-id}/external-opt-in");
+            urlBuilder_.Replace("{customer-id}", System.Uri.EscapeDataString(ConvertToString(customer_id, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{retail-wallet-id}", System.Uri.EscapeDataString(ConvertToString(retail_wallet_id, System.Globalization.CultureInfo.InvariantCulture)));
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
@@ -3791,10 +3889,10 @@ namespace Tokenization.SDK
         /// <summary>
         /// Import external wallets into the system.
         /// </summary>
-        /// <param name="body">External wallets' public addresses with some metadata.</param>
+        /// <param name="body">External wallets' public addresse with some metadata.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<BooleanApiResponse> ApiExternalV1RetailWalletsExternalPostAsync(ImportExternalRetailWalletDto body)
+        public virtual System.Threading.Tasks.Task<GuidApiResponse> ApiExternalV1RetailWalletsExternalPostAsync(CreateExternalRetailWalletDto body)
         {
             return ApiExternalV1RetailWalletsExternalPostAsync(body, System.Threading.CancellationToken.None);
         }
@@ -3803,10 +3901,10 @@ namespace Tokenization.SDK
         /// <summary>
         /// Import external wallets into the system.
         /// </summary>
-        /// <param name="body">External wallets' public addresses with some metadata.</param>
+        /// <param name="body">External wallets' public addresse with some metadata.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<BooleanApiResponse> ApiExternalV1RetailWalletsExternalPostAsync(ImportExternalRetailWalletDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<GuidApiResponse> ApiExternalV1RetailWalletsExternalPostAsync(CreateExternalRetailWalletDto body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/external/v1/retail-wallets/external");
@@ -3847,7 +3945,7 @@ namespace Tokenization.SDK
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<BooleanApiResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<GuidApiResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -4641,6 +4739,9 @@ namespace Tokenization.SDK
         [Newtonsoft.Json.JsonProperty("company", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CustomerCompanyDetailDto Company { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("tanganyLegalPerson", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public TanganyLegalPersonDto TanganyLegalPerson { get; set; }
+
         [Newtonsoft.Json.JsonProperty("nationalityIso", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string NationalityIso { get; set; }
 
@@ -4656,6 +4757,10 @@ namespace Tokenization.SDK
         [System.ComponentModel.DataAnnotations.StringLength(64)]
         public string Email { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("custodyProvider", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public CustodyProvider CustodyProvider { get; set; }
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.3.0))")]
@@ -4667,6 +4772,9 @@ namespace Tokenization.SDK
 
         [Newtonsoft.Json.JsonProperty("publicAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PublicAddress { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("accountId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid AccountId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
@@ -4741,6 +4849,18 @@ namespace Tokenization.SDK
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.3.0))")]
+    public partial class CreateRetailWalletRequest
+    {
+        [Newtonsoft.Json.JsonProperty("credentials", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SimpleAccessCredentialsDto Credentials { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("custodyProvider", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public CustodyProvider CustodyProvider { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.3.0))")]
     public partial class CreateTrustLineInternalDto
     {
         [Newtonsoft.Json.JsonProperty("pin", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -4748,6 +4868,18 @@ namespace Tokenization.SDK
 
         [Newtonsoft.Json.JsonProperty("uuid", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid Uuid { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.3.0))")]
+    public enum CustodyProvider
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"HADC")]
+        HADC = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Tangany")]
+        Tangany = 1,
 
     }
 
@@ -4880,6 +5012,17 @@ namespace Tokenization.SDK
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.StringLength(64, MinimumLength = 1)]
         public string Email { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.3.0))")]
+    public partial class CustomerExternalRetailWalletDto
+    {
+        [Newtonsoft.Json.JsonProperty("customerId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid CustomerId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("externalRetailWalletId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid ExternalRetailWalletId { get; set; }
 
     }
 
@@ -5043,6 +5186,21 @@ namespace Tokenization.SDK
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.3.0))")]
+    public partial class ExternalRetailWalletOptInDto
+    {
+        [Newtonsoft.Json.JsonProperty("tokenizedAssetId", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public System.Guid TokenizedAssetId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("approvedForDelivery", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool ApprovedForDelivery { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double Amount { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.3.0))")]
     public enum FaucetFundingResult
     {
 
@@ -5113,14 +5271,6 @@ namespace Tokenization.SDK
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.3.0))")]
-    public partial class ImportExternalRetailWalletDto
-    {
-        [Newtonsoft.Json.JsonProperty("wallets", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<CreateExternalRetailWalletDto> Wallets { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.3.0))")]
     public partial class InitTokenizedAssetCreationDto
     {
         [Newtonsoft.Json.JsonProperty("blockchain", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -5174,6 +5324,9 @@ namespace Tokenization.SDK
 
         [Newtonsoft.Json.JsonProperty("hasAIPSupport", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool HasAIPSupport { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("customAttributes", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, string> CustomAttributes { get; set; }
 
     }
 
@@ -5438,6 +5591,10 @@ namespace Tokenization.SDK
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public IdentVerifiedType IdentVerifiedType { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("tanganyIdentVerifiedType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public TanganyIdentVerifiedType TanganyIdentVerifiedType { get; set; }
+
         [Newtonsoft.Json.JsonProperty("eulaAgreed", Required = Newtonsoft.Json.Required.Always)]
         public bool EulaAgreed { get; set; }
 
@@ -5457,6 +5614,22 @@ namespace Tokenization.SDK
 
         [Newtonsoft.Json.JsonProperty("bic", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Bic { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("tanganyLegalPerson", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public TanganyLegalPersonDto TanganyLegalPerson { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.3.0))")]
+    public partial class LegalKycDto
+    {
+        [Newtonsoft.Json.JsonProperty("businessDescription", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
+        public string BusinessDescription { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isCreAvailable", Required = Newtonsoft.Json.Required.Always)]
+        public bool IsCreAvailable { get; set; }
 
     }
 
@@ -5573,8 +5746,11 @@ namespace Tokenization.SDK
         [System.Runtime.Serialization.EnumMember(Value = @"TransferCompleted")]
         TransferCompleted = 13,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"TokenPaused")]
+        TokenPaused = 14,
+
         [System.Runtime.Serialization.EnumMember(Value = @"NotExisting")]
-        NotExisting = 14,
+        NotExisting = 15,
 
     }
 
@@ -5679,6 +5855,29 @@ namespace Tokenization.SDK
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.3.0))")]
+    public partial class RelatedItemDto
+    {
+        [Newtonsoft.Json.JsonProperty("entityId", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public System.Guid EntityId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("position", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(255)]
+        public string Position { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isFictitiousBeneficialOwner", Required = Newtonsoft.Json.Required.Always)]
+        public bool IsFictitiousBeneficialOwner { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isUltimateBeneficialOwner", Required = Newtonsoft.Json.Required.Always)]
+        public bool IsUltimateBeneficialOwner { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("sharePercentage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(10)]
+        public string SharePercentage { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.3.0))")]
     public partial class RequestFaucetFundingDto
     {
         [Newtonsoft.Json.JsonProperty("retailWallets", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -5737,8 +5936,8 @@ namespace Tokenization.SDK
         [Newtonsoft.Json.JsonProperty("seedLockStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool SeedLockStatus { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("retailWalletSeedId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid RetailWalletSeedId { get; set; }
+        [Newtonsoft.Json.JsonProperty("retailWalletSeedId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? RetailWalletSeedId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("accountId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid AccountId { get; set; }
@@ -5797,6 +5996,10 @@ namespace Tokenization.SDK
 
         [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double Amount { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("custodyProvider", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public CustodyProvider CustodyProvider { get; set; }
 
     }
 
@@ -5953,13 +6156,216 @@ namespace Tokenization.SDK
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.3.0))")]
+    public partial class TanganyCustomerAddressDto
+    {
+        [Newtonsoft.Json.JsonProperty("country", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(2, MinimumLength = 1)]
+        public string Country { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("city", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
+        public string City { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("postcode", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
+        public string Postcode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("streetName", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
+        public string StreetName { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("streetNumber", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
+        public string StreetNumber { get; set; }
+
+    }
+
+    /// <summary>
+    /// The document which was used for verification. Note that a document is required for all verification methods except for in_person
+    /// </summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.3.0))")]
+    public partial class TanganyCustomerKycDocumentDto
+    {
+        /// <summary>
+        /// Stated nationality. Must be a ISO 3166-1 Alpha-2 country code. Additionally "XX" is allowed for unknown states.
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("nationality", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(2)]
+        public string Nationality { get; set; }
+
+        /// <summary>
+        /// Document issuing country. Must be a ISO 3166-1 Alpha-2 country code. Additionally "XX" is allowed for unknown states. Nullable only for QES_bankident method - has to be set to null or removed from the object
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("country", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(2)]
+        public string Country { get; set; }
+
+        /// <summary>
+        /// ID of the document. Nullable only for eID and QES_bankident methods - has to be set to null or removed from the object
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("number", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(255)]
+        public string Number { get; set; }
+
+        /// <summary>
+        /// Name of the document issuer. Nullable only for eID and QES_bankident methods - has to be set to null or removed from the object
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("issuedBy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(255)]
+        public string IssuedBy { get; set; }
+
+        /// <summary>
+        /// Date of issuance in the format YYYY-MM-DD. Must be &gt;= 1900-01-01. If not provided, can be set to n/a. Nullable only for QES_bankident method - has to be set to null or removed from the object
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("issueDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(DateFormatConverter))]
+        public System.DateTime? IssueDate { get; set; }
+
+        /// <summary>
+        /// Stated expiration date of the document in the YYYY-MM-DD format. Must be &gt;= 1900-01-01. Nullable only for QES_bankident method - has to be set to null or removed from the object
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("validUntil", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(DateFormatConverter))]
+        public System.DateTime? ValidUntil { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public TanganyDocumentType Type { get; set; }
+
+        /// <summary>
+        /// International Bank Account Number comprised of 34 characters, letters and numbers. Nullable for all methods except QES_bankident
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("iban", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(34)]
+        public string Iban { get; set; }
+
+        /// <summary>
+        /// Reference or purpose of a transfer containing any characters. Nullable for all methods except QES_bankident
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("reference", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Reference { get; set; }
+
+    }
+
+    /// <summary>
+    /// Type of the document. Nullable only for QES_bankident method - has to be set to null or removed from the object
+    /// </summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.3.0))")]
+    public enum TanganyDocumentType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Id_card")]
+        Id_card = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Passport")]
+        Passport = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Other")]
+        Other = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.3.0))")]
+    public enum TanganyIdentVerifiedType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Id_copy")]
+        Id_copy = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Auto_ident")]
+        Auto_ident = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"In_person")]
+        In_person = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Eid")]
+        Eid = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Post_ident")]
+        Post_ident = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Qes_bankident")]
+        Qes_bankident = 5,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.3.0))")]
+    public partial class TanganyLegalPersonDto
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public System.Guid Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
+        public string Name { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("legalForm", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.StringLength(255, MinimumLength = 1)]
+        public string LegalForm { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("commercialRegister", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(255)]
+        public string CommercialRegister { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("leiCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(255)]
+        public string LeiCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("taxId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(255)]
+        public string TaxId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("vatId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(255)]
+        public string VatId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isinCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(255)]
+        public string IsinCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("legalJurisdiction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(2)]
+        public string LegalJurisdiction { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("legalAddress", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public TanganyCustomerAddressDto LegalAddress { get; set; } = new TanganyCustomerAddressDto();
+
+        [Newtonsoft.Json.JsonProperty("postalAddress", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public TanganyCustomerAddressDto PostalAddress { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("kyc", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public LegalKycDto Kyc { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("related", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MinLength(1)]
+        public System.Collections.Generic.ICollection<RelatedItemDto> Related { get; set; } = new System.Collections.ObjectModel.Collection<RelatedItemDto>();
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.3.0))")]
     public partial class ToggleOptInAuthorizationDto
     {
         [Newtonsoft.Json.JsonProperty("credentials", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public SimpleAccessCredentialsDto Credentials { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("optinIds", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<System.Guid> OptinIds { get; set; }
+
         [Newtonsoft.Json.JsonProperty("customerRetailWalletIds", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<CustomerRetailWalletDto> CustomerRetailWalletIds { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("customerExternalRetailWallet", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<CustomerExternalRetailWalletDto> CustomerExternalRetailWallet { get; set; }
 
     }
 
@@ -6132,6 +6538,9 @@ namespace Tokenization.SDK
         [Newtonsoft.Json.JsonProperty("aipInterestRate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double AipInterestRate { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("customAttributes", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, string> CustomAttributes { get; set; }
+
         [Newtonsoft.Json.JsonProperty("transfers", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<TokenizedAssetTransferDto> Transfers { get; set; }
 
@@ -6293,6 +6702,9 @@ namespace Tokenization.SDK
         [Newtonsoft.Json.JsonProperty("aipInterestRate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double AipInterestRate { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("customAttributes", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IDictionary<string, string> CustomAttributes { get; set; }
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.3.0))")]
@@ -6324,8 +6736,11 @@ namespace Tokenization.SDK
         [Newtonsoft.Json.JsonProperty("customerName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CustomerName { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("retailWalletId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid RetailWalletId { get; set; }
+        [Newtonsoft.Json.JsonProperty("retailWalletId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? RetailWalletId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("externalRetailWalletId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? ExternalRetailWalletId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("proposedRetailWalletId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid ProposedRetailWalletId { get; set; }
@@ -6470,6 +6885,9 @@ namespace Tokenization.SDK
 
         [System.Runtime.Serialization.EnumMember(Value = @"TxRetailAsset")]
         TxRetailAsset = 16,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PauseToken")]
+        PauseToken = 17,
 
     }
 
@@ -6628,12 +7046,107 @@ namespace Tokenization.SDK
         [Newtonsoft.Json.JsonProperty("company", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CustomerCompanyDetailDto Company { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("tanganyLegalPerson", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public TanganyLegalPersonDto TanganyLegalPerson { get; set; }
+
         [Newtonsoft.Json.JsonProperty("nationalityIso", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string NationalityIso { get; set; }
 
         [Newtonsoft.Json.JsonProperty("gender", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public GenderTypes Gender { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.3.0))")]
+    public partial class UpdateKycData
+    {
+        [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.StringLength(64)]
+        public string Title { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("salutation", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Salutation { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("firstname", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.StringLength(64)]
+        public string Firstname { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("lastname", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.StringLength(64)]
+        public string Lastname { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("placeOfBirth", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.StringLength(100)]
+        public string PlaceOfBirth { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("dateOfBirth", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public System.DateTime DateOfBirth { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [System.ComponentModel.DataAnnotations.StringLength(64)]
+        public string Email { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("phoneNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string PhoneNumber { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("nonPepPerson", Required = Newtonsoft.Json.Required.Always)]
+        public bool NonPepPerson { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("highCorruptionIndex", Required = Newtonsoft.Json.Required.Always)]
+        public bool HighCorruptionIndex { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("nonSanctionedCountry", Required = Newtonsoft.Json.Required.Always)]
+        public bool NonSanctionedCountry { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("nonUsTaxPerson", Required = Newtonsoft.Json.Required.Always)]
+        public bool NonUsTaxPerson { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("identVerified", Required = Newtonsoft.Json.Required.Always)]
+        public bool IdentVerified { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("identVerifiedType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public IdentVerifiedType IdentVerifiedType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("tanganyIdentVerifiedType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public TanganyIdentVerifiedType TanganyIdentVerifiedType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("eulaAgreed", Required = Newtonsoft.Json.Required.Always)]
+        public bool EulaAgreed { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("address", Required = Newtonsoft.Json.Required.Always)]
+        [System.ComponentModel.DataAnnotations.Required]
+        public KycAddressDto Address { get; set; } = new KycAddressDto();
+
+        [Newtonsoft.Json.JsonProperty("company", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public CustomerCompanyDetailDto Company { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("nationalityIso", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string NationalityIso { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("gender", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public GenderTypes Gender { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("bic", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Bic { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("tanganyLegalPerson", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public TanganyLegalPersonDto TanganyLegalPerson { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("custodyProvider", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public CustodyProvider CustodyProvider { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public TanganyCustomerKycDocumentDto Document { get; set; }
 
     }
 
@@ -6740,6 +7253,15 @@ namespace Tokenization.SDK
         [System.Runtime.Serialization.EnumMember(Value = @"Faucet")]
         Faucet = 3,
 
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.3.0))")]
+    internal class DateFormatConverter : Newtonsoft.Json.Converters.IsoDateTimeConverter
+    {
+        public DateFormatConverter()
+        {
+            DateTimeFormat = "yyyy-MM-dd";
+        }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.3.0))")]
