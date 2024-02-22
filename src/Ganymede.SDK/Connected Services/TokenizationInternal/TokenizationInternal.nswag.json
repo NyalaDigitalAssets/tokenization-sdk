@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Nyala External API",
-    "description": "",
+    "title": "Nyala Customer API",
+    "description": "NYALA's tokenization API allows you to issue tokens on Polygon & Stellar. It allows you to create and manage tokens - including tokenized securities that have an ISIN - and to manage customer data. Interactions such as creating a new customer entity, request a wallet opening, creating a token and distributing a token to a customer are covered in this document.\r\n\r\n&nbsp;\r\n\r\nDuring the onboarding process, an institution entity will be created for you.\r\n",
     "contact": {
       "name": "Nyala Digital Asset AG",
       "url": "https://www.nyala.de",
@@ -256,92 +256,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BooleanApiResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/external/v1/electronic-security/{asset-id}": {
-      "get": {
-        "tags": [
-          "Electronic Security"
-        ],
-        "summary": "Information regarding an asset.",
-        "operationId": "GetAssetInfo",
-        "parameters": [
-          {
-            "name": "asset-id",
-            "in": "path",
-            "required": true,
-            "description": "The id of the asset.",
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ElectronicSecurityBasicInfoDtoApiResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/external/v1/electronic-security/{asset-id}/trust-lines": {
-      "post": {
-        "tags": [
-          "Electronic Security"
-        ],
-        "summary": "Allows for creating many trustlines in bulk.",
-        "operationId": "CreateTrustLines",
-        "parameters": [
-          {
-            "name": "asset-id",
-            "in": "path",
-            "required": true,
-            "description": "The asset to which the trustline is being created.",
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "requestBody": {
-          "description": "Request body containing the PIN and user ID pairs.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BulkCreateTrustLineDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BulkCreateTrustLineDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/BulkCreateTrustLineDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BulkResultDtoApiResponse"
                 }
               }
             }
@@ -1369,7 +1283,7 @@
     "/api/external/v1/model": {
       "get": {
         "tags": [
-          "IssuerWallet"
+          "Issuer Wallet"
         ],
         "operationId": "MissingModels",
         "responses": {
@@ -2163,115 +2077,6 @@
           }
         }
       }
-    },
-    "/api/ext/v1/create-trade-order": {
-      "post": {
-        "tags": [
-          "Trading"
-        ],
-        "operationId": "CreateTradeOrder",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExtTradeOrderDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExtTradeOrderDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ExtTradeOrderDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BooleanApiResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/external/v1/transactions/{days}": {
-      "get": {
-        "tags": [
-          "Transaction"
-        ],
-        "operationId": "GetTransactions",
-        "parameters": [
-          {
-            "name": "days",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TransactionToShowDtoListApiResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/external/v1/cancel-transactions": {
-      "post": {
-        "tags": [
-          "Transaction"
-        ],
-        "operationId": "CancelTransactions",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CancelTransactionsDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CancelTransactionsDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CancelTransactionsDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Int32ApiResponse"
-                }
-              }
-            }
-          }
-        }
-      }
     }
   },
   "components": {
@@ -2488,116 +2293,6 @@
           "data": {
             "type": "boolean",
             "readOnly": true
-          }
-        }
-      },
-      "BulkCreateTrustLineDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "trustLineData": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/CreateTrustLineInternalDto"
-            }
-          }
-        }
-      },
-      "BulkResultDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "items": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/BulkResultItemDto"
-            }
-          }
-        }
-      },
-      "BulkResultDtoApiResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "data": {
-            "$ref": "#/components/schemas/BulkResultDto"
-          }
-        }
-      },
-      "BulkResultItemDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "requestId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "locationId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "status": {
-            "$ref": "#/components/schemas/BulkResultItemStatus"
-          },
-          "reason": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "BulkResultItemStatus": {
-        "type": "string",
-        "format": "int32",
-        "enum": [
-          "NotSet",
-          "Ok",
-          "Failed",
-          "Duplicate"
-        ],
-        "x-custom-enum": {
-          "name": "BulkResultItemStatus",
-          "enumObjects": [
-            {
-              "label": "NotSet",
-              "value": 0
-            },
-            {
-              "label": "Ok",
-              "value": 1
-            },
-            {
-              "label": "Failed",
-              "value": 10
-            },
-            {
-              "label": "Duplicate",
-              "value": 11
-            }
-          ]
-        }
-      },
-      "CancelTransactionsDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "transactionIds": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "type": "string",
-              "format": "uuid"
-            }
           }
         }
       },
@@ -2844,20 +2539,6 @@
           },
           "custodyProvider": {
             "$ref": "#/components/schemas/CustodyProvider"
-          }
-        }
-      },
-      "CreateTrustLineInternalDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "pin": {
-            "type": "string",
-            "nullable": true
-          },
-          "uuid": {
-            "type": "string",
-            "format": "uuid"
           }
         }
       },
@@ -3128,116 +2809,9 @@
           }
         }
       },
-      "ElectronicSecurityBasicInfoDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "issuerWalletPubKey": {
-            "type": "string",
-            "nullable": true
-          },
-          "total": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "ElectronicSecurityBasicInfoDtoApiResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "data": {
-            "$ref": "#/components/schemas/ElectronicSecurityBasicInfoDto"
-          }
-        }
-      },
       "EmptyResult": {
         "type": "object",
         "additionalProperties": false
-      },
-      "ExtTradeOrderDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "event": {
-            "type": "string",
-            "nullable": true
-          },
-          "trade_id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "order_id": {
-            "type": "string",
-            "nullable": true
-          },
-          "client_order_id": {
-            "type": "string",
-            "nullable": true
-          },
-          "client_order_id_1": {
-            "type": "string",
-            "nullable": true
-          },
-          "client_order_id_2": {
-            "type": "string",
-            "nullable": true
-          },
-          "side": {
-            "type": "string",
-            "nullable": true
-          },
-          "order_type": {
-            "type": "string",
-            "nullable": true
-          },
-          "amount": {
-            "type": "number",
-            "format": "double"
-          },
-          "instrument": {
-            "type": "string",
-            "nullable": true
-          },
-          "confirmed_price": {
-            "type": "number",
-            "format": "double"
-          },
-          "executed_at": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "currency": {
-            "type": "string",
-            "nullable": true
-          },
-          "total_amount": {
-            "type": "number",
-            "format": "double"
-          },
-          "order_status": {
-            "type": "string",
-            "nullable": true
-          },
-          "seq_no": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          }
-        }
       },
       "ExternalRetailWalletDto": {
         "type": "object",
@@ -3510,25 +3084,6 @@
               "type": "string",
               "nullable": true
             }
-          }
-        }
-      },
-      "Int32ApiResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "data": {
-            "type": "integer",
-            "readOnly": true,
-            "format": "int32"
           }
         }
       },
@@ -4139,6 +3694,8 @@
         "additionalProperties": false,
         "required": [
           "institutionId",
+          "issuerName",
+          "issueSize",
           "name"
         ],
         "properties": {
@@ -4190,7 +3747,7 @@
           },
           "issueSize": {
             "type": "string",
-            "nullable": true
+            "minLength": 1
           },
           "nominalAmountPerToken": {
             "type": "string",
@@ -4198,7 +3755,7 @@
           },
           "issuerName": {
             "type": "string",
-            "nullable": true
+            "minLength": 1
           },
           "entryType": {
             "$ref": "#/components/schemas/ProjectEntryType"
@@ -5698,120 +5255,6 @@
           }
         }
       },
-      "TransactionToShowDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "institutionId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "blockchain": {
-            "$ref": "#/components/schemas/Blockchains"
-          },
-          "sourceWalletType": {
-            "$ref": "#/components/schemas/WalletTypes"
-          },
-          "action": {
-            "$ref": "#/components/schemas/TransactionActions"
-          },
-          "txBody": {
-            "type": "string",
-            "nullable": true
-          },
-          "modified": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "status": {
-            "$ref": "#/components/schemas/TxStatus"
-          },
-          "retryCounter": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "txId": {
-            "type": "string",
-            "nullable": true
-          },
-          "created": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "cryptoAssetName": {
-            "type": "string",
-            "nullable": true
-          },
-          "cryptoAssetSymbol": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "TransactionToShowDtoListApiResponse": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "errorMessageCodes": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "type": "string"
-            }
-          },
-          "data": {
-            "type": "array",
-            "readOnly": true,
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/TransactionToShowDto"
-            }
-          }
-        }
-      },
-      "TxStatus": {
-        "type": "string",
-        "format": "int32",
-        "enum": [
-          "New",
-          "Successful",
-          "Canceled",
-          "Failed",
-          "Retrying"
-        ],
-        "x-custom-enum": {
-          "name": "TxStatus",
-          "enumObjects": [
-            {
-              "label": "New",
-              "value": 1
-            },
-            {
-              "label": "Successful",
-              "value": 2
-            },
-            {
-              "label": "Canceled",
-              "value": -3
-            },
-            {
-              "label": "Failed",
-              "value": -2
-            },
-            {
-              "label": "Retrying",
-              "value": -1
-            }
-          ]
-        }
-      },
       "UpdateCustomerAccountDto": {
         "type": "object",
         "additionalProperties": false,
@@ -6142,44 +5585,17 @@
             }
           ]
         }
-      },
-      "WalletTypes": {
-        "type": "string",
-        "format": "int32",
-        "enum": [
-          "Institutional",
-          "Retail",
-          "Issuer",
-          "Faucet"
-        ],
-        "x-custom-enum": {
-          "name": "WalletTypes",
-          "enumObjects": [
-            {
-              "label": "Institutional",
-              "value": 1
-            },
-            {
-              "label": "Retail",
-              "value": 2
-            },
-            {
-              "label": "Issuer",
-              "value": 3
-            },
-            {
-              "label": "Faucet",
-              "value": 4
-            }
-          ]
-        }
       }
     }
   },
   "tags": [
     {
       "name": "Customer",
-      "description": "Customer management used for creating or listing new customer"
+      "description": "The first step in the tokenization lifecycle is to create a Customer that will receive the token."
+    },
+    {
+      "name": "Retail Wallet",
+      "description": "The second step in the tokenization lifecycle is to request a retail wallet for the Customer newly created. The tokens will be sent to that wallet, and the private key to the wallet will be custodied using our technology."
     }
   ]
 }

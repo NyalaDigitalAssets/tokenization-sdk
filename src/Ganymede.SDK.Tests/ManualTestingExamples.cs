@@ -82,12 +82,12 @@ namespace Tokenization.SDK.Tests
 
 
                 //Create wallets
-                var wallets = _client.CreateRetailWalletsAsync(customerId, new SimpleAccessCredentialsDto { Passphrase = "Nyala1234567" }).ConfigureAwait(false).GetAwaiter().GetResult();
+                var wallets = _client.CreateRetailWalletsAsync(customerId, new CreateRetailWalletRequest { Credentials = new SimpleAccessCredentialsDto { Passphrase = "Nyala1234567" }, CustodyProvider = CustodyProvider.HADC }).ConfigureAwait(false).GetAwaiter().GetResult();
                 Assert.NotNull(wallets);
 
 
                 // Update kyc
-                var customerDto = new KycDataDto
+                var customerDto = new UpdateKycData
                 {
                     Title = customerData.Title,
                     Firstname = customerData.Firstname,
@@ -171,7 +171,7 @@ namespace Tokenization.SDK.Tests
         [TestCase("E3D86A22-7E6F-4C74-ADFA-9892178B8F93")]
         public async Task Should_Update_KYC_Data(Guid customerId)
         {
-            var customerDto = new KycDataDto
+            var customerDto = new UpdateKycData
             {
                 Title = "Mr.",
                 Firstname = "Deontae",

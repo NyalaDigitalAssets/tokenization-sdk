@@ -85,7 +85,7 @@ namespace Tokenization.SDK
         /// </summary>
         /// <param name="customerId">The GUID ID of the customer to update</param>
         /// <param name="data">All updatable data</param>
-        public async Task<bool> UpdateCustomerKycDataAsync(Guid customerId, KycDataDto data)
+        public async Task<bool> UpdateCustomerKycDataAsync(Guid customerId, UpdateKycData data)
         {
             var response = await _client.ApiExternalV1CustomersKycAsync(customerId, data);
             return response.Data;
@@ -110,9 +110,9 @@ namespace Tokenization.SDK
         /// Created wallets for all supported blockchains for the specific customer. If customer already has wallets no new wallets are created. 
         /// </summary>
         /// <param name="customerId">The GUID ID of the customer for whom wallets are to be created</param>
-        /// <param name="credentials">The customer Passphrase is required. KeyFileContent is optinal (configurable)</param>
+        /// <param name="credentials">The customer Passphrase is required. KeyFileContent is optinal (configurable). CustodyProvider should be HADC</param>
         /// <returns></returns>
-        public async Task<IEnumerable<RetailWalletDto>> CreateRetailWalletsAsync(Guid customerId, SimpleAccessCredentialsDto credentials)
+        public async Task<IEnumerable<RetailWalletDto>> CreateRetailWalletsAsync(Guid customerId, CreateRetailWalletRequest credentials)
         {
             var response = await _client.ApiExternalV1CustomersRetailWalletsPostAsync(customerId, credentials);
             return response.Data;
