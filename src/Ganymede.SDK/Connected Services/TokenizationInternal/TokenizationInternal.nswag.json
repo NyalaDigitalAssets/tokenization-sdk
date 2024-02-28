@@ -4379,6 +4379,7 @@
         "type": "string",
         "format": "int32",
         "enum": [
+          "Video_ident",
           "Id_copy",
           "Auto_ident",
           "In_person",
