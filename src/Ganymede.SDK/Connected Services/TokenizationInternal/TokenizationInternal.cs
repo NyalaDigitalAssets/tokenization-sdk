@@ -5693,23 +5693,26 @@ namespace Tokenization.SDK
     public enum TanganyIdentVerifiedType
     {
 
+        [System.Runtime.Serialization.EnumMember(Value = @"Video_ident")]
+        Video_ident = 0,
+
         [System.Runtime.Serialization.EnumMember(Value = @"Id_copy")]
-        Id_copy = 0,
+        Id_copy = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Auto_ident")]
-        Auto_ident = 1,
+        Auto_ident = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"In_person")]
-        In_person = 2,
+        In_person = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Eid")]
-        Eid = 3,
+        Eid = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Post_ident")]
-        Post_ident = 4,
+        Post_ident = 5,
 
         [System.Runtime.Serialization.EnumMember(Value = @"Qes_bankident")]
-        Qes_bankident = 5,
+        Qes_bankident = 6,
 
     }
 
